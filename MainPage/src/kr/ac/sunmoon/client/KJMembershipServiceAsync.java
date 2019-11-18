@@ -6,10 +6,14 @@ import kr.ac.sunmoon.shared.KJMember;
 
 public interface KJMembershipServiceAsync {
 
-	void findKJmember(String keyword, int option, AsyncCallback<KJMember[]> callback);
+	void findKJmember(String iD, String name, AsyncCallback<KJMember> asyncCallback);
 	void Register_Membership(KJMember kjMember, AsyncCallback<Void> callback);
 	
 	void checkID(KJMember kjMember, AsyncCallback<Boolean> asyncCallback);
 	void LoginService(KJMember crKJmember, AsyncCallback<Boolean> asyncCallback);
+
+
+
+
 	
 }

@@ -88,9 +88,9 @@ private TextBox[] logininputs;
 				@Override
 				public void onClick(ClickEvent event) {
 					// TODO Auto-generated method stub
-//					FindPassword dialog_password = new FindPassword();
-//					dialog_password.setPopupPosition(Window.getClientWidth()/2-150, 100);
-//					dialog_password.show();
+					FindID dialog_id = new FindID();
+					dialog_id.setPopupPosition(Window.getClientWidth()/2-150,100);
+					dialog_id.show();
 				}
 			});
 			findIDBtn.setText("Find ID");

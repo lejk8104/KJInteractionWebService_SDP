@@ -9,9 +9,10 @@ import kr.ac.sunmoon.shared.KJMember;
 @RemoteServiceRelativePath("KJmembershipService")
 public interface KJMembershipService extends RemoteService {
 	
-	public KJMember[] findKJmember(String keyword, int option);
+	KJMember findKJmember(String iD, String name);
 	void Register_Membership(KJMember kjMember);
 	boolean checkID(KJMember kjMember);
 	boolean LoginService(KJMember crKJmember);
-	
+
+
 }

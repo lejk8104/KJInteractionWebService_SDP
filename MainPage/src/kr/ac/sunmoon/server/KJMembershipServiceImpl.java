@@ -17,8 +17,9 @@ import kr.ac.sunmoon.shared.KJMember;
 public class KJMembershipServiceImpl extends RemoteServiceServlet implements kr.ac.sunmoon.client.KJMembershipService {
 
 	@Override
-	public KJMember[] findKJmember(String keyword, int option) {
+	public KJMember findKJmember(String ID, String Name) {
 		// TODO Auto-generated method stub
+		KJMember kjmember = new KJMember();
 		try {
 			String url = "jdbc:mysql://localhost:3306/kj_membership_db?useSSL=false";
 			String user = "root";
@@ -27,20 +28,35 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements kr.
 			Connection con = DriverManager.getConnection(url, user, password_);
 			
 			Statement stmt = con.createStatement();
-			String sql = "SELECT * FROM kj_membership_db.test_total_data;";
+			String sql = "SELECT* FROM membership_data.kjmember Inner Join membership_data.local on kjmember.country= local.country; ";
 			ResultSet rs = stmt.executeQuery(sql);
-			while(rs.next()) {
-				
-				String ID = rs.getString("ID");
+			while(rs.next()) {				
+				String id = rs.getString("ID");
 				String Password = rs.getString("PassWord");
 				String Check_Password = rs.getString("Check_Password");
-				String Name = rs.getString("Name");
+				String name = rs.getString("Name");
 				String Gender = rs.getString("Gender");
 				String Year = rs.getString("Year");
 				String Date = rs.getString("Date");
 				String Country = rs.getString("Country");
 				String Local = rs.getString(" Local");
-			
+				//패스워드 찾기
+				if (ID.equals(id) && Name.equals(name)) {
+					kjmember.setID(id);
+					kjmember.setCheckPassword(Check_Password);
+					kjmember.setName(name);
+					kjmember.setGender(Gender);
+					kjmember.setYear(Year);
+					kjmember.setDate(Date);
+					kjmember.setCountry(Country);
+					kjmember.setLocal(Local);
+					rs.close();
+					stmt.close();
+					con.close();
+					return kjmember;
+				}
+				//아이디찾기
+//				else if 
 			}
 			rs.close();
 			stmt.close();
@@ -48,6 +64,7 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements kr.
 				
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 		return null;
 	}
@@ -73,9 +90,9 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements kr.
 			}
 			return true;
 			
-			
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 		return false;
 	}
