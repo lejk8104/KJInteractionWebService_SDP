@@ -17,8 +17,8 @@
   <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
   <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
 
-  <!-- Other module inherits  
-  <inherits name="org.moxieapps.gwt.highcharts.Highcharts"/>
+  <!-- Other module inherits  -->
+  <!-- <inherits name="org.moxieapps.gwt.highcharts.Highcharts"/>    에러잡기  -->
   <inherits name="com.gwtext.GwtExt"/>
 
   <!-- Specify the app entry point class.                         -->
