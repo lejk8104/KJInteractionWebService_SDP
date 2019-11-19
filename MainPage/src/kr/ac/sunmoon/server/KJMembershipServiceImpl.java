@@ -80,14 +80,13 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements kr.
 			Connection con = DriverManager.getConnection(url, user, password_);
 		
 			Statement stmt = con.createStatement();
-			String sql = "SELECT ID kj_membership_db.kjmember;";
+			String sql = "SELECT ID kj_membership_db.kjmember where '" + id + "';";
 			ResultSet rs = stmt.executeQuery(sql);
-			while(rs.next()) {
-				String ID = rs.getString("ID");
-				if (ID.equals(id)) {
-					return false;
-				}
-			}
+			rs.next();
+			String ID = rs.getString("ID");
+			if (ID.equals(id))
+				return false;
+			
 			return true;
 			
 		} catch (Exception e) {
@@ -158,7 +157,6 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements kr.
 			rs.close();
 			stmt.close();
 			con.close();
-			
 			return false;
 			
 		} catch (Exception e) {

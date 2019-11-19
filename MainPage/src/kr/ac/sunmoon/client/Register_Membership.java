@@ -18,6 +18,7 @@ public class Register_Membership extends DialogBox {
 
 	
 	private static final TextBox String = null;           //?
+	private ListBox[] listinputs;
 	private TextBox[] txtinputs;
 	private TextBox[] subinputs;
 	private TextBox[] interestinput;
@@ -61,7 +62,7 @@ public class Register_Membership extends DialogBox {
 				}
 				KJMember kjMember = new KJMember();
 				kjMember.setID(txtinputs[0].getText().trim());
-			
+				
 				KJMembershipServiceAsync checkservice = GWT.create(KJMembershipService.class);
 				checkservice.checkID(kjMember, new AsyncCallback<Boolean>() {
 
@@ -89,7 +90,8 @@ public class Register_Membership extends DialogBox {
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				String[] membershipDatas = new String[8];
+				String[] membershipDatas = new String[3];
+				String[] listdata = new String[4];
 				String[] interestinput = new String[3];
 				String[] subinputs = new String[3];
 				
@@ -170,7 +172,8 @@ public class Register_Membership extends DialogBox {
 	
 	private void addInputList(Grid grid, Grid textgrid) {
 		
-		txtinputs = new TextBox[8];
+		txtinputs = new TextBox[3];
+		listinputs = new ListBox[4];
 		
 		//아이디
 		Label lblID = new Label("ID");
@@ -199,12 +202,11 @@ public class Register_Membership extends DialogBox {
 		//성별
 		Label lblGender = new Label("Gender");
 		grid.setWidget(4, 0, lblGender);
-		ListBox lboxGender = new ListBox();
-		lboxGender.getSelectedItemText();
-		lboxGender.addItem("Male");
-		lboxGender.addItem("Female");
-		txtinputs[4] = new TextBox();
-		grid.setWidget(4, 1, lboxGender);
+		listinputs[0] = new ListBox();
+//		lboxGender.getSelectedItemText();
+		listinputs[0].addItem("Male");
+		listinputs[0].addItem("Female");
+		grid.setWidget(4, 1, listinputs[0]);
 	
 		//생년
 		Label lblYear = new Label("Year");
@@ -265,7 +267,6 @@ public class Register_Membership extends DialogBox {
 		lboxYear.addItem("2018");
 		lboxYear.addItem("2019");
 		
-		txtinputs[5] = new TextBox();
 		grid.setWidget(5, 1, lboxYear);
 		
 //		//월일/ 달력표시
@@ -281,7 +282,6 @@ public class Register_Membership extends DialogBox {
 		ListBox lboxCountry = new ListBox();
 		lboxCountry.addItem("Korean");
 		lboxCountry.addItem("Japanese");
-		txtinputs[7] = new TextBox();   //?
 		grid.setWidget(6, 1, lboxCountry);		
 //		
 		//지역표시
@@ -327,7 +327,6 @@ public class Register_Membership extends DialogBox {
 		lboxpreference.addItem("보통이다");
 		lboxpreference.addItem("그렇다");
 		lboxpreference.addItem("매우 그렇다");
-		subinputs[0] = new TextBox();   //0으로 시작할수도 있음
 		grid.setWidget(9, 1, lboxpreference);
 		
 		//관심사
@@ -339,13 +338,13 @@ public class Register_Membership extends DialogBox {
 		interestinput[1] = new TextBox();
 		interestinput[2] = new TextBox();
 		interestinput[3] = new TextBox();
-		interestinput[4] = new TextBox();
+//		interestinput[4] = new TextBox();
 		
 		interestgrid.setWidget(0, 0, interestinput[0]);
 		interestgrid.setWidget(0, 1, interestinput[1]);
 //		interestgrid.setWidget(0, 2, interestinput[2]);
-		interestgrid.setWidget(1, 0, interestinput[3]);
-		interestgrid.setWidget(1, 1, interestinput[4]);
+		interestgrid.setWidget(1, 0, interestinput[2]);
+		interestgrid.setWidget(1, 1, interestinput[3]);
 
 		grid.setWidget(10, 1, interestgrid);
 		

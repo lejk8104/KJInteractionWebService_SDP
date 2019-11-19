@@ -1,0 +1,3 @@
+# Module mainpage
+# RPC service class, partial path of RPC policy file
+kr.ac.sunmoon.client.KJMembershipService, 2FC9BD2419280243FC1A88343E358A84.gwt.rpc
