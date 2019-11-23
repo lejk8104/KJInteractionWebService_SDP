@@ -13,6 +13,7 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 
 import kr.ac.sunmoon.shared.KJMember;
+import kr.ac.sunmoon.shared.Survey_data;
 
 public class Register_Membership extends DialogBox {
 
@@ -20,7 +21,7 @@ public class Register_Membership extends DialogBox {
 	private static final TextBox String = null;           //?
 	private ListBox[] listinputs;
 	private TextBox[] txtinputs;
-	private TextBox[] subinputs;
+	private ListBox[] subinputs;
 	private TextBox[] interestinput;
 
 	
@@ -29,7 +30,7 @@ public class Register_Membership extends DialogBox {
 		super(false, true);
 		this.setText("Register_Membership");
 		
-		Grid grid = new Grid(15,5);
+		Grid grid = new Grid(16,5);
 		this.setWidget(grid);
 	
 		Grid textgrid = new Grid(1,2);
@@ -44,7 +45,7 @@ public class Register_Membership extends DialogBox {
 		
 //		아이디 중복확인
 		Grid btngrid = new Grid(1,2);
-		grid.setWidget(14, 1, btngrid);
+		grid.setWidget(15, 1, btngrid);
 		
 		Button btnIDCheck = new Button();
 		grid.setWidget(0, 4, btnIDCheck);
@@ -90,49 +91,109 @@ public class Register_Membership extends DialogBox {
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				String[] membershipDatas = new String[3];
-				String[] listdata = new String[4];
-				String[] interestinput = new String[3];
-				String[] subinputs = new String[3];
+				String[] membershipData = new String[4];
+				String [] listData = new String[4];
+				String[] interestData = new String[3];
+				String[] subinputdata = new String[3];
+				String male = "Male";
+				String female = "Female";				
+				String korean = "Korean";
+				String japanese = "Japanese";
 				
-				for(int i=0; i<membershipDatas.length; i++) {
-					membershipDatas[i] = txtinputs[i].getText().trim();
+				for(int i=0; i<membershipData.length; i++) {
+					membershipData[i] = txtinputs[i].getText().trim();
 					
-					if(membershipDatas[i].equals("")) {
+					if(membershipData[i].equals("")) {
 						Window.alert("Please, Input Your ALl Data");
 						return;
 					}
-					if(membershipDatas[1].equals(membershipDatas[2])) {
+					if(membershipData[1].equals(membershipData[2])) {
 						Window.alert("Please, check your password");
 						return;
 					}
 				}
-				for(int i=0; i<interestinput.length; i++) {
-					membershipDatas[i] = txtinputs[i].getText().trim();
-					
-					if(membershipDatas[i].equals("")) {
+				
+				for(int i=0; i<listData.length; i++) {
+					int index =0;
+					if (listinputs[0].getItemText(index) == "0") {
+						listinputs[0].setItemText(0, male);
+					}
+					else if (listinputs[0].getItemText(index) == "1") {
+						listinputs[0].setItemText(1, female);
+					}
+					else if(listinputs[2].getItemText(index) == "0") {
+						listinputs[2].setItemText(0, korean);
+					}
+					else if(listinputs[2].getItemText(index) == "1") {
+						listinputs[2].setItemText(0, japanese);
+					}
+					else;
+					listinputs[i].getSelectedItemText().trim();
+					if(listData[i].equals("")) {
 						Window.alert("Please, Input Your Interest survey data");
 						return;
+						
+//					index= index+1;
 					}
 				}
-				for(int i=0; i<subinputs.length; i++) {
-					subinputs[i] = txtinputs[i].getText().trim();
+				for(int i=0; i<interestData.length; i++) {
+					interestData[i] =  interestinput[i].getText().trim();
 					
-					if(subinputs[i].equals("")) {
+					if(interestData[i].equals("")) {
 						Window.alert("Please, Input Your other survey datas");
 						return;
 					}
 				}
+				for(int i=0; i<subinputdata.length; i++) {
+					subinputdata[i]=Integer.toString(subinputs[i].getSelectedIndex()-2).trim();
+					if(subinputdata[i].equals("")) {
+						Window.alert("Please, Input Your other survey datas");
+						return;
+					}
+				}
+				//kjmembership_dataset
 				KJMember kjMember = new KJMember();
-				kjMember.setID(membershipDatas[0]);
-				kjMember.setPassword(membershipDatas[1]);
-				kjMember.setCheckPassword(membershipDatas[2]);
-				kjMember.setName(membershipDatas[3]);
-				kjMember.setGender(membershipDatas[4]);
-				kjMember.setYear(membershipDatas[5]);
-				kjMember.setDate(membershipDatas[6]);
-				kjMember.setCountry(membershipDatas[7]);
-				kjMember.setLocal(membershipDatas[8]);
+				kjMember.setID(membershipData[0]);
+				kjMember.setPassword(membershipData[1]);
+				kjMember.setCheckPassword(membershipData[2]);
+				kjMember.setName(membershipData[3]);
+//				kjMember.setGender(membershipData[4);
+				kjMember.setGender(listData[0]);
+				kjMember.setYear(listData[1]);
+				kjMember.setDate(listData[2]);
+				kjMember.setCountry(listData[3]);
+				kjMember.setLocal(listData[4]);
+				
+				//survey data set
+				Survey_data surveyData = new Survey_data();
+				surveyData.setID(membershipData[0]);
+				surveyData.setName(membershipData[3]);
+				surveyData.setPreference(subinputdata[0]);
+//				surveyData.setInterest(interestData);
+				surveyData.setA(subinputdata[1]);
+				surveyData.setB(subinputdata[2]);
+				surveyData.setC(subinputdata[3]);
+//				surveyData.setNumber(`);
+				
+				//Korean survey data Statistic
+//				surveyData.setGyeonggi_people(gyeonggi_people);
+//				surveyData.setSeoul_people(seoul_people);
+//				surveyData.setGangwon_people(gangwon_people);
+//				surveyData.setNorth_Chungcheong_people(north_Chungcheong_people);
+//				surveyData.setSouth_Chungcheong_people(south_Chungcheong_people);
+//				surveyData.setNorth_Gyeongsang_people(north_Gyeongsang_people);
+//				surveyData.setSouth_Gyeongsang_people(south_Gyeongsang_people);
+//				surveyData.setNorth_Jeolla_people(north_Jeolla_people);
+//				surveyData.setSouth_Jeolla_peoples(south_Jeolla_peoples);
+				
+				////Japanese survey data Statistic
+//				surveyData.setHokkaido_people(hokkaido_people);
+//				surveyData.setTohoku_people(tohoku_people);
+//				surveyData.setKanto_people(kanto_people);
+//				surveyData.setChubu_people(chubu_people);
+//				surveyData.setKinki_people(kinki_people);
+//				surveyData.setChugoku_people(chugoku_people);
+//				surveyData.setShikokupeople(shikokupeople);
 				
 				//서버통신
 				KJMembershipServiceAsync service = GWT.create(KJMembershipService.class);
@@ -199,75 +260,81 @@ public class Register_Membership extends DialogBox {
 		txtinputs[3] = new TextBox();
 		grid.setWidget(3, 1, txtinputs[3]);
 		
+		//이메일
+		Label lblEmail = new Label("E-mail");
+		grid.setWidget(4, 0, lblEmail);
+		txtinputs[4] = new TextBox();
+		grid.setWidget(4, 1, txtinputs[4]);
+		
 		//성별
 		Label lblGender = new Label("Gender");
-		grid.setWidget(4, 0, lblGender);
+		grid.setWidget(5, 0, lblGender);
 		listinputs[0] = new ListBox();
 //		lboxGender.getSelectedItemText();
 		listinputs[0].addItem("Male");
 		listinputs[0].addItem("Female");
-		grid.setWidget(4, 1, listinputs[0]);
+		grid.setWidget(5, 1, listinputs[0]);
 	
 		//생년
 		Label lblYear = new Label("Year");
-		grid.setWidget(5, 0, lblYear);
-		ListBox lboxYear = new ListBox();
-		lboxYear.addItem("1970");
-		lboxYear.addItem("1971");
-		lboxYear.addItem("1972");
-		lboxYear.addItem("1973");
-		lboxYear.addItem("1974");
-		lboxYear.addItem("1975");
-		lboxYear.addItem("1976");
-		lboxYear.addItem("1977");
-		lboxYear.addItem("1978");
-		lboxYear.addItem("1979");
+		grid.setWidget(6, 0, lblYear);
+		listinputs[1] = new ListBox();
+		listinputs[1].addItem("1970");
+		listinputs[1].addItem("1971");
+		listinputs[1].addItem("1972");
+		listinputs[1].addItem("1973");
+		listinputs[1].addItem("1974");
+		listinputs[1].addItem("1975");
+		listinputs[1].addItem("1976");
+		listinputs[1].addItem("1977");
+		listinputs[1].addItem("1978");
+		listinputs[1].addItem("1979");
 		
-		lboxYear.addItem("1980");
-		lboxYear.addItem("1981");
-		lboxYear.addItem("1982");
-		lboxYear.addItem("1983");
-		lboxYear.addItem("1984");
-		lboxYear.addItem("1985");
-		lboxYear.addItem("1986");
-		lboxYear.addItem("1987");
-		lboxYear.addItem("1988");
-		lboxYear.addItem("1989");
+		listinputs[1].addItem("1980");
+		listinputs[1].addItem("1981");
+		listinputs[1].addItem("1982");
+		listinputs[1].addItem("1983");
+		listinputs[1].addItem("1984");
+		listinputs[1].addItem("1985");
+		listinputs[1].addItem("1986");
+		listinputs[1].addItem("1987");
+		listinputs[1].addItem("1988");
+		listinputs[1].addItem("1989");
 		
-		lboxYear.addItem("1990");
-		lboxYear.addItem("1991");
-		lboxYear.addItem("1992");
-		lboxYear.addItem("1993");
-		lboxYear.addItem("1994");
-		lboxYear.addItem("1995");
-		lboxYear.addItem("1996");
-		lboxYear.addItem("1997");
-		lboxYear.addItem("1998");
-		lboxYear.addItem("1999");
+		listinputs[1].addItem("1990");
+		listinputs[1].addItem("1991");
+		listinputs[1].addItem("1992");
+		listinputs[1].addItem("1993");
+		listinputs[1].addItem("1994");
+		listinputs[1].addItem("1995");
+		listinputs[1].addItem("1996");
+		listinputs[1].addItem("1997");
+		listinputs[1].addItem("1998");
+		listinputs[1].addItem("1999");
 		
-		lboxYear.addItem("2000");
-		lboxYear.addItem("2001");
-		lboxYear.addItem("2002");
-		lboxYear.addItem("2003");
-		lboxYear.addItem("2004");
-		lboxYear.addItem("2005");
-		lboxYear.addItem("2006");
-		lboxYear.addItem("2007");
-		lboxYear.addItem("2008");
-		lboxYear.addItem("2009");
+		listinputs[1].addItem("2000");
+		listinputs[1].addItem("2001");
+		listinputs[1].addItem("2002");
+		listinputs[1].addItem("2003");
+		listinputs[1].addItem("2004");
+		listinputs[1].addItem("2005");
+		listinputs[1].addItem("2006");
+		listinputs[1].addItem("2007");
+		listinputs[1].addItem("2008");
+		listinputs[1].addItem("2009");
 		
-		lboxYear.addItem("2010");
-		lboxYear.addItem("2011");
-		lboxYear.addItem("2012");
-		lboxYear.addItem("2013");
-		lboxYear.addItem("2014");
-		lboxYear.addItem("2015");
-		lboxYear.addItem("2016");
-		lboxYear.addItem("2017");
-		lboxYear.addItem("2018");
-		lboxYear.addItem("2019");
+		listinputs[1].addItem("2010");
+		listinputs[1].addItem("2011");
+		listinputs[1].addItem("2012");
+		listinputs[1].addItem("2013");
+		listinputs[1].addItem("2014");
+		listinputs[1].addItem("2015");
+		listinputs[1].addItem("2016");
+		listinputs[1].addItem("2017");
+		listinputs[1].addItem("2018");
+		listinputs[1].addItem("2019");
 		
-		grid.setWidget(5, 1, lboxYear);
+		grid.setWidget(6, 1, listinputs[1]);
 		
 //		//월일/ 달력표시
 //		Label lblDate = new Label("Date");
@@ -278,60 +345,48 @@ public class Register_Membership extends DialogBox {
 //		
 		// 나라선택
 		Label lblCountry = new Label("Country");
-		grid.setWidget(6, 0, lblCountry);
-		ListBox lboxCountry = new ListBox();
-		lboxCountry.addItem("Korean");
-		lboxCountry.addItem("Japanese");
-		grid.setWidget(6, 1, lboxCountry);		
+		grid.setWidget(7, 0, lblCountry);
+		listinputs[2] = new ListBox();
+		listinputs[2].addItem("Korean");
+		listinputs[2].addItem("Japanese");
+		grid.setWidget(7, 1, listinputs[2]);		
 //		
 		//지역표시
 		Label lblLocal = new Label("Local");
-		grid.setWidget(7, 0, lblLocal);
-		ListBox lboxLocal = new ListBox();
+		grid.setWidget(8, 0, lblLocal);
+		listinputs[3] = new ListBox();
 		
-		lboxLocal.addItem("Seoul");
-		lboxLocal.addItem("경기도");
-		lboxLocal.addItem("강원도");
-		lboxLocal.addItem("충청북도");
-		lboxLocal.addItem("충첨남도");
-		lboxLocal.addItem("경상북도");
-		lboxLocal.addItem("경상남도");
-		lboxLocal.addItem("전라북도");
-		lboxLocal.addItem("전라남도");
-		lboxLocal.addItem("훗카이도");
-		lboxLocal.addItem("도호쿠");
-		lboxLocal.addItem("간토");
-		lboxLocal.addItem("주부");
-		lboxLocal.addItem("긴키");
-		lboxLocal.addItem("주고쿠");
-		lboxLocal.addItem("시코쿠");
+		listinputs[3].addItem("Gyeonggi-do");
+		listinputs[3].addItem("Seoul");
+		listinputs[3].addItem("Gangwon-do");
+		listinputs[3].addItem("Chungcheongbuk-do");
+		listinputs[3].addItem("Chungcheongnam-do");
+		listinputs[3].addItem("Gyeongsangbuk-do");
+		listinputs[3].addItem("Gyeongsangnam-do");
+		listinputs[3].addItem("Jeollabuk-do");
+		listinputs[3].addItem("Jeollanam-do ");
+		listinputs[3].addItem("Hokkaido");
+		listinputs[3].addItem("Tohoku");
+		listinputs[3].addItem("Kanto");
+		listinputs[3].addItem("Chubu");
+		listinputs[3].addItem("Kinki");
+		listinputs[3].addItem("Chugoku");
+		listinputs[3].addItem("Shikoku");
 //		txtinputs[8] = new TextBox();  //?
-		grid.setWidget(7, 1, lboxLocal);	
+		grid.setWidget(8, 1, listinputs[3]);	
 		}
 	
 	private void addSurveyList(Grid grid) {
 		
 		interestinput = new TextBox[4];
-		subinputs = new TextBox[3];
+		subinputs = new ListBox[3];
 		
 		Label title = new Label("Survey");
-		grid.setWidget(8, 0, title);
-		
-		//지역별 선호도
-		Label lblPreference = new Label("Preference");
-		grid.setWidget(9, 0, lblPreference);
-		ListBox lboxpreference = new ListBox();
-		
-		lboxpreference.addItem("Very Bad");
-		lboxpreference.addItem("그렇지 않다");
-		lboxpreference.addItem("보통이다");
-		lboxpreference.addItem("그렇다");
-		lboxpreference.addItem("매우 그렇다");
-		grid.setWidget(9, 1, lboxpreference);
+		grid.setWidget(9, 0, title);
 		
 		//관심사
 		Label lblInterests = new Label("Plase Input your interests.");
-		grid.setWidget(10, 0, lblInterests);
+		grid.setWidget(11, 0, lblInterests);
 		Grid interestgrid = new Grid(2,2);
 		
 		interestinput[0] = new TextBox();
@@ -346,24 +401,36 @@ public class Register_Membership extends DialogBox {
 		interestgrid.setWidget(1, 0, interestinput[2]);
 		interestgrid.setWidget(1, 1, interestinput[3]);
 
-		grid.setWidget(10, 1, interestgrid);
+		grid.setWidget(11, 1, interestgrid);
 		
+		//지역별 선호도
+		Label lblPreference = new Label("Preference");
+		grid.setWidget(10, 0, lblPreference);
+		subinputs[0] = new ListBox();
+		
+		subinputs[0].addItem("Very Bad");
+		subinputs[0].addItem("그렇지 않다");
+		subinputs[0].addItem("보통이다");
+		subinputs[0].addItem("그렇다");
+		subinputs[0].addItem("매우 그렇다");
+		grid.setWidget(10, 1, subinputs[0]);
+	
 		//A
 		Label A = new Label("A");
-		grid.setWidget(11, 0, A);
-		subinputs[1] = new TextBox();
-		grid.setWidget(11, 1, subinputs[1]);
+		grid.setWidget(12, 0, A);
+		subinputs[1] = new ListBox();
+		grid.setWidget(12, 1, subinputs[1]);
 	
 		//B
 		Label B = new Label("B");
-		grid.setWidget(12, 0, B);
-		subinputs[2] = new TextBox();
-		grid.setWidget(12, 1, subinputs[2]);
+		grid.setWidget(13, 0, B);
+		subinputs[2] = new ListBox();
+		grid.setWidget(13, 1, subinputs[2]);
 		
 		//C
 		Label C = new Label("C");
-		grid.setWidget(13, 0, C);
-		subinputs[3] = new TextBox();
-		grid.setWidget(13, 1, subinputs[3]);
+		grid.setWidget(14, 0, C);
+		subinputs[3] = new ListBox();
+		grid.setWidget(14, 1, subinputs[3]);
 	}
 }

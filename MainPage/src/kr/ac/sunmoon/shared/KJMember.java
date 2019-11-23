@@ -8,6 +8,7 @@ public class KJMember implements IsSerializable {
 	private String Password;
 	private String CheckPassword;
 	private String Name;
+	private String Email;
 	private String Gender;
 	private String Year;
 	private String Date;
@@ -37,6 +38,12 @@ public class KJMember implements IsSerializable {
 	}
 	public void setName(String Name) {
 		this.Name = Name;
+	}
+	public void setEmail(String Email) {
+		this.Email = Email;
+	}
+	public String getEmail() {
+		return Email;
 	}
 	public String getGender() {
 		return Gender;

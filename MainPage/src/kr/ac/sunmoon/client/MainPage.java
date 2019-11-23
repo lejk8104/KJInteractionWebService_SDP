@@ -1,64 +1,356 @@
 package kr.ac.sunmoon.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.user.client.ui.DecoratorPanel;
-import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.dev.jjs.impl.codesplitter.NothingAlivePredicate;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.ScrollPanel;
-import com.google.gwt.user.client.ui.TabBar;
-import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Image;
+import com.gwtext.client.core.Margins;
+import com.gwtext.client.core.RegionPosition;
+import com.gwtext.client.widgets.HTMLPanel;
+import com.gwtext.client.widgets.Panel;
+import com.gwtext.client.widgets.TabPanel;
+import com.gwtext.client.widgets.Viewport;
+import com.gwtext.client.widgets.form.ComboBox;
+import com.gwtext.client.widgets.form.FormPanel;
+import com.gwtext.client.widgets.form.TextField;
+import com.gwtext.client.widgets.layout.AccordionLayout;
+import com.gwtext.client.widgets.layout.AnchorLayoutData;
+import com.gwtext.client.widgets.layout.BorderLayout;
+import com.gwtext.client.widgets.layout.BorderLayoutData;
+import com.gwtext.client.widgets.layout.ColumnLayout;
+import com.gwtext.client.widgets.layout.ColumnLayoutData;
+import com.gwtext.client.widgets.layout.FitLayout;
+import com.gwtext.client.widgets.layout.FormLayout;
+import com.gwtext.client.widgets.layout.HorizontalLayout;
+import com.gwtext.client.widgets.menu.Menu;
+import com.gwtext.client.widgets.tree.TreeEditor;
+import com.gwtext.client.widgets.tree.TreeNode;
+import com.gwtext.client.widgets.tree.TreePanel;
 
-/**
- * Entry point classes define <code>onModuleLoad()</code>.
- */
-public class MainPage implements EntryPoint {
+public class MainPage implements EntryPoint  {
+
+    private Menu menu;  
+    private TreeNode ctxNode;  
+    private TreeEditor treeEditor; 
+    
+	@Override
 	public void onModuleLoad() {
+		// TODO Auto-generated method stub
+		Panel mainPanel = new Panel();  
+        mainPanel.setBorder(false);  
+        mainPanel.setPaddings(10);  
+        mainPanel.setLayout(new FitLayout());  
+  
+        Panel borderPanel = new Panel();  
+        borderPanel.setLayout(new BorderLayout());  
+  
+        //add north panel  
+        Panel northPanel = new Panel();  
+        northPanel.setEl(new HTML("<p></p>").getElement());
+        northPanel.setTitle("KJ Interaction WebSite");
+        northPanel.setHeight(130);  
+        northPanel.setBodyStyle("background-color:#F0F8FF");  
+        borderPanel.add(northPanel, new BorderLayoutData(RegionPosition.NORTH));  
+        
+        
+        Panel hpsearch = new Panel();
+        hpsearch.setLayout(new ColumnLayout());
+        hpsearch.setMargins(5, 233, 252, 5);
+        
+        // Logo iamage
+        Panel firstColumn = new Panel();  
+        firstColumn.setLayout(new FormLayout());  
+        firstColumn.setBorder(false);
+        firstColumn.setMargins(5, 5, 5, 5);
+        
+        Image imglogo = new Image();
+		imglogo.setUrl("image/interactionlog.png");
+        firstColumn.add(imglogo, new AnchorLayoutData("100%"));
+        hpsearch.add(firstColumn, new ColumnLayoutData(0.17));
 		
-		// main panel
-		RootPanel.get("title").getElement().getStyle().setBackgroundColor("coral");
-		RootPanel.get("main").getElement().getStyle().setBackgroundColor("#F0F8FF");
-		final VerticalPanel vpMain = new VerticalPanel();
-		vpMain.getElement().getStyle().setWidth(1024, Unit.PX);
-		RootPanel.get("main").add(vpMain);
+        //dinamic Search
+        Panel secondColumn = new Panel();  
+        secondColumn.setLayout(new FormLayout());  
+        secondColumn.setBorder(false);
+		secondColumn.setMargins(32, 5, 5, 32);
 		
-		final TopPanel topPanel = new TopPanel();
-		vpMain.add(topPanel);
-		
-		final TabBar bar = new TabBar();
-		bar.addTab("여행 및 관광정보");
-		bar.addTab("Animation 한국vs일본");
-		bar.addTab("스포츠");
-		bar.addTab("금융");
-		bar.addTab("자동차");
-		bar.setStyleName("bar");
-		vpMain.add(bar);
-		
-//		final Grid grid = new Grid(3, 2);
-//		vpMain.add(grid);
-		
-		DecoratorPanel dp = new DecoratorPanel();
-		vpMain.add(dp);
-		
-		ScrollPanel spResult = new ScrollPanel();
-		spResult.getElement().getStyle().setBackgroundColor("#FFA07A");
-		spResult.getElement().getStyle().setWidth(1200, Unit.PX);
-		spResult.getElement().getStyle().setHeight(1000, Unit.PX);
-		HTML video = new HTML("<iframe width=560 height=315 src=https://www.youtube.com/embed/bkcitbJzi6c "
+        ComboBox loading = new ComboBox(); 
+        loading.setDisplayField("title");  
+        loading.setTypeAhead(false);  
+        loading.setLoadingText("Searching...");  
+        loading.setWidth(320);
+        loading.setPageSize(10);
+        loading.setHideTrigger(true);
+        loading.setMode(ComboBox.REMOTE); 
+        loading.setHideLabel(true);
+        
+        FormPanel search = new FormPanel();
+        search.setBorder(false);
+        search.add(loading,new AnchorLayoutData("97%"));
+        secondColumn.add(search);
+        hpsearch.add(secondColumn, new ColumnLayoutData(0.5));
+        
+        // search logo
+        Panel third_Column = new Panel();  
+        third_Column.setLayout(new FormLayout());  
+        third_Column.setBorder(false);
+        third_Column.setMargins(30, 0, 30, 10);
+        
+        Image imgsearch = new Image();
+        imgsearch.setUrl("image/search.png");
+        third_Column.add(imgsearch);
+        hpsearch.add(third_Column, new ColumnLayoutData(0.1));
+        
+        // login logo
+        Panel fourth_Column = new Panel();  
+        fourth_Column.setLayout(new FormLayout());  
+        fourth_Column.setBorder(false);
+        fourth_Column.setMargins(0, 0, 0, 0);
+
+        Image imglogin = new Image();
+        imglogin.setUrl("image/login.png");
+        fourth_Column.add(imglogin);
+//        hpsearch.add(fourth_Column, new ColumnLayoutData(0.3));
+
+        // register logo
+        Panel fiveth_Panel = new Panel();  
+        fiveth_Panel.setLayout(new FormLayout());  
+        fiveth_Panel.setBorder(false);
+        fiveth_Panel.setMargins(7, 7, 7, 7);
+        
+        Image imgRegister = new Image();
+        imgRegister.setUrl("image/register.png");
+        fiveth_Panel.add(imgRegister);
+//        hpsearch.add(fiveth_Panel, new ColumnLayoutData(0.1));
+        
+        northPanel.add(hpsearch);
+        
+        //add south panel  
+        Panel southPanel = new Panel();  
+        southPanel.setHeight(50);  
+        southPanel.setBodyStyle("background-color:#CDEB8B");  
+        southPanel.setCollapsible(true);  
+        southPanel.setTitle("South");  
+        
+        //?
+        Panel southdata2 = new Panel();
+        southdata2.setLayout(new ColumnLayout());
+        southPanel.setBorder(false);
+        
+        BorderLayoutData southData = new BorderLayoutData(RegionPosition.SOUTH);  
+        southData.setMinSize(50);  
+        southData.setMaxSize(100);  
+        southData.setMargins(new Margins(10, 10, 10, 0));  
+        southData.setSplit(true);
+        
+        //주소록
+        Panel first_Column = new Panel();  
+        first_Column.setLayout(new FormLayout());  
+        first_Column.setBorder(false);
+        
+        first_Column.add(new TextField("Address", "first"), new AnchorLayoutData("97%"));
+        southdata2.add(first_Column, new ColumnLayoutData(0.5));  
+        
+        // 연락처
+        Panel second_Column = new Panel();  
+        second_Column.setLayout(new FormLayout());  
+        second_Column.setBorder(false);  
+
+        second_Column.add(new TextField("Phone Number", "last"), new AnchorLayoutData("97%"));
+        southdata2.add(second_Column, new ColumnLayoutData(0.5));
+        
+        southPanel.add(southdata2);
+        borderPanel.add(southPanel, southData);
+        
+        //add My page  
+        Panel eastPanel = new Panel();
+        eastPanel.setHtml("<p>east panel</p>");  
+        eastPanel.setTitle("My Page");  
+        eastPanel.setCollapsible(true);  
+        eastPanel.setWidth(250);  
+  
+        Panel accordionPanel = createAccordionPanel();  
+        accordionPanel.setHeight(400);  
+        accordionPanel.setWidth(250);
+        
+        BorderLayoutData eastData = new BorderLayoutData(RegionPosition.EAST);  
+        eastData.setSplit(true);  
+        eastData.setMinSize(175);  
+        eastData.setMaxSize(400);  
+        eastData.setMargins(new Margins(0, 0, 5, 0));  
+        eastPanel.add(accordionPanel);
+        
+        borderPanel.add(eastPanel, eastData);  
+  
+        // Main Menu
+        Panel westPanel = new Panel();  
+        westPanel.setHtml("<p>west panel</p>");  
+        westPanel.setTitle("Main menu");  
+        westPanel.setBodyStyle("background-color:#EEEEEE");  
+        westPanel.setCollapsible(true);  
+        westPanel.setWidth(230);  
+  
+        BorderLayoutData westData = new BorderLayoutData(RegionPosition.WEST);
+        westData.setSplit(true);  
+        westData.setMinSize(175);  
+        westData.setMaxSize(400);  
+        westData.setMargins(new Margins(0, 5, 0, 0));  
+  
+        final TreePanel treePanel = new OutlookTreePanel();
+        treePanel.setMargins(2, 2, 2, 2);
+        treePanel.setWidth(400);  
+        treePanel.setHeight(400);
+        TreeNode root = new TreeNode();
+        
+        westPanel.add(treePanel); 
+        borderPanel.add(westPanel, westData);  
+  
+        Panel centerPanel = new Panel();  
+        centerPanel.setBodyStyle("background-color:#C3D9FF");  
+  
+        TabPanel tabPanel = new TabPanel();  
+        tabPanel.setPlain(true);  
+        tabPanel.setActiveTab(0);  
+
+        Panel secondTab = new Panel();  
+        secondTab.setTitle("Main Page");
+        Panel thirdtab = new Panel();  
+        thirdtab.setTitle("Chatting");
+        Panel fourthtab = new Panel();  
+        fourthtab.setTitle("Advertisement and Youtube");
+        Panel fivethtab = new Panel();  
+        fivethtab.setTitle("Trip Recommend");
+        
+        tabPanel.add(secondTab);
+        tabPanel.add(thirdtab);
+        tabPanel.add(fourthtab);
+        tabPanel.add(fivethtab);
+        
+        // Main Mathod
+        centerPanel.add(tabPanel);
+        HTMLPanel htmlPannel = new HTMLPanel();
+        htmlPannel.setMargins(10, 50, 53, 10);
+//        HTML video = new HTML("<iframe width=560 height=315 src=https://www.youtube.com/embed/bkcitbJzi6c "
+//				+ "frameborder=0 allow=accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture allowfullscreen></iframe>");
+        htmlPannel.setHtml("<iframe width=560 height=315 src=https://www.youtube.com/embed/bkcitbJzi6c "
 				+ "frameborder=0 allow=accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture allowfullscreen></iframe>");
-		video.getElement().getStyle().setMarginLeft(300, Unit.PX);
-		spResult.add(video);
-		dp.setWidget(spResult);
-		
-		//bottom panel
-		Grid bottomPanel = new Grid(1, 2);
-		bottomPanel.getElement().getStyle().setWidth(1024, Unit.PX);
-		final Label address = new Label("주소");
-		final Label question = new Label("연락처");
-		bottomPanel.setWidget(0, 0, address);
-		bottomPanel.setWidget(0, 1, question);
-		vpMain.add(bottomPanel);
+        centerPanel.add(htmlPannel);
+        borderPanel.add(centerPanel, new BorderLayoutData(RegionPosition.CENTER));  
+
+        mainPanel.add(borderPanel);  
+  
+        Viewport viewport = new Viewport(mainPanel);  
+    } 
+	
+	// TreePanel
+	class OutlookTreePanel extends TreePanel {  
+		  
+        public OutlookTreePanel() {  
+  
+        	// Root
+            TreeNode mainService = new TreeNode("Main Service");
+            mainService.setIconCls("login-icon");  
+            mainService.setExpanded(true);  
+            
+            // Login Service
+            TreeNode login = new TreeNode("Login Service");  
+            login.setIconCls("login-icon");  
+            login.setExpanded(true); 
+            mainService.appendChild(login);
+            
+            TreeNode register = new TreeNode("Register");  
+            register.setIconCls("register-icon");  
+            login.appendChild(register);  
+  
+            TreeNode fidnID = new TreeNode("Find ID");  
+            fidnID.setIconCls("find id-icon");  
+            login.appendChild(fidnID);  
+  
+            TreeNode findPassword = new TreeNode("Find Password");  
+            findPassword.setIconCls("findpassword-icon");  
+            login.appendChild(findPassword);  
+  
+            // Chatting Service
+            TreeNode chattingservice = new TreeNode("Chatting Service");  
+            chattingservice.setIconCls("chatting-icon");  
+            chattingservice.setExpanded(true);  
+  
+            TreeNode mypage = new TreeNode("My Page");  
+            mypage.setIconCls("mypage-icon");  
+            chattingservice.appendChild(mypage);  
+  
+            TreeNode changeinterests = new TreeNode("Change Interests");  
+            changeinterests.setIconCls("changeinterests-icon");  
+            chattingservice.appendChild(changeinterests);  
+   
+            mainService.appendChild(chattingservice);  
+            
+            //Recommend Service
+            TreeNode recommend = new TreeNode("Recommend Service");  
+            recommend.setIconCls("recommend-icon");  
+            recommend.setExpanded(true);  
+  
+            TreeNode youtube = new TreeNode("Youtube");  
+            youtube.setIconCls("youtube-icon");  
+            recommend.appendChild(youtube);  
+  
+            TreeNode advertisement = new TreeNode("Advertisement for KJ Interaction");  
+            advertisement.setIconCls("advertisement-icon");  
+            recommend.appendChild(advertisement);  
+   
+            mainService.appendChild(recommend);
+            
+          //Website Service
+            TreeNode websiteService = new TreeNode("Website Service");  
+            websiteService.setIconCls("websiteService-icon");  
+            websiteService.setExpanded(true);  
+  
+            TreeNode recommandTrip_Tour = new TreeNode("Recommand Trip&Tour");  
+            recommandTrip_Tour.setIconCls("recommandTrip_Tour-icon");  
+            websiteService.appendChild(recommandTrip_Tour);  
+  
+            TreeNode animation = new TreeNode("Animation korea vs japanese");  
+            animation.setIconCls("animation-icon");  
+            websiteService.appendChild(animation);  
+   
+            TreeNode sports = new TreeNode("Sports");  
+            sports.setIconCls("sport-icon");  
+            websiteService.appendChild(sports);  
+            
+            TreeNode vehicle = new TreeNode("Vehicle");  
+            vehicle.setIconCls("sport-icon");  
+            websiteService.appendChild(vehicle);  
+            
+            TreeNode qna = new TreeNode("QnA");  
+            qna.setIconCls("sport-icon");  
+            websiteService.appendChild(qna);  
+            
+            mainService.appendChild(websiteService);
+  
+            setIconCls("mainpage-icon");  
+            setWidth(400);  
+            setHeight(400);  
+            setEnableDD(true);  
+            setRootNode(mainService);
+            
+        }  
+        
+    }  
+	// Accoredion Panel
+	private Panel createAccordionPanel() {  
+        Panel accordionPanel = new Panel();  
+        accordionPanel.setLayout(new AccordionLayout(true));  
+  
+        Panel mypagePanel = new Panel("", "<p>Mypage</p>");
+        mypagePanel.setTitle("Mypage");
+//        mypagePanel.setIconCls("settings-icon");  
+        accordionPanel.add(mypagePanel);  
+  
+        Panel loginservicePanel = new Panel("Login Service", "<p>Login Service</p>");  
+//        loginservicePanel.setIconCls("folder-icon");  
+        accordionPanel.add(loginservicePanel);  
+        
+        return accordionPanel;
 	}
 }
+ 	  
