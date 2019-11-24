@@ -1,436 +1,509 @@
 package kr.ac.sunmoon.client;
 
+import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.Grid;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
+import com.gwtext.client.data.Record;
+import com.gwtext.client.data.SimpleStore;
+import com.gwtext.client.data.Store;
+import com.gwtext.client.widgets.Button;
+import com.gwtext.client.widgets.Panel;
+import com.gwtext.client.widgets.TabPanel;
+import com.gwtext.client.widgets.form.ComboBox;
+import com.gwtext.client.widgets.form.DateField;
+import com.gwtext.client.widgets.form.FormPanel;
+import com.gwtext.client.widgets.form.TextField;
+import com.gwtext.client.widgets.form.VType;
+import com.gwtext.client.widgets.form.event.ComboBoxListenerAdapter;
+import com.gwtext.client.widgets.layout.FormLayout;
 
 import kr.ac.sunmoon.shared.KJMember;
-import kr.ac.sunmoon.shared.Survey_data;
-
-public class Register_Membership extends DialogBox {
-
-	
-	private static final TextBox String = null;           //?
+  
+  
+public class Register_Membership extends com.gwtext.client.widgets.Window{  
+  
 	private ListBox[] listinputs;
 	private TextBox[] txtinputs;
 	private ListBox[] subinputs;
 	private TextBox[] interestinput;
-
 	
-	public Register_Membership(){
-		
-		super(false, true);
-		this.setText("Register_Membership");
-		
-		Grid grid = new Grid(16,5);
-		this.setWidget(grid);
-	
-		Grid textgrid = new Grid(1,2);
-		grid.setWidget(0, 1, textgrid);
-		
-		addInputList(grid,textgrid);
-		addSurveyList(grid);
-		addButtons(grid,textgrid);
-	}
-		
-	private void addButtons(Grid grid, Grid textgrid) {
-		
-//		아이디 중복확인
-		Grid btngrid = new Grid(1,2);
-		grid.setWidget(15, 1, btngrid);
-		
-		Button btnIDCheck = new Button();
-		grid.setWidget(0, 4, btnIDCheck);
-		btnIDCheck.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-				String[] checks = new String[1];
-				
-				if(txtinputs[0].getText().trim().equals("")) {
-					
-					Window.alert("Please Input your ID");
-					return;
-				}
-				KJMember kjMember = new KJMember();
-				kjMember.setID(txtinputs[0].getText().trim());
-				
-				KJMembershipServiceAsync checkservice = GWT.create(KJMembershipService.class);
-				checkservice.checkID(kjMember, new AsyncCallback<Boolean>() {
-
-					@Override
-					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
-						Window.alert("this ID already exists. ");
+    public Register_Membership() {  
+    	
+    	super();
+        Panel panel = new Panel();  
+        panel.setBorder(false);  
+        panel.setPaddings(15);
+  
+        FormPanel formPanel = new FormPanel();  
+        formPanel.setFrame(true); 
+        formPanel.setTitle("KJ Membership Page");
+        formPanel.setLabelWidth(65);  
+        formPanel.setBorder(false);  
+        formPanel.setWidth(320);  
+    }
+//        
+//        //TabPanel 선언
+//        final TabPanel tabPanel = new TabPanel();  
+//        tabPanel.setActiveTab(0);  
+//  
+//        Panel firstTab = new Panel();  
+//        firstTab.setTitle("KJ Membership");  
+//        firstTab.setLayout(new FormLayout());  
+//        firstTab.setAutoHeight(true);  
+//        firstTab.setPaddings(10);  
+//  
+//        //list store 선언
+//        final Store gender = new SimpleStore(new String[] {"genderData","gender"}, Getgender());
+//        gender.load();
+//        final Store countriesStore = new SimpleStore(new String[]{"country", "countryData"}, countries);  
+//        countriesStore.load();  
+//        final Store citiesStore = new SimpleStore(new String[]{"cityData", "country", "cityName"}, cities);  
+//        citiesStore.load(); 
+//        
+//        // ID
+//        TextField txtID = new TextField("ID", "id", 200);  
+//        txtID.setAllowBlank(false);  
+////        txtID.setValue("id"); 
+//        firstTab.add(txtID);  
+//  
+//        //Password
+//        TextField txtPassword = new TextField("Password", "passwordData", 200);  
+////        txtPassword.setValue("password");  
+//        firstTab.add(txtPassword);  
+//  
+//        //CheckPassword
+//        TextField txtCheckPassword = new TextField("Check Password", "checkpasswordData", 200);  
+////        txtCheckPassword.setValue("checkpassword");
+//        firstTab.add(txtCheckPassword);  
+//
+//        //Name
+//        TextField txtName = new TextField("Name", "nameData", 200);
+//        txtName.setAllowBlank(false); 
+//        txtName.setValue("name"); 
+//        firstTab.add(txtName);  
+//  
+//        //E-Mail
+//        TextField txtemail = new TextField("Email", "emailData", 200);  
+//        txtemail.setVtype(VType.EMAIL);  
+//        firstTab.add(txtemail);  
+//  
+//        //Gender list
+//        ComboBox listgender = new ComboBox();
+//        listgender.setAllowBlank(false);
+//        listgender.setMinChars(1);
+//        listgender.setFieldLabel("Gender");
+//        listgender.setStore(gender);
+//        listgender.setDisplayField("genderData");
+//        listgender.setEmptyText("Select Gender"); 
+//        listgender.setTriggerAction(ComboBox.ALL); //? 모르겠다
+//        listgender.setTypeAhead(true);  // 이를 채우고 자동 선택한다
+//        listgender.setSelectOnFocus(true); //데이터값 수신할 떄 자동채움
+//        listgender.setWidth(200);  
+//        listgender.setResizable(true); //?
+//        firstTab.add(listgender);
+//        
+//        //Birth
+//        DateField dataBirth = new DateField("Date of birth", "BirthData", 200);  
+//        dataBirth.setAllowBlank(false);
+//        firstTab.add(dataBirth);
+//        
+//        // country
+//        final ComboBox listcountry = new ComboBox();  
+//        listcountry.setFieldLabel("Select Country");  
+//        listcountry.setStore(countriesStore);  
+//        listcountry.setDisplayField("countryData");  
+//        listcountry.setMode(ComboBox.LOCAL);  
+//    	listcountry.setTriggerAction(ComboBox.ALL);  
+//    	listcountry.setForceSelection(true);  
+////    	listcountry.setValueField("country");  
+//    	listcountry.setReadOnly(true);  
+//
+//    	// local
+//    	final ComboBox listlocal = new ComboBox();  
+//    	listlocal.setFieldLabel("Select City");  
+//    	listlocal.setStore(citiesStore);  
+//    	listlocal.setDisplayField("cityName");  
+////    	listlocal.setValueField("local");  
+//    	listlocal.setMode(ComboBox.LOCAL);  
+//	    listlocal.setTriggerAction(ComboBox.ALL);  
+//	    listlocal.setLinked(true);  
+//	    listlocal.setForceSelection(true);  
+//	    listlocal.setReadOnly(true);  
+//
+//	    //동작과정
+//	    listcountry.addListener(new ComboBoxListenerAdapter() {  
+//        public void onSelect(ComboBox comboBox, Record record, int index) {  
+//            listlocal.setValue("");  
+//            citiesStore.filter("country", comboBox.getValue());  
+//        	}  
+//	    });  
+//	    firstTab.add(listcountry);
+//	    firstTab.add(listlocal);
+//  
+//        tabPanel.add(firstTab);  
+//    }
+//        //list store 선언
+//        final Store preference = new SimpleStore(new String[] {"Text","Preference","data"}, Getpreference());
+//        preference.load();
+//        final Store a = new SimpleStore(new String[] {"Text","A","data"}, GetA());
+//        a.load();
+//        final Store b = new SimpleStore(new String[] {"Text","B","data"}, GetB());
+//        b.load();
+//        final Store c = new SimpleStore(new String[] {"Text","C","data"}, GetC());
+//        c.load();
+//        
+//        // Survey
+//        Panel secondTab = new Panel();  
+//        secondTab.setTitle("Survey");  
+//        secondTab.setLayout(new FormLayout());  
+//        secondTab.setAutoHeight(true);  
+//        secondTab.setPaddings(10);  
+// 
+//        // preference
+//        ComboBox listpreference = new ComboBox();
+//        listpreference.setAllowBlank(false);
+//        listpreference.setMinChars(1);
+//        listpreference.setFieldLabel("Preference");
+//        listpreference.setStore(c);
+//        listpreference.setDisplayField("Text");
+//        listpreference.setEmptyText("Select Preference"); 
+//        listpreference.setTriggerAction(ComboBox.ALL); //? 모르겠다
+//        listpreference.setTypeAhead(true);  // 이를 채우고 자동 선택한다
+//        listpreference.setSelectOnFocus(true); //데이터값 수신할 떄 자동채움
+//        listpreference.setWidth(200);  
+//        listpreference.setResizable(true); //?
+//        secondTab.add(listpreference);
+//
+//        //Interest
+//        TextField txtinterests = new TextField("Interests", "interests", 200);  
+//        txtinterests.setAllowBlank(false);  
+////        txtinterests.setValue("interests"); 
+//        secondTab.add(txtinterests);
+//        
+//        //A
+//        ComboBox A = new ComboBox();
+//        A.setAllowBlank(false);
+//        A.setMinChars(1);
+//        A.setFieldLabel("Preference");
+//        A.setStore(a);
+//        A.setDisplayField("Text");
+//        A.setEmptyText("Select A"); 
+//        A.setTriggerAction(ComboBox.ALL); //? 모르겠다
+//        A.setTypeAhead(true);  // 이를 채우고 자동 선택한다
+//        A.setSelectOnFocus(true); //데이터값 수신할 떄 자동채움
+//        A.setWidth(200);  
+//        A.setResizable(true); //?
+//        secondTab.add(A);
+//        
+//        //B
+//        ComboBox B = new ComboBox();
+//        B.setAllowBlank(false);
+//        B.setMinChars(1);
+//        B.setFieldLabel("Preference");
+//        B.setStore(b);
+//        B.setDisplayField("Text");
+//        B.setEmptyText("Select B"); 
+//        B.setTriggerAction(ComboBox.ALL); //? 모르겠다
+//        B.setTypeAhead(true);  // 이를 채우고 자동 선택한다
+//        B.setSelectOnFocus(true); //데이터값 수신할 떄 자동채움
+//        B.setWidth(200);  
+//        B.setResizable(true); //?
+//        secondTab.add(B);
+//        
+//        //C
+//        ComboBox C = new ComboBox();
+//        C.setAllowBlank(false);
+//        C.setMinChars(1);
+//        C.setFieldLabel("Preference");
+//        C.setStore(c);
+//        C.setDisplayField("Text");
+//        C.setEmptyText("Select C"); 
+//        C.setTriggerAction(ComboBox.ALL); //? 모르겠다
+//        C.setTypeAhead(true);  // 이를 채우고 자동 선택한다
+//        C.setSelectOnFocus(true); //데이터값 수신할 떄 자동채움
+//        C.setWidth(200);  
+//        C.setResizable(true); //?
+//        secondTab.add(C);
+//
+//        tabPanel.add(secondTab);
+//        
+//        Button btnok = new Button("OK");  
+//        Button btncancel = new Button("Cancel");  
+//  
+//        formPanel.addButton(btnok);  
+//        formPanel.addButton(btncancel);  
+//  
+//        formPanel.add(tabPanel);  
+//        panel.add(formPanel);  
+//  
+//        RootPanel.get().add(panel);  
+//    }  
+    
+    // list object
+    private Object[][] Getgender()  {
+    	return new Object[][] {
+    		new Object[] {"Male","gender"},
+    		new Object[] {"Female","gender"}
+    	};
+    }
+    
+    private Object[][] countries = new Object[][]{  
+        new Object[]{"K", "Korean"},  
+        new Object[]{"J", "Japanese"},  
+    };
+    
+    private Object[][] cities = new Object[][]{  
+        new Object[]{new Integer(001), "K", "Gyeonggi-do"},  
+        new Object[]{new Integer(002), "K", "Seoul"},  
+        new Object[]{new Integer(003), "K", "Gangwon-do"},  
+        new Object[]{new Integer(004), "K", "Chungcheongbuk-do"},  
+        new Object[]{new Integer(005), "K", "Chungcheongnam-do"},  
+        new Object[]{new Integer(006), "K", "Gyeongsangbuk-do"},  
+        new Object[]{new Integer(007), "K", "Gyeongsangnam-do"},  
+//        new Object[]{new Integer(008), "K", "Jeollabuk-do"},  
+//        new Object[]{new Integer(009), "K", "Jeollanam-do "},  
+        new Object[]{new Integer(0010), "J", "Hokkaido"}, 
+        new Object[]{new Integer(0011), "J", "Tohoku"},
+        new Object[]{new Integer(0012), "J", "Chubu"},
+        new Object[]{new Integer(0013), "J", "Kinki"},
+        new Object[]{new Integer(0014), "J", "Chugoku"},
+        new Object[]{new Integer(0015), "J", "Shikoku"},
+        new Object[]{new Integer(0016), "J", "Kyushu"}
+    };
+    
+    private Object[][] Getpreference()  {
+    	return new Object[][] {
+    		new Object[] {"Very Bad","preference", new Integer(-2)},
+    		new Object[] {"Bad","preference", new Integer(-1)},
+    		new Object[] {"So So","preference", new Integer(0)},
+    		new Object[] {"Good","preference", new Integer(1)},
+    		new Object[] {"Very Good","preference", new Integer(2)},
+    	};
+    }    
+    
+    private Object[][] GetA()  {
+    	return new Object[][] {
+    		new Object[] {"Very Bad","a", new Integer(-2)},
+    		new Object[] {"Bad","a", new Integer(-1)},
+    		new Object[] {"So So","a", new Integer(0)},
+    		new Object[] {"Good","a", new Integer(1)},
+    		new Object[] {"Very Good","a", new Integer(2)},
+    	};
+    }
+    
+    private Object[][] GetB()  {
+    	return new Object[][] {
+    		new Object[] {"Very Bad","b", new Integer(-2)},
+    		new Object[] {"Bad","b", new Integer(-1)},
+    		new Object[] {"So So","b", new Integer(0)},
+    		new Object[] {"Good","b", new Integer(1)},
+    		new Object[] {"Very Good","b", new Integer(2)},
+    	};
+    }
+    
+    private Object[][] GetC()  {
+    	return new Object[][] {
+    		new Object[] {"Very Bad","c", new Integer(-2)},
+    		new Object[] {"Bad","c", new Integer(-1)},
+    		new Object[] {"So So","c", new Integer(0)},
+    		new Object[] {"Good","c", new Integer(1)},
+    		new Object[] {"Very Good","c", new Integer(2)},
+    	};
+    }
+    
+//private void addButtons(Button btnok, Button btncancel) {
+//		
+////		아이디 중복확인
+//		Button btnIDCheck = new Button();
+//		btnIDCheck.addClickHandler(new ClickHandler() {
+//			
+//			@Override
+//			public void onClick(ClickEvent event) {
+//				// TODO Auto-generated method stub
+//				String[] checks = new String[1];
+//				
+//				if(txtinputs[0].getText().trim().equals("")) {
+//					
+//					Window.alert("Please Input your ID");
+//					return;
+//				}
+//				KJMember kjMember = new KJMember();
+//				kjMember.setID(txtinputs[0].getText().trim());
+//				
+//				KJMembershipServiceAsync checkservice = GWT.create(KJMembershipService.class);
+//				checkservice.checkID(kjMember, new AsyncCallback<Boolean>() {
+//
+//					@Override
+//					public void onFailure(Throwable caught) {
+//						// TODO Auto-generated method stub
+//						Window.alert("this ID already exists. ");
+////						Register_Membership.this.hide();
+//					}
+//					@Override
+//					public void onSuccess(Boolean result) {
+//						// TODO Auto-generated method stub
+//						Window.alert("This ID is available");
+//					}
+//				});
+//			}
+//		});
+//		btnIDCheck.setText("CheckID");
+//		
+////		OK 버튼
+//		Button btnOk = new Button();
+//		btnOk.addAttachHandler(handler)
+//			
+//			@Override
+//			public void onAttachOrDetach(AttachEvent event) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		})
+//		btnOk.addClickHandler(new ClickHandler() {
+//			
+//			@Override
+//			public void onClick(ClickEvent event) {
+//				// TODO Auto-generated method stub
+//				String[] membershipData = new String[4];
+//				String [] listData = new String[4];
+//				String[] interestData = new String[3];
+//				String[] subinputdata = new String[3];
+//
+//				
+//				for(int i=0; i<membershipData.length; i++) {
+//					membershipData[i] = txtinputs[i].getText().trim();
+//					
+//					if(membershipData[i].equals("")) {
+//						Window.alert("Please, Input Your ALl Data");
+//						return;
+//					}
+//					if(membershipData[1].equals(membershipData[2])) {
+//						Window.alert("Please, check your password");
+//						return;
+//					}
+//				}
+//				
+//				for(int i=0; i<listData.length; i++) {
+//					int index =0;
+//					if (listinputs[0].getItemText(index) == "0") {
+//						listinputs[0].setItemText(0, male);
+//					}
+//					else if (listinputs[0].getItemText(index) == "1") {
+//						listinputs[0].setItemText(1, female);
+//					}
+//					else if(listinputs[2].getItemText(index) == "0") {
+//						listinputs[2].setItemText(0, korean);
+//					}
+//					else if(listinputs[2].getItemText(index) == "1") {
+//						listinputs[2].setItemText(0, japanese);
+//					}
+//					else;
+//					listinputs[i].getSelectedItemText().trim();
+//					if(listData[i].equals("")) {
+//						Window.alert("Please, Input Your Interest survey data");
+//						return;
+//						
+////					index= index+1;
+//					}
+//				}
+//				for(int i=0; i<interestData.length; i++) {
+//					interestData[i] =  interestinput[i].getText().trim();
+//					
+//					if(interestData[i].equals("")) {
+//						Window.alert("Please, Input Your other survey datas");
+//						return;
+//					}
+//				}
+//				for(int i=0; i<subinputdata.length; i++) {
+//					subinputdata[i]=Integer.toString(subinputs[i].getSelectedIndex()-2).trim();
+//					if(subinputdata[i].equals("")) {
+//						Window.alert("Please, Input Your other survey datas");
+//						return;
+//					}
+//				}
+//				//kjmembership_dataset
+//				KJMember kjMember = new KJMember();
+//				kjMember.setID(membershipData[0]);
+//				kjMember.setPassword(membershipData[1]);
+//				kjMember.setCheckPassword(membershipData[2]);
+//				kjMember.setName(membershipData[3]);
+////				kjMember.setGender(membershipData[4);
+//				kjMember.setGender(listData[0]);
+//				kjMember.setYear(listData[1]);
+//				kjMember.setDate(listData[2]);
+//				kjMember.setCountry(listData[3]);
+//				kjMember.setLocal(listData[4]);
+//				
+//				//survey data set
+//				Survey_data surveyData = new Survey_data();
+//				surveyData.setID(membershipData[0]);
+//				surveyData.setName(membershipData[3]);
+//				surveyData.setPreference(subinputdata[0]);
+////				surveyData.setInterest(interestData);
+//				surveyData.setA(subinputdata[1]);
+//				surveyData.setB(subinputdata[2]);
+//				surveyData.setC(subinputdata[3]);
+////				surveyData.setNumber(`);
+//				
+//				//Korean survey data Statistic
+////				surveyData.setGyeonggi_people(gyeonggi_people);
+////				surveyData.setSeoul_people(seoul_people);
+////				surveyData.setGangwon_people(gangwon_people);
+////				surveyData.setNorth_Chungcheong_people(north_Chungcheong_people);
+////				surveyData.setSouth_Chungcheong_people(south_Chungcheong_people);
+////				surveyData.setNorth_Gyeongsang_people(north_Gyeongsang_people);
+////				surveyData.setSouth_Gyeongsang_people(south_Gyeongsang_people);
+////				surveyData.setNorth_Jeolla_people(north_Jeolla_people);
+////				surveyData.setSouth_Jeolla_peoples(south_Jeolla_peoples);
+//				
+//				////Japanese survey data Statistic
+////				surveyData.setHokkaido_people(hokkaido_people);
+////				surveyData.setTohoku_people(tohoku_people);
+////				surveyData.setKanto_people(kanto_people);
+////				surveyData.setChubu_people(chubu_people);
+////				surveyData.setKinki_people(kinki_people);
+////				surveyData.setChugoku_people(chugoku_people);
+////				surveyData.setShikokupeople(shikokupeople);
+//				
+//				//서버통신
+//				KJMembershipServiceAsync service = GWT.create(KJMembershipService.class);
+//				service.Register_Membership(kjMember, new AsyncCallback<Void>() {
+//					
+//					@Override
+//					public void onSuccess(Void result) {
+//						// TODO Auto-generated method stub
+//						Window.alert("Welcome to the membership");
 //						Register_Membership.this.hide();
-					}
-					@Override
-					public void onSuccess(Boolean result) {
-						// TODO Auto-generated method stub
-						Window.alert("This ID is available");
-					}
-				});
-			}
-		});
-		btnIDCheck.setText("CheckID");
-		textgrid.setWidget(0, 1, btnIDCheck);
-		
-//		OK 버튼
-		Button btnOk = new Button();
-		btnOk.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-				String[] membershipData = new String[4];
-				String [] listData = new String[4];
-				String[] interestData = new String[3];
-				String[] subinputdata = new String[3];
-				String male = "Male";
-				String female = "Female";				
-				String korean = "Korean";
-				String japanese = "Japanese";
-				
-				for(int i=0; i<membershipData.length; i++) {
-					membershipData[i] = txtinputs[i].getText().trim();
-					
-					if(membershipData[i].equals("")) {
-						Window.alert("Please, Input Your ALl Data");
-						return;
-					}
-					if(membershipData[1].equals(membershipData[2])) {
-						Window.alert("Please, check your password");
-						return;
-					}
-				}
-				
-				for(int i=0; i<listData.length; i++) {
-					int index =0;
-					if (listinputs[0].getItemText(index) == "0") {
-						listinputs[0].setItemText(0, male);
-					}
-					else if (listinputs[0].getItemText(index) == "1") {
-						listinputs[0].setItemText(1, female);
-					}
-					else if(listinputs[2].getItemText(index) == "0") {
-						listinputs[2].setItemText(0, korean);
-					}
-					else if(listinputs[2].getItemText(index) == "1") {
-						listinputs[2].setItemText(0, japanese);
-					}
-					else;
-					listinputs[i].getSelectedItemText().trim();
-					if(listData[i].equals("")) {
-						Window.alert("Please, Input Your Interest survey data");
-						return;
-						
-//					index= index+1;
-					}
-				}
-				for(int i=0; i<interestData.length; i++) {
-					interestData[i] =  interestinput[i].getText().trim();
-					
-					if(interestData[i].equals("")) {
-						Window.alert("Please, Input Your other survey datas");
-						return;
-					}
-				}
-				for(int i=0; i<subinputdata.length; i++) {
-					subinputdata[i]=Integer.toString(subinputs[i].getSelectedIndex()-2).trim();
-					if(subinputdata[i].equals("")) {
-						Window.alert("Please, Input Your other survey datas");
-						return;
-					}
-				}
-				//kjmembership_dataset
-				KJMember kjMember = new KJMember();
-				kjMember.setID(membershipData[0]);
-				kjMember.setPassword(membershipData[1]);
-				kjMember.setCheckPassword(membershipData[2]);
-				kjMember.setName(membershipData[3]);
-//				kjMember.setGender(membershipData[4);
-				kjMember.setGender(listData[0]);
-				kjMember.setYear(listData[1]);
-				kjMember.setDate(listData[2]);
-				kjMember.setCountry(listData[3]);
-				kjMember.setLocal(listData[4]);
-				
-				//survey data set
-				Survey_data surveyData = new Survey_data();
-				surveyData.setID(membershipData[0]);
-				surveyData.setName(membershipData[3]);
-				surveyData.setPreference(subinputdata[0]);
-//				surveyData.setInterest(interestData);
-				surveyData.setA(subinputdata[1]);
-				surveyData.setB(subinputdata[2]);
-				surveyData.setC(subinputdata[3]);
-//				surveyData.setNumber(`);
-				
-				//Korean survey data Statistic
-//				surveyData.setGyeonggi_people(gyeonggi_people);
-//				surveyData.setSeoul_people(seoul_people);
-//				surveyData.setGangwon_people(gangwon_people);
-//				surveyData.setNorth_Chungcheong_people(north_Chungcheong_people);
-//				surveyData.setSouth_Chungcheong_people(south_Chungcheong_people);
-//				surveyData.setNorth_Gyeongsang_people(north_Gyeongsang_people);
-//				surveyData.setSouth_Gyeongsang_people(south_Gyeongsang_people);
-//				surveyData.setNorth_Jeolla_people(north_Jeolla_people);
-//				surveyData.setSouth_Jeolla_peoples(south_Jeolla_peoples);
-				
-				////Japanese survey data Statistic
-//				surveyData.setHokkaido_people(hokkaido_people);
-//				surveyData.setTohoku_people(tohoku_people);
-//				surveyData.setKanto_people(kanto_people);
-//				surveyData.setChubu_people(chubu_people);
-//				surveyData.setKinki_people(kinki_people);
-//				surveyData.setChugoku_people(chugoku_people);
-//				surveyData.setShikokupeople(shikokupeople);
-				
-				//서버통신
-				KJMembershipServiceAsync service = GWT.create(KJMembershipService.class);
-				service.Register_Membership(kjMember, new AsyncCallback<Void>() {
-					
-					@Override
-					public void onSuccess(Void result) {
-						// TODO Auto-generated method stub
-						Window.alert("Welcome to the membership");
-						Register_Membership.this.hide();
-						
-					}
-					@Override
-					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
-						Window.alert("Sorry, Please try agian after few minutes");
-						Register_Membership.this.hide();
-					}
-				});
-			}
-		});
-		btnOk.setText("Register");
-		btngrid.setWidget(0,0, btnOk);
-		
-		//취소
-		Button btnCancel = new Button();
-		btnCancel.setText("Cancel");
-		btnCancel.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent arg0) {
-				// TODO Auto-generated method stub
-				Register_Membership.this.hide();
-			}
-		});
-		btngrid.setWidget(0, 1, btnCancel);
-	}
-	
-	private void addInputList(Grid grid, Grid textgrid) {
-		
-		txtinputs = new TextBox[3];
-		listinputs = new ListBox[4];
-		
-		//아이디
-		Label lblID = new Label("ID");
-		grid.setWidget(0, 0, lblID);
-		txtinputs[0] = new TextBox();
-		textgrid.setWidget(0, 0, txtinputs[0]);
-		
-		//패스워드
-		Label lblPassword = new Label("Password");
-		grid.setWidget(1, 0, lblPassword);
-		txtinputs[1] = new TextBox();
-		grid.setWidget(1, 1, txtinputs[1]);
-		
-		//패스워드확인
-		Label lblCheckPassword = new Label("Check Password");
-		grid.setWidget(2, 0, lblCheckPassword);
-		txtinputs[2] = new TextBox();
-		grid.setWidget(2, 1, txtinputs[2]);
-		
-		//이름
-		Label lblName = new Label("Name");
-		grid.setWidget(3, 0, lblName);
-		txtinputs[3] = new TextBox();
-		grid.setWidget(3, 1, txtinputs[3]);
-		
-		//이메일
-		Label lblEmail = new Label("E-mail");
-		grid.setWidget(4, 0, lblEmail);
-		txtinputs[4] = new TextBox();
-		grid.setWidget(4, 1, txtinputs[4]);
-		
-		//성별
-		Label lblGender = new Label("Gender");
-		grid.setWidget(5, 0, lblGender);
-		listinputs[0] = new ListBox();
-//		lboxGender.getSelectedItemText();
-		listinputs[0].addItem("Male");
-		listinputs[0].addItem("Female");
-		grid.setWidget(5, 1, listinputs[0]);
-	
-		//생년
-		Label lblYear = new Label("Year");
-		grid.setWidget(6, 0, lblYear);
-		listinputs[1] = new ListBox();
-		listinputs[1].addItem("1970");
-		listinputs[1].addItem("1971");
-		listinputs[1].addItem("1972");
-		listinputs[1].addItem("1973");
-		listinputs[1].addItem("1974");
-		listinputs[1].addItem("1975");
-		listinputs[1].addItem("1976");
-		listinputs[1].addItem("1977");
-		listinputs[1].addItem("1978");
-		listinputs[1].addItem("1979");
-		
-		listinputs[1].addItem("1980");
-		listinputs[1].addItem("1981");
-		listinputs[1].addItem("1982");
-		listinputs[1].addItem("1983");
-		listinputs[1].addItem("1984");
-		listinputs[1].addItem("1985");
-		listinputs[1].addItem("1986");
-		listinputs[1].addItem("1987");
-		listinputs[1].addItem("1988");
-		listinputs[1].addItem("1989");
-		
-		listinputs[1].addItem("1990");
-		listinputs[1].addItem("1991");
-		listinputs[1].addItem("1992");
-		listinputs[1].addItem("1993");
-		listinputs[1].addItem("1994");
-		listinputs[1].addItem("1995");
-		listinputs[1].addItem("1996");
-		listinputs[1].addItem("1997");
-		listinputs[1].addItem("1998");
-		listinputs[1].addItem("1999");
-		
-		listinputs[1].addItem("2000");
-		listinputs[1].addItem("2001");
-		listinputs[1].addItem("2002");
-		listinputs[1].addItem("2003");
-		listinputs[1].addItem("2004");
-		listinputs[1].addItem("2005");
-		listinputs[1].addItem("2006");
-		listinputs[1].addItem("2007");
-		listinputs[1].addItem("2008");
-		listinputs[1].addItem("2009");
-		
-		listinputs[1].addItem("2010");
-		listinputs[1].addItem("2011");
-		listinputs[1].addItem("2012");
-		listinputs[1].addItem("2013");
-		listinputs[1].addItem("2014");
-		listinputs[1].addItem("2015");
-		listinputs[1].addItem("2016");
-		listinputs[1].addItem("2017");
-		listinputs[1].addItem("2018");
-		listinputs[1].addItem("2019");
-		
-		grid.setWidget(6, 1, listinputs[1]);
-		
-//		//월일/ 달력표시
-//		Label lblDate = new Label("Date");
-//		grid.setWidget(5, 2, lblDate);
+//						
+//					}
+//					@Override
+//					public void onFailure(Throwable caught) {
+//						// TODO Auto-generated method stub
+//						Window.alert("Sorry, Please try agian after few minutes");
+//						Register_Membership.this.hide();
+//					}
+//				});
+//			}
+//		});
+//		btnOk.setText("Register");
 //		
-////		txtinputs[6];
-//		grid.setWidget(5, 3, txtinputs[6]);
-//		
-		// 나라선택
-		Label lblCountry = new Label("Country");
-		grid.setWidget(7, 0, lblCountry);
-		listinputs[2] = new ListBox();
-		listinputs[2].addItem("Korean");
-		listinputs[2].addItem("Japanese");
-		grid.setWidget(7, 1, listinputs[2]);		
-//		
-		//지역표시
-		Label lblLocal = new Label("Local");
-		grid.setWidget(8, 0, lblLocal);
-		listinputs[3] = new ListBox();
-		
-		listinputs[3].addItem("Gyeonggi-do");
-		listinputs[3].addItem("Seoul");
-		listinputs[3].addItem("Gangwon-do");
-		listinputs[3].addItem("Chungcheongbuk-do");
-		listinputs[3].addItem("Chungcheongnam-do");
-		listinputs[3].addItem("Gyeongsangbuk-do");
-		listinputs[3].addItem("Gyeongsangnam-do");
-		listinputs[3].addItem("Jeollabuk-do");
-		listinputs[3].addItem("Jeollanam-do ");
-		listinputs[3].addItem("Hokkaido");
-		listinputs[3].addItem("Tohoku");
-		listinputs[3].addItem("Kanto");
-		listinputs[3].addItem("Chubu");
-		listinputs[3].addItem("Kinki");
-		listinputs[3].addItem("Chugoku");
-		listinputs[3].addItem("Shikoku");
-//		txtinputs[8] = new TextBox();  //?
-		grid.setWidget(8, 1, listinputs[3]);	
-		}
-	
-	private void addSurveyList(Grid grid) {
-		
-		interestinput = new TextBox[4];
-		subinputs = new ListBox[3];
-		
-		Label title = new Label("Survey");
-		grid.setWidget(9, 0, title);
-		
-		//관심사
-		Label lblInterests = new Label("Plase Input your interests.");
-		grid.setWidget(11, 0, lblInterests);
-		Grid interestgrid = new Grid(2,2);
-		
-		interestinput[0] = new TextBox();
-		interestinput[1] = new TextBox();
-		interestinput[2] = new TextBox();
-		interestinput[3] = new TextBox();
-//		interestinput[4] = new TextBox();
-		
-		interestgrid.setWidget(0, 0, interestinput[0]);
-		interestgrid.setWidget(0, 1, interestinput[1]);
-//		interestgrid.setWidget(0, 2, interestinput[2]);
-		interestgrid.setWidget(1, 0, interestinput[2]);
-		interestgrid.setWidget(1, 1, interestinput[3]);
-
-		grid.setWidget(11, 1, interestgrid);
-		
-		//지역별 선호도
-		Label lblPreference = new Label("Preference");
-		grid.setWidget(10, 0, lblPreference);
-		subinputs[0] = new ListBox();
-		
-		subinputs[0].addItem("Very Bad");
-		subinputs[0].addItem("그렇지 않다");
-		subinputs[0].addItem("보통이다");
-		subinputs[0].addItem("그렇다");
-		subinputs[0].addItem("매우 그렇다");
-		grid.setWidget(10, 1, subinputs[0]);
-	
-		//A
-		Label A = new Label("A");
-		grid.setWidget(12, 0, A);
-		subinputs[1] = new ListBox();
-		grid.setWidget(12, 1, subinputs[1]);
-	
-		//B
-		Label B = new Label("B");
-		grid.setWidget(13, 0, B);
-		subinputs[2] = new ListBox();
-		grid.setWidget(13, 1, subinputs[2]);
-		
-		//C
-		Label C = new Label("C");
-		grid.setWidget(14, 0, C);
-		subinputs[3] = new ListBox();
-		grid.setWidget(14, 1, subinputs[3]);
-	}
-}
+//		//취소
+//		Button btnCancel = new Button();
+//		btnCancel.setText("Cancel");
+//		btnCancel.addClickHandler(new ClickHandler() {
+//			@Override
+//			public void onClick(ClickEvent arg0) {
+//				// TODO Auto-generated method stub
+//				Register_Membership.this.hide();
+//			}
+//		});
+//	}
+}  

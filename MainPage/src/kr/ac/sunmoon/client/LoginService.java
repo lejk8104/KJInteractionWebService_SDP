@@ -1,149 +1,109 @@
 package kr.ac.sunmoon.client;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.Grid;
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
-import com.sun.java.swing.plaf.windows.resources.windows;
+import com.gwtext.client.core.EventObject;
+import com.gwtext.client.core.Position;
+import com.gwtext.client.widgets.Button;
+import com.gwtext.client.widgets.Panel;
+import com.gwtext.client.widgets.Window;
+import com.gwtext.client.widgets.event.ButtonListenerAdapter;
+import com.gwtext.client.widgets.form.FormPanel;
+import com.gwtext.client.widgets.form.TextField;  
 
 import kr.ac.sunmoon.shared.KJMember;
 
-public class LoginService extends DialogBox{
+public class LoginService extends Window{
 
-private final String Null = null;
 private TextBox[] logininputs;
 	
 	public LoginService()  {
 	
-		super(false, true);
-		this.setText("Login Page");
+		super();
 		
-		Grid grid = new Grid(5,2);
-		this.setWidget(grid);
-		
-		addinputList(grid);
-		addButton(grid);
-		Button btnlogin = new Button();
-		btnlogin.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-				String[] logindatas = new String[1];
-				
-				for (int i =0; i<logindatas.length; i++) {
-					
-					logindatas[i] = logininputs[i].getText().trim();
-					if(logininputs[i].equals("")) {
-			
-						Window.alert("Plase input your Login Data");
-						return;
-					}
-				}
-				KJMember crKJmember = new KJMember();
-				crKJmember.setID(logindatas[0]);
-				crKJmember.setPassword(logindatas[1]);
-				crKJmember.setCheckPassword(Null);
-				crKJmember.setName(Null);
-				crKJmember.setGender(Null);
-				crKJmember.setYear(Null);
-				crKJmember.setDate(Null);
-				crKJmember.setCountry(Null);
-				crKJmember.setLocal(Null);
-				
-				//서버 연결
-				KJMembershipServiceAsync logservice = GWT.create(KJMembershipService.class);
-				logservice.LoginService(crKJmember, new AsyncCallback<Boolean>() {
+		Panel loginPanel = new Panel();  
+        loginPanel.setBorder(false);  
+        loginPanel.setPaddings(15);  
+        this.add(loginPanel);
+        
+        final Window window = new Window();
+        window.setTitle("Login Service");
+        window.setWidth(350);  
+        window.setHeight(170);  
+        window.setMinWidth(300);  
+        window.setMinHeight(200); 
+        
+        window.setCloseAction(Window.HIDE);
+        window.setPlain(true);
+        
+        
+        final FormPanel loginform = new FormPanel();  
+        loginform.setFrame(true);  
+        loginform.setWidth(350);  
+        loginform.setLabelWidth(55);
+        loginform.setButtonAlign(Position.CENTER);
+  
+        // ID input
+        TextField txtID = new TextField("ID", "id", 250);  
+        txtID.setAllowBlank(false);  
+        loginform.add(txtID);  
+  
+        // Password input
+        TextField txtPassword = new TextField("Password", "password", 250);  
+        loginform.add(txtPassword);  
+  
+        //login btn
+        Button btnlogin = new Button("Login", new ButtonListenerAdapter() {
+            public void onClick(Button btnlogin, EventObject e) {  
+                window.show();      //로그인
+            }
+        });
+        loginform.addButton(btnlogin);  
+        
+        // Cancel btn
+        Button btncancel = new Button("Cancel", new ButtonListenerAdapter() {
+        	public void onClick(Button btncancel, EventObject e) {
+        		window.hide(); //window 연결
+        	}
+        });  
+        loginform.addButton(btncancel); 
+  
+        // Regsiter btn
+        Button btnregister = new Button("Register our Membership", new ButtonListenerAdapter() {
+        	public void onClick(Button btnregister, EventObject e) {
+        		window.show(); //window 연결
+        	}
+        });
+        loginform.addButton(btnregister);  
+  
+        //두번째 form
+        Panel secondPanel = new Panel();
+        secondPanel.setButtonAlign(Position.CENTER);
+//        secondPanel.setLayout(new ColumnLayout());
+//        secondPanel.setMargins(0, 0, 0, 0);
+        
+        // Findid btn
+        Button btnfindid = new Button("Find ID", new ButtonListenerAdapter() {
+        		public void onClick(Button btnfindid, EventObject e) {
+    		window.show(); //window 연결
+        }
+    });  
+        secondPanel.addButton(btnfindid); 
+        
+        // Findpassword btn
+        Button btnfindpassword = new Button("Find Password", new ButtonListenerAdapter() {
+        	public void onClick(Button btnfindpassword, EventObject e) {
+        		window.show(); //window 연결
+            }
+        });  
+        secondPanel.addButton(btnfindpassword); 
+        loginform.add(secondPanel);
+        window.add(loginform); 
+        
+        loginPanel.add(window);
 
-					public void onSuccess(Boolean result) {
-						// TODO Auto-generated method stub
-						Window.alert("Login is Complete!");
-						LoginService.this.hide();
-						
-					}
-					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
-						Window.alert("Sorry, please try again after few minutes.");
-						LoginService.this.hide();
-					}
-				});
-			}
-		});
-		btnlogin.setText("Login");
-		grid.setWidget(4, 0, btnlogin);
-		
-	}
-		public void addButton(Grid grid) {
-
-			//아이디 찾기 연결
-			Button findIDBtn = new Button();
-			findIDBtn.addClickHandler(new ClickHandler() {
-				
-				@Override
-				public void onClick(ClickEvent event) {
-					// TODO Auto-generated method stub
-					FindID dialog_id = new FindID();
-					dialog_id.setPopupPosition(Window.getClientWidth()/2-150,100);
-					dialog_id.show();
-				}
-			});
-			findIDBtn.setText("Find ID");
-			grid.setWidget(3, 0, findIDBtn);
-			
-			//비밀번호 찾기 연결
-			Button findPasswordBtn = new Button();
-			findPasswordBtn.addClickHandler(new ClickHandler() {
-				
-				@Override
-				public void onClick(ClickEvent event) {
-					// TODO Auto-generated method stub
-					FindPassword dialog_password = new FindPassword();
-					dialog_password.setPopupPosition(Window.getClientWidth()/2-150, 100);
-					dialog_password.show();
-				}
-			});
-			findPasswordBtn.setText("Find Password");
-			grid.setWidget(3, 1, findPasswordBtn);
-			
-			//회원가입 페이지 연결
-			Button registerBtn = new Button();
-			registerBtn.addClickHandler(new ClickHandler() {
-				
-				@Override
-				public void onClick(ClickEvent event) {
-					// TODO Auto-generated method stub
-					Register_Membership dialog_RE = new Register_Membership();
-					dialog_RE.setPopupPosition(Window.getClientWidth()/2-150,100);
-					dialog_RE.show();
-				}
-			});
-			registerBtn .setText("Register our Membership");
-			grid.setWidget(4, 1, registerBtn);
-	}
-	private void addinputList(Grid grid) {
-		
-		logininputs = new TextBox[1];
-		
-		//아이디 입력칸
-		Label lbllogID = new Label("ID");
-		grid.setWidget(0, 0, lbllogID);
-		logininputs[0] = new TextBox();
-		grid.setWidget(0, 1, logininputs[0]);
-		
-		//비밀번호 입력란
-		Label lbllogPassword = new Label("Password");
-		grid.setWidget(1, 0, lbllogPassword);
-		logininputs[1] = new TextBox();
-		grid.setWidget(1, 1, logininputs[1]);
-	}
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-	}
+        RootPanel.get().add(loginPanel);  
+    }  
 }

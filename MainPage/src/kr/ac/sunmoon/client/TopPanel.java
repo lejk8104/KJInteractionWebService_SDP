@@ -47,7 +47,7 @@ public class TopPanel extends HorizontalPanel{
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
 				LoginService dialog_log  = new LoginService();
-				dialog_log.setPopupPosition(Window.getClientWidth()/2-150,100);
+//				dialog_log.setPopupPosition(Window.getClientWidth()/2-150,100);
 				dialog_log.show();
 			}
 		});

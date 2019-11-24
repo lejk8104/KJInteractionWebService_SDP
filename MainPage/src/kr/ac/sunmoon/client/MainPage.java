@@ -2,14 +2,20 @@ package kr.ac.sunmoon.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.dev.jjs.impl.codesplitter.NothingAlivePredicate;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
+import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Margins;
 import com.gwtext.client.core.RegionPosition;
+import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.HTMLPanel;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.TabPanel;
 import com.gwtext.client.widgets.Viewport;
+import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.form.ComboBox;
 import com.gwtext.client.widgets.form.FormPanel;
 import com.gwtext.client.widgets.form.TextField;
@@ -96,10 +102,10 @@ public class MainPage implements EntryPoint  {
         third_Column.setBorder(false);
         third_Column.setMargins(30, 0, 30, 10);
         
-        Image imgsearch = new Image();
-        imgsearch.setUrl("image/search.png");
-        third_Column.add(imgsearch);
-        hpsearch.add(third_Column, new ColumnLayoutData(0.1));
+//        Image imgsearch = new Image();
+//        imgsearch.setUrl("image/search.png");
+//        third_Column.add(imgsearch);
+//        hpsearch.add(third_Column, new ColumnLayoutData(0.1));
         
         // login logo
         Panel fourth_Column = new Panel();  
@@ -107,10 +113,42 @@ public class MainPage implements EntryPoint  {
         fourth_Column.setBorder(false);
         fourth_Column.setMargins(0, 0, 0, 0);
 
-        Image imglogin = new Image();
-        imglogin.setUrl("image/login.png");
-        fourth_Column.add(imglogin);
+        Button logbtn = new Button("Login Service", new ButtonListenerAdapter() {
+        	public void onClick(Button btnfindpassword, EventObject e) {
+        		LoginService loginwindow = new LoginService();
+        		loginwindow.show(); //window 연결
+        	}
+        });
+//        Image imglogin = new Image();
+//        imglogin.setUrl("image/login.png");
+//        imglogin.addClickHandler(new ClickHandler() {
+			
+//			@Override
+//			public void onClick(ClickEvent event) {
+//				// TODO Auto-generated method stub
+//				LoginService dialog_log  = new LoginService();
+//				dialog_log.setPopupPosition(Window.getClientWidth()/2-150,100);
+//				dialog_log.show();
+//			}
+//		});
+        fourth_Column.add(logbtn);
+        hpsearch.add(fourth_Column, new ColumnLayoutData(0.3));
+        
+        // 광고실험로고
+//        Panel fourth_Column = new Panel();  
+//        fourth_Column.setLayout(new FormLayout());  
+//        fourth_Column.setBorder(false);
+//        fourth_Column.setMargins(0, 0, 0, 0);
+//
+//        Button logbtn = new Button("Login Service", new ButtonListenerAdapter() {
+//        	public void onClick(Button btnfindpassword, EventObject e) {
+//        		Advertise_KJinteration kjwindow = new Advertise_KJinteration();
+//        		kjwindow.show(); //window 연결
+//        	}
+//        });
+//        fourth_Column.add(logbtn);
 //        hpsearch.add(fourth_Column, new ColumnLayoutData(0.3));
+        
 
         // register logo
         Panel fiveth_Panel = new Panel();  
@@ -120,6 +158,16 @@ public class MainPage implements EntryPoint  {
         
         Image imgRegister = new Image();
         imgRegister.setUrl("image/register.png");
+//        imgRegister.addClickHandler(new ClickHandler() {
+//			
+//			@Override
+//			public void onClick(ClickEvent event) {
+//				// TODO Auto-generated method stub
+//				Register_Membership dialog_RE = new Register_Membership();
+//				dialog_RE.setPopupPosition(Window.getClientWidth()/2-150,100);
+//				dialog_RE.show();
+//			}
+//		});
         fiveth_Panel.add(imgRegister);
 //        hpsearch.add(fiveth_Panel, new ColumnLayoutData(0.1));
         
@@ -230,8 +278,6 @@ public class MainPage implements EntryPoint  {
         centerPanel.add(tabPanel);
         HTMLPanel htmlPannel = new HTMLPanel();
         htmlPannel.setMargins(10, 50, 53, 10);
-//        HTML video = new HTML("<iframe width=560 height=315 src=https://www.youtube.com/embed/bkcitbJzi6c "
-//				+ "frameborder=0 allow=accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture allowfullscreen></iframe>");
         htmlPannel.setHtml("<iframe width=560 height=315 src=https://www.youtube.com/embed/bkcitbJzi6c "
 				+ "frameborder=0 allow=accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture allowfullscreen></iframe>");
         centerPanel.add(htmlPannel);
