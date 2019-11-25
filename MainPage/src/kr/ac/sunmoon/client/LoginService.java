@@ -22,25 +22,17 @@ private TextBox[] logininputs;
 	public LoginService()  {
 	
 		super();
+		this.setBorder(false);
+		this.setPaddings(0);
+		this.setClosable(true);
+		this.setWidth(300);
+		this.setHeight(200);
+		this.setPlain(true);
+		this.setCloseAction(this.HIDE);
 		
-		Panel loginPanel = new Panel();  
-        loginPanel.setBorder(false);  
-        loginPanel.setPaddings(15);  
-        this.add(loginPanel);
-        
-        final Window window = new Window();
-        window.setTitle("Login Service");
-        window.setWidth(350);  
-        window.setHeight(170);  
-        window.setMinWidth(300);  
-        window.setMinHeight(200); 
-        
-        window.setCloseAction(Window.HIDE);
-        window.setPlain(true);
-        
-        
         final FormPanel loginform = new FormPanel();  
-        loginform.setFrame(true);  
+        loginform.setFrame(true);
+        loginform.setTitle("Login Service");
         loginform.setWidth(350);  
         loginform.setLabelWidth(55);
         loginform.setButtonAlign(Position.CENTER);
@@ -57,7 +49,7 @@ private TextBox[] logininputs;
         //login btn
         Button btnlogin = new Button("Login", new ButtonListenerAdapter() {
             public void onClick(Button btnlogin, EventObject e) {  
-                window.show();      //로그인
+//                this.show();      //로그인
             }
         });
         loginform.addButton(btnlogin);  
@@ -65,7 +57,7 @@ private TextBox[] logininputs;
         // Cancel btn
         Button btncancel = new Button("Cancel", new ButtonListenerAdapter() {
         	public void onClick(Button btncancel, EventObject e) {
-        		window.hide(); //window 연결
+//        		window.hide(); //window 연결
         	}
         });  
         loginform.addButton(btncancel); 
@@ -73,7 +65,7 @@ private TextBox[] logininputs;
         // Regsiter btn
         Button btnregister = new Button("Register our Membership", new ButtonListenerAdapter() {
         	public void onClick(Button btnregister, EventObject e) {
-        		window.show(); //window 연결
+//        		window.show(); //window 연결
         	}
         });
         loginform.addButton(btnregister);  
@@ -87,7 +79,7 @@ private TextBox[] logininputs;
         // Findid btn
         Button btnfindid = new Button("Find ID", new ButtonListenerAdapter() {
         		public void onClick(Button btnfindid, EventObject e) {
-    		window.show(); //window 연결
+//    		window.show(); //window 연결
         }
     });  
         secondPanel.addButton(btnfindid); 
@@ -95,15 +87,15 @@ private TextBox[] logininputs;
         // Findpassword btn
         Button btnfindpassword = new Button("Find Password", new ButtonListenerAdapter() {
         	public void onClick(Button btnfindpassword, EventObject e) {
-        		window.show(); //window 연결
+//        		window.show(); //window 연결
             }
         });  
         secondPanel.addButton(btnfindpassword); 
         loginform.add(secondPanel);
-        window.add(loginform); 
+        this.add(loginform); 
         
-        loginPanel.add(window);
+//        loginPanel.add(window);
 
-        RootPanel.get().add(loginPanel);  
+//        RootPanel.get().add(loginPanel);  
     }  
 }

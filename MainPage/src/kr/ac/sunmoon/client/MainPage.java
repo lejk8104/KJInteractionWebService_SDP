@@ -114,8 +114,8 @@ public class MainPage implements EntryPoint  {
         fourth_Column.setMargins(0, 0, 0, 0);
 
         Button logbtn = new Button("Login Service", new ButtonListenerAdapter() {
-        	public void onClick(Button btnfindpassword, EventObject e) {
-        		LoginService loginwindow = new LoginService();
+        	public void onClick(Button logbtn, EventObject e) {
+        		final LoginService loginwindow = new LoginService();
         		loginwindow.show(); //window 연결
         	}
         });

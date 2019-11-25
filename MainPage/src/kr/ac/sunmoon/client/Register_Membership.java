@@ -38,13 +38,23 @@ public class Register_Membership extends com.gwtext.client.widgets.Window{
     public Register_Membership() {  
     	
     	super();
+		this.setBorder(false);
+		this.setPaddings(0);
+		this.setClosable(true);
+		this.setWidth(300);
+		this.setHeight(200);
+		this.setPlain(true);
+		this.setCloseAction(this.HIDE);
+    	
+    	
         Panel panel = new Panel();  
         panel.setBorder(false);  
         panel.setPaddings(15);
+        panel.setTitle("KJ Interaction Web");
   
         FormPanel formPanel = new FormPanel();  
         formPanel.setFrame(true); 
-        formPanel.setTitle("KJ Membership Page");
+//        formPanel.setTitle("KJ Membership Page");
         formPanel.setLabelWidth(65);  
         formPanel.setBorder(false);  
         formPanel.setWidth(320);  
