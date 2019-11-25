@@ -36,8 +36,7 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements kr.
 				String Check_Password = rs.getString("Check_Password");
 				String name = rs.getString("Name");
 				String Gender = rs.getString("Gender");
-				String Year = rs.getString("Year");
-				String Date = rs.getString("Date");
+				String Birth = rs.getString("Birth");
 				String Country = rs.getString("Country");
 				String Local = rs.getString(" Local");
 				//패스워드 찾기
@@ -46,8 +45,7 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements kr.
 					kjmember.setCheckPassword(Check_Password);
 					kjmember.setName(name);
 					kjmember.setGender(Gender);
-					kjmember.setYear(Year);
-					kjmember.setDate(Date);
+//					kjmember.setBirth(Birth);
 					kjmember.setCountry(Country);
 					kjmember.setLocal(Local);
 					rs.close();
@@ -110,8 +108,7 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements kr.
 			String checkpassword = kjMember.getCheckPassword();
 			String name = kjMember.getName();
 			String gender = kjMember.getGender();
-			String year = kjMember.getYear();
-			String data = kjMember.getDate();
+			String birh = kjMember.getBirth();
 			String country = kjMember.getCountry();
 			String local = kjMember.getLocal();
 			

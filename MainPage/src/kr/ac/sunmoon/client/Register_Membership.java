@@ -21,11 +21,16 @@ import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.form.VType;
 import com.gwtext.client.widgets.form.event.ComboBoxListenerAdapter;
 import com.gwtext.client.widgets.layout.FormLayout;
+import com.sun.java.swing.plaf.windows.resources.windows;
+
+import kr.ac.sunmoon.shared.KJMember;
   
   
 public class Register_Membership extends Window{  
   
-	private ArrayList inputlList = new ArrayList();
+	private ArrayList<String> inputlList = new ArrayList<String>();
+	String[] membershipdata = new String[9];
+	String[] surveydata =  new String[4];
 	
     public Register_Membership() {  
 
@@ -50,7 +55,7 @@ public class Register_Membership extends Window{
         final TabPanel tabPanel = new TabPanel();  
         tabPanel.setActiveTab(0);  
   
-        Panel firstTab = new Panel();  
+        final Panel firstTab = new Panel();  
         firstTab.setTitle("KJ Membership");  
         firstTab.setLayout(new FormLayout());  
         firstTab.setAutoHeight(true);  
@@ -65,34 +70,34 @@ public class Register_Membership extends Window{
         citiesStore.load(); 
         
         // ID
-        TextField txtID = new TextField("ID", "id", 200);  
+        final TextField txtID = new TextField("ID", "id", 200);  
         txtID.setAllowBlank(false);  
 //        txtID.setValue("id"); 
         firstTab.add(txtID);  
   
         //Password
-        TextField txtPassword = new TextField("Password", "passwordData", 200);  
+        final TextField txtPassword = new TextField("Password", "passwordData", 200);  
 //        txtPassword.setValue("password");  
         firstTab.add(txtPassword);  
   
         //CheckPassword
-        TextField txtCheckPassword = new TextField("Check Password", "checkpasswordData", 200);  
+        final TextField txtCheckPassword = new TextField("Check Password", "checkpasswordData", 200);  
 //        txtCheckPassword.setValue("checkpassword");
         firstTab.add(txtCheckPassword);  
 
         //Name
-        TextField txtName = new TextField("Name", "nameData", 200);
+        final TextField txtName = new TextField("Name", "nameData", 200);
         txtName.setAllowBlank(false); 
         txtName.setValue("name"); 
         firstTab.add(txtName);  
   
         //E-Mail
-        TextField txtemail = new TextField("Email", "emailData", 200);  
+        final TextField txtemail = new TextField("Email", "emailData", 200);  
         txtemail.setVtype(VType.EMAIL);  
         firstTab.add(txtemail);  
   
         //Gender list
-        ComboBox listgender = new ComboBox();
+        final ComboBox listgender = new ComboBox();
         listgender.setAllowBlank(false);
         listgender.setMinChars(1);
         listgender.setFieldLabel("Gender");
@@ -107,7 +112,7 @@ public class Register_Membership extends Window{
         firstTab.add(listgender);
         
         //Birth
-        DateField dataBirth = new DateField("Date of birth", "BirthData", 200);  
+        final DateField dataBirth = new DateField("Date of birth", "BirthData", 200);  
         dataBirth.setAllowBlank(false);
         firstTab.add(dataBirth);
         
@@ -123,26 +128,26 @@ public class Register_Membership extends Window{
     	listcountry.setReadOnly(true);  
 
     	// local
-    	final ComboBox listlocal = new ComboBox();  
-    	listlocal.setFieldLabel("Select City");  
-    	listlocal.setStore(citiesStore);  
-    	listlocal.setDisplayField("cityName");  
+    	final ComboBox listcity = new ComboBox();  
+    	listcity.setFieldLabel("Select City");  
+    	listcity.setStore(citiesStore);  
+    	listcity.setDisplayField("cityName");  
 //    	listlocal.setValueField("local");  
-    	listlocal.setMode(ComboBox.LOCAL);  
-	    listlocal.setTriggerAction(ComboBox.ALL);  
-	    listlocal.setLinked(true);  
-	    listlocal.setForceSelection(true);  
-	    listlocal.setReadOnly(true);  
+    	listcity.setMode(ComboBox.LOCAL);  
+	    listcity.setTriggerAction(ComboBox.ALL);  
+	    listcity.setLinked(true);  
+	    listcity.setForceSelection(true);  
+	    listcity.setReadOnly(true);  
 
 	    //동작과정
 	    listcountry.addListener(new ComboBoxListenerAdapter() {  
         public void onSelect(ComboBox comboBox, Record record, int index) {  
-            listlocal.setValue("");  
+            listcity.setValue("");  
             citiesStore.filter("country", comboBox.getValue());  
         	}  
 	    });  
 	    firstTab.add(listcountry);
-	    firstTab.add(listlocal);
+	    firstTab.add(listcity);
   
         tabPanel.add(firstTab);  
         
@@ -157,14 +162,14 @@ public class Register_Membership extends Window{
         c.load();
         
         // Survey
-        Panel secondTab = new Panel();  
+        final Panel secondTab = new Panel();  
         secondTab.setTitle("Survey");  
         secondTab.setLayout(new FormLayout());  
         secondTab.setAutoHeight(true);  
         secondTab.setPaddings(10);  
  
         // preference
-        ComboBox listpreference = new ComboBox();
+        final ComboBox listpreference = new ComboBox();
         listpreference.setAllowBlank(false);
         listpreference.setMinChars(1);
         listpreference.setFieldLabel("Preference");
@@ -179,16 +184,16 @@ public class Register_Membership extends Window{
         secondTab.add(listpreference);
 
         //Interest
-        TextField txtinterests = new TextField("Interests", "interests", 200);  
+        final TextField txtinterests = new TextField("Interests", "interests", 200);  
         txtinterests.setAllowBlank(false);  
 //        txtinterests.setValue("interests"); 
         secondTab.add(txtinterests);
         
         //A
-        ComboBox A = new ComboBox();
+        final ComboBox A = new ComboBox();
         A.setAllowBlank(false);
         A.setMinChars(1);
-        A.setFieldLabel("Preference");
+        A.setFieldLabel("A");
         A.setStore(a);
         A.setDisplayField("Text");
         A.setEmptyText("Select A"); 
@@ -200,10 +205,10 @@ public class Register_Membership extends Window{
         secondTab.add(A);
         
         //B
-        ComboBox B = new ComboBox();
+        final ComboBox B = new ComboBox();
         B.setAllowBlank(false);
         B.setMinChars(1);
-        B.setFieldLabel("Preference");
+        B.setFieldLabel("B");
         B.setStore(b);
         B.setDisplayField("Text");
         B.setEmptyText("Select B"); 
@@ -215,10 +220,10 @@ public class Register_Membership extends Window{
         secondTab.add(B);
         
         //C
-        ComboBox C = new ComboBox();
+        final ComboBox C = new ComboBox();
         C.setAllowBlank(false);
         C.setMinChars(1);
-        C.setFieldLabel("Preference");
+        C.setFieldLabel("C");
         C.setStore(c);
         C.setDisplayField("Text");
         C.setEmptyText("Select C"); 
@@ -231,14 +236,51 @@ public class Register_Membership extends Window{
 
         tabPanel.add(secondTab);
         
-        Button btnok = new Button("OK", new ButtonListenerAdapter() {
+        final Button btnok = new Button("OK", new ButtonListenerAdapter() {
         	
         	public void onClick(Button btnok, EventObject e) {
-//        		for (int)
-//        		inputlList.add(index, element);
+        		// membershipdata list 선언
+        		membershipdata[0] = txtID.getText().trim();
+        		membershipdata[1] = txtPassword.getText().trim();
+        		membershipdata[2] = txtCheckPassword.getText().trim();
+        		membershipdata[3] = txtName.getText().trim();
+        		membershipdata[4] = listgender.getText().trim();
+        		membershipdata[5] = txtemail.getText().trim();
+        		membershipdata[6] = dataBirth.getText().trim();
+        		membershipdata[7] = listcountry.getText().trim();
+        		membershipdata[8] = listcity.getText().trim();
+        		// survey data list 선언
+        		surveydata[0] = listpreference.getText().trim();
+        		surveydata[1] = A.getText().trim();
+        		surveydata[2] = B.getText().trim();
+        		surveydata[3] = C.getText().trim();
+        		for(int i=0; i<membershipdata.length; i++) {
+        			if(membershipdata[i].equals("")) {
+        				Window popup = new Window();
+        				return;
+        			}
+        		}
+        		for(int i=0; i<surveydata.length; i++) {
+        			if(surveydata[i].equals("")) {
+        				Window popup = new Window();
+        				popup.setTitle("Please, input your survey data");
+        				return;
+        			}
+        		}
+        		//kjmembership_dataset
+        		KJMember kjMember = new KJMember();
+				kjMember.setID(membershipdata[0]);
+				kjMember.setPassword(membershipdata[1]);
+				kjMember.setCheckPassword(membershipdata[2]);
+				kjMember.setName(membershipdata[3]);
+				kjMember.setGender(membershipdata[4]);
+				kjMember.setEmail(membershipdata[5]);
+//				kjMember.setBirth(membershipdata[6]);
+				kjMember.setCountry(membershipdata[7]);
+				kjMember.setLocal(membershipdata[7]);
         	}
         });  
-        Button btncancel = new Button("Cancel");  
+        final Button btncancel = new Button("Cancel");  
   
         formPanel.addButton(btnok);  
         formPanel.addButton(btncancel);  

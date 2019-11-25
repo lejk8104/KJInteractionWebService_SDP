@@ -10,8 +10,7 @@ public class KJMember implements IsSerializable {
 	private String Name;
 	private String Email;
 	private String Gender;
-	private String Year;
-	private String Date;
+	private String Birth;
 	private String Country;
 	private String Local;
 	 
@@ -51,17 +50,11 @@ public class KJMember implements IsSerializable {
 	public void setGender(String Gender) {
 		this.Gender = Gender;
 	}
-	public String getYear() {
-		return Year;
+	public String getBirth() {
+		return Birth;
 	}
-	public void setYear(String Year) {
-		this.Year = Year;
-	}
-	public String getDate() {
-		return Date;
-	}
-	public void setDate(String Date) {
-		this.Date = Date;
+	public void setBitrh(String Birth) {
+		this.Birth = Birth;
 	}
 	public String getCountry() {
 		return Country;
