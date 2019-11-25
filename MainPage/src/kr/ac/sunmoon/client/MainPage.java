@@ -178,7 +178,7 @@ public class MainPage implements EntryPoint  {
         southPanel.setHeight(50);  
         southPanel.setBodyStyle("background-color:#CDEB8B");  
         southPanel.setCollapsible(true);  
-        southPanel.setTitle("South");  
+        southPanel.setTitle("Information");  
         
         //?
         Panel southdata2 = new Panel();
