@@ -1,97 +1,66 @@
 package kr.ac.sunmoon.client;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.Grid;
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.core.client.EntryPoint;import com.google.gwt.event.logical.shared.AttachEvent;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
-
-import kr.ac.sunmoon.shared.KJMember;
-
-public class FindID extends DialogBox{
-
-private TextBox[] membershipdata;	
-
-	public FindID() {
-		
-		super(false,true);
-		this.setText("Find ID Page");
-		
-		Grid grid = new Grid(3,2);
-		this.setWidget(grid);
-		
-		addinputList(grid);
-		clickHandler(grid);	
-		}
-	private void addinputList(Grid grid) {
-		membershipdata = new TextBox[1];
-		
-		//ID
-		Label lblfindID = new Label("ID");
-		grid.setWidget(0, 0, lblfindID);
-		membershipdata[0] = new TextBox();
-		grid.setWidget(0, 1, membershipdata[0]);
-		//Password
-		Label lblfindName = new Label("Name");
-		grid.setWidget(1, 0, lblfindName);
-		membershipdata[0] = new TextBox();
-		grid.setWidget(1, 1, membershipdata[0]);
-	}
-	private void clickHandler(Grid grid) {
+import com.gwtext.client.core.EventObject;
+import com.gwtext.client.widgets.Button;
+import com.gwtext.client.widgets.Panel;
+import com.gwtext.client.widgets.Window;
+import com.gwtext.client.widgets.event.ButtonListenerAdapter;
+import com.gwtext.client.widgets.form.FormPanel;
+import com.gwtext.client.widgets.form.TextField;
+import com.gwtext.client.widgets.layout.ColumnLayout;  
+  
+public class FindID extends Window {  
+  
+	private TextBox[] membershipdata;	
 	
-		Grid btngrid = new Grid(1,2);
-		grid.setWidget(2, 1, btngrid);
-		
-		Button btnok = new Button();
-		btnok.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-				String[] membershipdata = new String[1];
-				for (int i =0; i<membershipdata.length; i++) {
-					if(membershipdata[i].equals("")){
-						Window.alert("Please input your all data");
-						return;
-					}
-				}
-				String ID = membershipdata[0];
-				String Name = membershipdata[1];
-				//서버연결
-				KJMembershipServiceAsync findPassword = GWT.create(KJMembershipService.class);
-				findPassword.findKJmember(ID, Name, new AsyncCallback<KJMember>() { //? 서버쪽 좀더 생각해보자
+    public FindID () {  
+    	super();
+		this.setBorder(false);
+		this.setPaddings(0);
+		this.setClosable(true);
+		this.setWidth(315);
+		this.setHeight(130);
+		this.setPlain(true);
+		this.setCloseAction(this.HIDE);
+  
+        final FormPanel findidform = new FormPanel();  
+        findidform.setFrame(true);  
+        findidform.setTitle("Find ID Service");  
+  
+        findidform.setWidth(300);  
+        findidform.setLabelWidth(40);  
+  
+        // name input
+        TextField txtname = new TextField("Name", "name", 230);  
+        txtname.setAllowBlank(false);  
+        findidform.add(txtname);  
+  
+        // Email input
+        TextField txtemail = new TextField("Email", "email", 230);  
+//        이메일텍스트 확인
+        txtemail.setAllowBlank(false);  
+        findidform.add(txtemail); 
+  
+        // find id btn
+        Button btnfindid = new Button("Find ID", new ButtonListenerAdapter() {
+    		public void onClick(Button btnfindid, EventObject e) {
+//			window.show(); //window 연결 버튼 실제 동작과정
+    			}
+    		});  
+        findidform.addButton(btnfindid); 
+        // Cancel btn
+        Button btncancel = new Button("Cancel", new ButtonListenerAdapter() {
+    		public void onClick(Button btncancel, EventObject e) {
+    			//? 취소
+    		}
+    		});   
+        findidform.addButton(btncancel); 
 
-					@Override
-					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
-						Window.alert("Sorry, please try again after few minutes.");	
-					}
-					@Override
-					public void onSuccess(KJMember User) {
-						// TODO Auto-generated method stub
-						String id = User.getID();
-						Window.alert(id);
-					}
-				});
-			}
-		});
-		btnok.setText("Find ID");
-		btngrid.setWidget(0, 0, btnok);
-//		
-		//Cancel
-		Button btnCancel = new Button();
-		btnCancel.setText("Cancel");
-		btnCancel.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent arg0) {
-				// TODO Auto-generated method stub
-				FindID.this.hide();
-			}
-		});
-		btngrid.setWidget(0, 1, btnCancel);			
-	}		
-}
+        this.add(findidform);  
+
+        RootPanel.get().add(this);  
+    }  
+}  

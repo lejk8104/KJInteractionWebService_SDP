@@ -25,8 +25,8 @@ private TextBox[] logininputs;
 		this.setBorder(false);
 		this.setPaddings(0);
 		this.setClosable(true);
-		this.setWidth(300);
-		this.setHeight(200);
+		this.setWidth(360);
+		this.setHeight(170);
 		this.setPlain(true);
 		this.setCloseAction(this.HIDE);
 		
@@ -42,6 +42,7 @@ private TextBox[] logininputs;
         txtID.setAllowBlank(false);  
         loginform.add(txtID);  
   
+//        txtID.getText()
         // Password input
         TextField txtPassword = new TextField("Password", "password", 250);  
         loginform.add(txtPassword);  
@@ -57,7 +58,8 @@ private TextBox[] logininputs;
         // Cancel btn
         Button btncancel = new Button("Cancel", new ButtonListenerAdapter() {
         	public void onClick(Button btncancel, EventObject e) {
-//        		window.hide(); //window 연결
+//        		
+        		//window 연결
         	}
         });  
         loginform.addButton(btncancel); 
@@ -65,7 +67,8 @@ private TextBox[] logininputs;
         // Regsiter btn
         Button btnregister = new Button("Register our Membership", new ButtonListenerAdapter() {
         	public void onClick(Button btnregister, EventObject e) {
-//        		window.show(); //window 연결
+        		Register_Membership registerwindow = new Register_Membership();
+        		registerwindow.show();
         	}
         });
         loginform.addButton(btnregister);  
@@ -79,7 +82,8 @@ private TextBox[] logininputs;
         // Findid btn
         Button btnfindid = new Button("Find ID", new ButtonListenerAdapter() {
         		public void onClick(Button btnfindid, EventObject e) {
-//    		window.show(); //window 연결
+        			FindID findidwindow = new FindID();
+        			findidwindow.show();
         }
     });  
         secondPanel.addButton(btnfindid); 
@@ -87,7 +91,8 @@ private TextBox[] logininputs;
         // Findpassword btn
         Button btnfindpassword = new Button("Find Password", new ButtonListenerAdapter() {
         	public void onClick(Button btnfindpassword, EventObject e) {
-//        		window.show(); //window 연결
+        		FindPassword findpasswordwindow = new FindPassword();
+        		findpasswordwindow.show();
             }
         });  
         secondPanel.addButton(btnfindpassword); 
