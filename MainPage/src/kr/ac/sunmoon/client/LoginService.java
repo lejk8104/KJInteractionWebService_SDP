@@ -89,6 +89,7 @@ private TextBox[] logininputs;
         		FindPassword findpasswordwindow = new FindPassword();
         		findpasswordwindow.show();
             }
+        	
         });  
         secondPanel.addButton(btnfindpassword); 
         loginform.add(secondPanel);
