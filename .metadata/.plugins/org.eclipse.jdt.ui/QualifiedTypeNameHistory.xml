@@ -1,2 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.sun.java.swing.plaf.windows.resources.windows"/>
+<fullyQualifiedTypeName name="com.google.gwt.user.client.ui.ClickListener"/>
+<fullyQualifiedTypeName name="com.google.gwt.event.dom.client.ClickEvent"/>
+<fullyQualifiedTypeName name="com.google.gwt.event.logical.shared.AttachEvent.Handler"/>
+<fullyQualifiedTypeName name="com.google.gwt.user.client.ui.HTML"/>
+<fullyQualifiedTypeName name="com.google.gwt.dom.client.Style.Unit"/>
+<fullyQualifiedTypeName name="com.google.gwt.user.client.ui.Button"/>
+<fullyQualifiedTypeName name="com.google.gwt.event.dom.client.ClickHandler"/>
+<fullyQualifiedTypeName name="com.google.gwt.user.client.Window"/>
+<fullyQualifiedTypeName name="kr.ac.sunmoon.client.ChatService"/>
+<fullyQualifiedTypeName name="com.google.gwt.user.client.ui.HorizontalPanel"/>
+<fullyQualifiedTypeName name="com.gwtext.client.widgets.event.ButtonListener"/>
+<fullyQualifiedTypeName name="com.gwtext.client.widgets.Button"/>
+<fullyQualifiedTypeName name="com.gwtext.client.widgets.event.ButtonListenerAdapter"/>
+<fullyQualifiedTypeName name="com.gwtext.client.core.EventObject"/>
+</qualifiedTypeNameHistroy>

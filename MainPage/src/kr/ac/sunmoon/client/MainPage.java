@@ -13,6 +13,7 @@ import com.gwtext.client.widgets.HTMLPanel;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.TabPanel;
 import com.gwtext.client.widgets.Viewport;
+import com.gwtext.client.widgets.event.ButtonListener;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.form.ComboBox;
 import com.gwtext.client.widgets.form.FormPanel;
@@ -35,7 +36,6 @@ public class MainPage implements EntryPoint  {
     private Menu menu;  
     private TreeNode ctxNode;  
     private TreeEditor treeEditor; 
-    private Button chatBtn;
     
     private native void drawMap() /*-{
     	$wnd.dramMap();
@@ -135,6 +135,8 @@ public class MainPage implements EntryPoint  {
 //		});
         fourth_Column.add(logbtn);
         hpsearch.add(fourth_Column, new ColumnLayoutData(0.3));
+        
+        
         
         // 광고실험로고
 //        Panel fourth_Column = new Panel();  
@@ -262,11 +264,22 @@ public class MainPage implements EntryPoint  {
         tabPanel.setPlain(true);  
         tabPanel.setActiveTab(0);  
 
-        Panel secondTab = new Panel();  
+        Panel secondTab = new Panel();
         secondTab.setTitle("Main Page");
         //채팅방 들어가기
         Panel thirdtab = new Panel();
-        chatBtn = new Button("Chatting Start");
+        Button chatBtn = new Button("Chatting Start", new ButtonListenerAdapter() {
+        	public void onClick(Button chatBtn, EventObject e) {
+        		final ChatService chatService = new ChatService();
+        		chatService.show();
+        	}
+        });
+//        Button logbtn = new Button("Login Service", new ButtonListenerAdapter() {
+//        	public void onClick(Button logbtn, EventObject e) {
+//        		final LoginService loginwindow = new LoginService();
+//        		loginwindow.show(); //window 연결
+//        	}
+//        });
         thirdtab.addButton(chatBtn);
         thirdtab.setTitle("Chatting");
         //동영상 추천

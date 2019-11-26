@@ -74,6 +74,16 @@ h1 {
 	font-size: 25px;
 }
 
+.chatBtn {
+	margin-left: 40px;
+	margin-right: 40px;
+	border-right: 200px;
+	margin-top:40px;
+	width: 100px;
+	height: 50px;
+	font-size: 25px;
+}
+
 .menuLb {
 	width: 200px;
 	height: 80px;

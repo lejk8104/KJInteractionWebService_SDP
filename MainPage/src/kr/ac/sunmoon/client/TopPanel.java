@@ -1,9 +1,7 @@
 package kr.ac.sunmoon.client;
 
-import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -53,6 +51,21 @@ public class TopPanel extends HorizontalPanel{
 		});
 		hpSearch.add(loginBtn);
 		hpSearch.setCellHorizontalAlignment(loginBtn, HorizontalPanel.ALIGN_RIGHT);
+		
+		//chatting button
+		Button chatBtn = new Button("Chatting Start");
+		chatBtn.setStyleName("chatBtn");
+		chatBtn.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+//				ChatService chatService = new ChatService();
+//				ChatService.show();
+			}
+		});
+		hpSearch.add(chatBtn);
+		hpSearch.setCellHorizontalAlignment(chatBtn, HorizontalPanel.ALIGN_RIGHT);
 		
 		ListBox menuLb = new ListBox();
 		menuLb.addItem("Main Page");

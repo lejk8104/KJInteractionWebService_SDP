@@ -1,8 +1,5 @@
 package kr.ac.sunmoon.client;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Position;
@@ -11,9 +8,7 @@ import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.Window;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.form.FormPanel;
-import com.gwtext.client.widgets.form.TextField;  
-
-import kr.ac.sunmoon.shared.KJMember;
+import com.gwtext.client.widgets.form.TextField;
 
 public class LoginService extends Window{
 
