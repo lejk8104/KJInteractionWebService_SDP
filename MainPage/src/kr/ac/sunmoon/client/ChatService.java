@@ -4,9 +4,11 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Image;
+import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Position;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.Window;
+import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.form.FormPanel;
 import com.gwtext.client.widgets.form.Label;
 import com.gwtext.client.widgets.layout.AnchorLayoutData;
@@ -65,7 +67,21 @@ public class ChatService extends Window {
 				com.google.gwt.user.client.Window.alert("failed with matching");
 			}
 		});
-
+		
+		Button startBtn = new Button("chatting start", new ButtonListenerAdapter() {
+			public void onClick(Button startBtn, EventObject e) {
+				ChatRoom chatRoom = new ChatRoom();
+				chatRoom.show();
+			}
+		});
+		chatform.addButton(startBtn);
+		
+		Button againBtn = new Button("matching again");
+		chatform.addButton(againBtn);
+		
+		Button cancelBtn = new Button("cancel");
+		chatform.addButton(cancelBtn);
+		
         this.add(chatform);
 	}
 }
