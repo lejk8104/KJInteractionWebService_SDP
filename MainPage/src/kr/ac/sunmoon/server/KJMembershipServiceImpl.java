@@ -172,7 +172,7 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements kr.
 		return false;
 	}
 	
-	private int findLCS(int[][] c, String[] X, String[] Y) {
+	private int findLCS(int[][] c, String[] X, String[] Y) { //LCS알고리즘 구현
 		for(int i=1; i<X.length+1; i++) {
 			for(int j=1; j<Y.length+1; j++) {
 				if(X[i-1].equals(Y[j-1]))
@@ -184,7 +184,7 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements kr.
 		return c[X.length][Y.length];
 	}
 	
-	@Override
+	@Override // ID를 가지고 매칭되는 상대방의 ID를 찾아서 반환
 	public String findLCS(String ID) {
 		String matchingID = null;
 		try {
@@ -205,7 +205,6 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements kr.
 			sql = "select ID, interest1, interest2, interest3, interest4, interest5 from survey where ID != " + ID + ";";
 			rs = stmt.executeQuery(sql);
 			String[] interests;
-//			String[] myInterests = {"문화교류", "채팅", "여행", "테니스", "독서"};
 			int maxLCS = 0;
 			ArrayList<String> tmpID = new ArrayList<String>();
 			while(rs.next()) {
