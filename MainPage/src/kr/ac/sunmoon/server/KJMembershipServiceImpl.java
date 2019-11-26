@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import org.apache.commons.lang3.builder.StandardToStringStyle;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import kr.ac.sunmoon.client.LoginService;
@@ -194,10 +196,16 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements kr.
 			
 			Statement stmt = con.createStatement();
 			
-			String sql = "select ID, interest1, interest2, interest3, interest4, interest5 from survey where ID != 'seiya.u77';";
+			String sql = "select interest1, interest2, interest3, interest4, interest5 from survey where ID = " + ID + ";";
 			ResultSet rs = stmt.executeQuery(sql);
+			String[] myInterests = new String[5];
+			for(int i=1; i<myInterests.length+1; i++)
+				myInterests[i] = rs.getString("interest" + i);
+			
+			sql = "select ID, interest1, interest2, interest3, interest4, interest5 from survey where ID != " + ID + ";";
+			rs = stmt.executeQuery(sql);
 			String[] interests;
-			String[] myInterests = {"문화교류", "채팅", "여행", "테니스", "독서"};
+//			String[] myInterests = {"문화교류", "채팅", "여행", "테니스", "독서"};
 			int maxLCS = 0;
 			ArrayList<String> tmpID = new ArrayList<String>();
 			while(rs.next()) {

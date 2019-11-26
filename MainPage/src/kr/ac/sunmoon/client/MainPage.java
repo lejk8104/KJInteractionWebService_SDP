@@ -274,12 +274,6 @@ public class MainPage implements EntryPoint  {
         		chatService.show();
         	}
         });
-//        Button logbtn = new Button("Login Service", new ButtonListenerAdapter() {
-//        	public void onClick(Button logbtn, EventObject e) {
-//        		final LoginService loginwindow = new LoginService();
-//        		loginwindow.show(); //window 연결
-//        	}
-//        });
         thirdtab.addButton(chatBtn);
         thirdtab.setTitle("Chatting");
         //동영상 추천
