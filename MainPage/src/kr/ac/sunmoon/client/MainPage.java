@@ -268,13 +268,15 @@ public class MainPage implements EntryPoint  {
         secondTab.setTitle("Main Page");
         //채팅방 들어가기
         Panel thirdtab = new Panel();
-        Button chatBtn = new Button("Chatting Start", new ButtonListenerAdapter() {
-        	public void onClick(Button chatBtn, EventObject e) {
-        		final ChatService chatService = new ChatService();
-        		chatService.show();
-        	}
-        });
-        thirdtab.addButton(chatBtn);
+//        Button chatBtn = new Button("Chatting Start", new ButtonListenerAdapter() {
+//        	public void onClick(Button chatBtn, EventObject e) {
+//        		final ChatService chatService = new ChatService();
+//        		chatService.show();
+//        	}
+//        });
+//        thirdtab.addButton(chatBtn);
+        ChatService chatservice = new ChatService();
+        thirdtab.add(chatservice);
         thirdtab.setTitle("Chatting");
         //동영상 추천
         Panel fourthtab = new Panel();

@@ -7,6 +7,7 @@ import com.google.gwt.user.client.ui.Image;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Position;
 import com.gwtext.client.widgets.Button;
+import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.Window;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.form.FormPanel;
@@ -16,7 +17,7 @@ import com.gwtext.client.widgets.layout.ColumnLayoutData;
 
 import javafx.scene.control.Alert;
 
-public class ChatService extends Window {
+public class ChatService extends Panel {
 	private Label lb2;
 
 	public ChatService() {
@@ -25,17 +26,21 @@ public class ChatService extends Window {
 		this.setBorder(false);
 		this.setPaddings(0);
 		this.setClosable(true);
-		this.setWidth(1024);
-		this.setHeight(700);
-		this.setPlain(true);
-		this.setCloseAction(this.HIDE);
+		this.setWidth(570);
+//		this.setBodyStyle("background-color:#CDEB8B");  
+		this.setHeight(600);
+		this.setMargins(20, 70, 50, 20);
+//		this.setPlain(true);
+//		this.setCloseAction(this.HIDE);
 		
 		final FormPanel chatform = new FormPanel();  
         chatform.setFrame(true);
         chatform.setTitle("Chatting Service");
-        chatform.setWidth(1024);
+        chatform.setWidth(550);
+        chatform.setHeight(250);
         chatform.setLabelWidth(55);
         chatform.setButtonAlign(Position.CENTER);
+        chatform.setMargins(0, 0, 0, 0);
         
         Label lb1 = new Label("seiya.u77 ");
         chatform.add(lb1, new AnchorLayoutData("200%"));
