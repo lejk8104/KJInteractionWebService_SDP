@@ -28,5 +28,4 @@ public class LCSAlgorithm {
 		printArray(matrix);
 		System.out.println(c[X.length][Y.length]);
 	}
-
 }

@@ -6,7 +6,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import kr.ac.sunmoon.shared.KJMember;
 
-@RemoteServiceRelativePath("KJmembershipService")
+@RemoteServiceRelativePath("kjmembershipservice")
 public interface KJMembershipService extends RemoteService {
 	
 	public KJMember findKJmember(String iD, String name);

@@ -23,9 +23,9 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements kr.
 		// TODO Auto-generated method stub
 		KJMember kjmember = new KJMember();
 		try {
-			String url = "jdbc:mysql://localhost:3306/kj_membership_db?useSSL=false";
+			String url = "jdbc:mysql://localhost:3306/sdp2?useSSL=false";
 			String user = "root";
-			String password_ = "0131";
+			String password_ = "seiya411";
 			
 			Connection con = DriverManager.getConnection(url, user, password_);
 			
@@ -74,9 +74,9 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements kr.
 		// TODO Auto-generated method stub
 		try {
 			String id = kjMember.getID();
-			String url = "jdbc:mysql://localhost:3306/kj_membership_db?useSSL=false";
+			String url = "jdbc:mysql://localhost:3306/sdp2?useSSL=false";
 			String user = "root";
-			String password_ = "0131";
+			String password_ = "seiya411";
 			Connection con = DriverManager.getConnection(url, user, password_);
 		
 			Statement stmt = con.createStatement();
@@ -114,9 +114,9 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements kr.
 			String country = kjMember.getCountry();
 			String local = kjMember.getLocal();
 			
-			String url = "jdbc:mysql://localhost:3306/kj_membership_db?useSSL=false";
+			String url = "jdbc:mysql://localhost:3306/sdp2?useSSL=false";
 			String user = "root";
-			String password_ = "0131";
+			String password_ = "seiya411";
 			
 			Connection con = DriverManager.getConnection(url, user, password_);
 			
@@ -139,9 +139,9 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements kr.
 		String password = crKjMember.getPassword();
 		List returnlist = new List();
 		try {
-			String url = "jdbc:mysql://localhost:3306/kj_membership_db?useSSL=false";
+			String url = "jdbc:mysql://localhost:3306/sdp2?useSSL=false";
 			String user = "root";
-			String password_ = "0131";
+			String password_ = "seiya411";
 			
 			Connection con = DriverManager.getConnection(url, user, password_);
 			Statement stmt = con.createStatement();
