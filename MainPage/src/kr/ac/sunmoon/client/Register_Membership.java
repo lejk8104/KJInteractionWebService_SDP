@@ -1,10 +1,9 @@
 package kr.ac.sunmoon.client;
 
-import java.awt.List;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.data.Record;
 import com.gwtext.client.data.SimpleStore;
@@ -21,9 +20,9 @@ import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.form.VType;
 import com.gwtext.client.widgets.form.event.ComboBoxListenerAdapter;
 import com.gwtext.client.widgets.layout.FormLayout;
-import com.sun.java.swing.plaf.windows.resources.windows;
 
 import kr.ac.sunmoon.shared.KJMember;
+import kr.ac.sunmoon.shared.Survey_data;
   
   
 public class Register_Membership extends Window{  
@@ -31,6 +30,7 @@ public class Register_Membership extends Window{
 	private ArrayList<String> inputlList = new ArrayList<String>();
 	String[] membershipdata = new String[9];
 	String[] surveydata =  new String[4];
+	final Window popupwindow = new Window();
 	
     public Register_Membership() {  
 
@@ -278,8 +278,63 @@ public class Register_Membership extends Window{
 //				kjMember.setBirth(membershipdata[6]);
 				kjMember.setCountry(membershipdata[7]);
 				kjMember.setLocal(membershipdata[7]);
-        	}
-        });  
+				
+				//survey data set
+				Survey_data surveyData = new Survey_data();
+				surveyData.setID(membershipdata[0]);
+				surveyData.setName(membershipdata[3]);
+				surveyData.setPreference(surveydata[0]);
+//				surveyData.setInterest(interestData);
+				surveyData.setA(surveydata[1]);
+				surveyData.setB(surveydata[2]);
+				surveyData.setC(surveydata[3]);
+//				surveyData.setNumber(`);
+
+				//Korean survey data Statistic
+//				surveyData.setGyeonggi_people(gyeonggi_people);
+//				surveyData.setSeoul_people(seoul_people);
+//				surveyData.setGangwon_people(gangwon_people);
+//				surveyData.setNorth_Chungcheong_people(north_Chungcheong_people);
+//				surveyData.setSouth_Chungcheong_people(south_Chungcheong_people);
+//				surveyData.setNorth_Gyeongsang_people(north_Gyeongsang_people);
+//				surveyData.setSouth_Gyeongsang_people(south_Gyeongsang_people);
+//				surveyData.setNorth_Jeolla_people(north_Jeolla_people);
+//				surveyData.setSouth_Jeolla_peoples(south_Jeolla_peoples);
+
+				////Japanese survey data Statistic
+//				surveyData.setHokkaido_people(hokkaido_people);
+//				surveyData.setTohoku_people(tohoku_people);
+//				surveyData.setKanto_people(kanto_people);
+//				surveyData.setChubu_people(chubu_people);
+//				surveyData.setKinki_people(kinki_people);
+//				surveyData.setChugoku_people(chugoku_people);
+//				surveyData.setShikokupeople(shikokupeople);
+
+				//서버통신
+				KJMembershipServiceAsync service = GWT.create(KJMembershipService.class);
+				service.Register_Membership(kjMember, new AsyncCallback<Void>() {
+
+					@Override
+					public void onSuccess(Void result) {
+						// TODO Auto-generated method stub
+						popupwindow.setTitle("Welcome to the membership");
+						popupwindow.show();
+//						popupwindow.hide();
+						Register_Membership.this.hide();
+
+					}
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						popupwindow.setTitle("Sorry, Please try agian after few minutes");
+						popupwindow.show();
+						Register_Membership.this.hide();
+					}
+				});
+			}
+		});
+ 
+        
         final Button btncancel = new Button("Cancel");  
   
         formPanel.addButton(btnok);  
@@ -288,14 +343,8 @@ public class Register_Membership extends Window{
         formPanel.add(tabPanel);  
         this.add(formPanel);  
   
-        RootPanel.get().add(this);  
+//        RootPanel.get().add(this);  
     }  
-//    public Object[] txtinputs(Object txtCheckPassword, Object listlocal) {
-//		return new Object[] {
-//				new Object[] {txtID, txtPassword, txtCheckPassword, txtName, listgender, txtemail,listcountry,dataBirth,listlocal}
-//				
-//	};
-//}
     
     // list object
     private Object[][] Getgender()  {
@@ -304,7 +353,6 @@ public class Register_Membership extends Window{
     		new Object[] {"Female","gender"}
     	};
     }
-    
     
     private Object[][] countries = new Object[][]{  
         new Object[]{"K", "Korean"},  
