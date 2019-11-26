@@ -28,7 +28,7 @@ import kr.ac.sunmoon.shared.Survey_data;
 public class Register_Membership extends Window{  
   
 	private ArrayList<String> inputlList = new ArrayList<String>();
-	String[] membershipdata = new String[9];
+	String[] membershipdata = new String[8];
 	String[] surveydata =  new String[4];
 	final Window popupwindow = new Window();
 	
@@ -256,14 +256,15 @@ public class Register_Membership extends Window{
         		surveydata[3] = C.getText().trim();
         		for(int i=0; i<membershipdata.length; i++) {
         			if(membershipdata[i].equals("")) {
-        				Window popup = new Window();
+        				popupwindow.setTitle("Please, input your membership data");
+        				popupwindow.show();
         				return;
         			}
         		}
         		for(int i=0; i<surveydata.length; i++) {
         			if(surveydata[i].equals("")) {
-        				Window popup = new Window();
-        				popup.setTitle("Please, input your survey data");
+        				popupwindow.setTitle("Please, input your survey data");
+        				popupwindow.show();
         				return;
         			}
         		}
@@ -290,8 +291,10 @@ public class Register_Membership extends Window{
 				surveyData.setC(surveydata[3]);
 //				surveyData.setNumber(`);
 
-				//Korean survey data Statistic
-//				surveyData.setGyeonggi_people(gyeonggi_people);
+				//Korean survey data Statistice
+				int KJinteraction = 1;
+//				listcity.getind
+//				surveyData.setGyeonggi_people(gyeonggi_pople);
 //				surveyData.setSeoul_people(seoul_people);
 //				surveyData.setGangwon_people(gangwon_people);
 //				surveyData.setNorth_Chungcheong_people(north_Chungcheong_people);
@@ -335,8 +338,11 @@ public class Register_Membership extends Window{
 		});
  
         
-        final Button btncancel = new Button("Cancel");  
-  
+        final Button btncancel = new Button("Cancel",new ButtonListenerAdapter() {
+            public void onClick(Button btncancel, EventObject e) {  
+                Register_Membership.this.hide();
+            }
+        });    
         formPanel.addButton(btnok);  
         formPanel.addButton(btncancel);  
   

@@ -54,7 +54,7 @@ public class FindPassword extends Window {
         // Cancel btn
         Button btncancel = new Button("Cancel", new ButtonListenerAdapter() {
             public void onClick(Button btncancel, EventObject e) {  
-//              this.show();      //·Î±×ÀÎ
+              FindPassword.this.hide();
           }
       });  
         findpasswordform.addButton(btncancel); 

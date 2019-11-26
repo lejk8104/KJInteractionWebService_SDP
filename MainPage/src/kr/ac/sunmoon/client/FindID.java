@@ -54,7 +54,7 @@ public class FindID extends Window {
         // Cancel btn
         Button btncancel = new Button("Cancel", new ButtonListenerAdapter() {
     		public void onClick(Button btncancel, EventObject e) {
-    			//? √Îº“
+    			FindID.this.hide();
     		}
     		});   
         findidform.addButton(btncancel); 
