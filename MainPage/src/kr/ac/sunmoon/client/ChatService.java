@@ -26,7 +26,7 @@ public class ChatService extends Panel {
 		this.setBorder(false);
 		this.setPaddings(0);
 		this.setClosable(true);
-		this.setWidth(570);
+		this.setWidth(700);
 //		this.setBodyStyle("background-color:#CDEB8B");  
 		this.setHeight(600);
 		this.setMargins(20, 70, 50, 20);
@@ -64,6 +64,7 @@ public class ChatService extends Panel {
 			
 			@Override
 			public void onSuccess(String result) {
+				com.google.gwt.user.client.Window.alert(result);
 				lb2.setText(result);
 			}
 			

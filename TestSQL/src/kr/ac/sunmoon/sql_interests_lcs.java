@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class sql_interests_lcs {
-	public static int findLCS(int[][] c, String[] X, String[] Y) {
+	private int findLCS(int[][] c, String[] X, String[] Y) { //LCS알고리즘 구현
 		for(int i=1; i<X.length+1; i++) {
 			for(int j=1; j<Y.length+1; j++) {
 				if(X[i-1].equals(Y[j-1]))
@@ -19,8 +19,9 @@ public class sql_interests_lcs {
 		}
 		return c[X.length][Y.length];
 	}
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	
+	public void findLCS(String ID){
+		String matchingID = null;
 		try {
 			String url = "jdbc:mysql://localhost:3306/sdp2?useSSL=false";
 			String user = "root";
@@ -30,23 +31,35 @@ public class sql_interests_lcs {
 			
 			Statement stmt = con.createStatement();
 			
-			String sql = "select ID, interest1, interest2, interest3, interest4, interest5 from survey where ID != 'seiya.u77';";
-			ResultSet rs = stmt.executeQuery(sql);
+			String sql1 = "select interest1, interest2, interest3, interest4, interest5 from survey where ID = '" + ID + "';";
+			ResultSet rs1 = stmt.executeQuery(sql1);
+			String[] myInterests = new String[5];
+			while(rs1.next()) {
+				myInterests[0] = rs1.getString("interest1");
+				myInterests[1] = rs1.getString("interest2");
+				myInterests[2] = rs1.getString("interest3");
+				myInterests[3] = rs1.getString("interest4");
+				myInterests[4] = rs1.getString("interest5");
+			}
+			for(int i=0; i<myInterests.length; i++)
+				System.out.println(myInterests[i] + ", ");
+			
+			String sql2 = "select ID, interest1, interest2, interest3, interest4, interest5 from survey where ID != '" + ID + "';";
+			ResultSet rs2 = stmt.executeQuery(sql2);
 			String[] interests;
-			String[] myInterests = {"문화교류", "채팅", "여행", "테니스", "독서"};
 			int maxLCS = 0;
 			ArrayList<String> tmpID = new ArrayList<String>();
-			while(rs.next()) {
+			while(rs2.next()) {
 				interests = new String[5];
-				String interest1 = rs.getString("interest1");
+				String interest1 = rs2.getString("interest1");
 				interests[0] = interest1;
-				String interest2 = rs.getString("interest2");
+				String interest2 = rs2.getString("interest2");
 				interests[1] = interest2;
-				String interest3 = rs.getString("interest3");
+				String interest3 = rs2.getString("interest3");
 				interests[2] = interest3;
-				String interest4 = rs.getString("interest4");
+				String interest4 = rs2.getString("interest4");
 				interests[3] = interest4;
-				String interest5 = rs.getString("interest5");
+				String interest5 = rs2.getString("interest5");
 				interests[4] = interest5;
 				int[][] c = new int[myInterests.length+1][interests.length+1];
 				int LCS = findLCS(c, myInterests, interests);
@@ -55,17 +68,16 @@ public class sql_interests_lcs {
 					tmpID.removeAll(tmpID);
 				}
 				if(LCS >= maxLCS) {
-					tmpID.add(rs.getString("ID"));
+					tmpID.add(rs2.getString("ID"));
 				}
-//				System.out.println(interest1+ ", " + interest2 + ", " + interest3 + ", " + interest4 + ", " + interest5);
 			}
-			System.out.println(tmpID.get((int)(Math.random()*tmpID.size())));
-			rs.close();
+			matchingID = tmpID.get((int)(Math.random()*tmpID.size()));
+			rs2.close();
 			stmt.close();
 			con.close();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println(matchingID);
 	}
-
 }

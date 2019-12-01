@@ -16,13 +16,11 @@
 <fullyQualifiedTypeName name="java.lang.Exception"/>
 <fullyQualifiedTypeName name="java.sql.Connection"/>
 <fullyQualifiedTypeName name="java.sql.DriverManager"/>
-<fullyQualifiedTypeName name="java.sql.ResultSet"/>
 <fullyQualifiedTypeName name="java.sql.Statement"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.util.Iterator"/>
 <fullyQualifiedTypeName name="kr.ac.sunmoon.client.KJMembershipServiceAsync"/>
 <fullyQualifiedTypeName name="com.google.gwt.core.client.GWT"/>
-<fullyQualifiedTypeName name="kr.ac.sunmoon.client.KJMembershipService"/>
 <fullyQualifiedTypeName name="com.google.gwt.user.client.rpc.AsyncCallback"/>
 <fullyQualifiedTypeName name="com.gwtext.client.widgets.Window"/>
 <fullyQualifiedTypeName name="com.google.gwt.user.client.ui.DialogBox"/>
@@ -30,4 +28,6 @@
 <fullyQualifiedTypeName name="javafx.scene.control.Alert"/>
 <fullyQualifiedTypeName name="javax.xml.transform.Result"/>
 <fullyQualifiedTypeName name="com.google.gwt.user.client.Window"/>
+<fullyQualifiedTypeName name="java.sql.ResultSet"/>
+<fullyQualifiedTypeName name="kr.ac.sunmoon.client.KJMembershipService"/>
 </qualifiedTypeNameHistroy>
