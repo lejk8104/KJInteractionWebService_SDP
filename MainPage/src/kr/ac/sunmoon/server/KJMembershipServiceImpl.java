@@ -137,9 +137,9 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements KJM
 	}
 	
 	@Override
-	public boolean LoginService(KJMember crKjMember) {
-//		String id = crKjMember.getID();
-//		String password = crKjMember.getPassword();
+	public boolean LoginService(KJMember loginmember) {
+//		String id = loginmember.getID();
+//		String password = loginmember.getPassword();
 //		List returnlist = new List();
 //		try {
 //			String url = "jdbc:mysql://localhost:3306/sdp2?useSSL=false";
