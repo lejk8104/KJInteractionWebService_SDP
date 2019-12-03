@@ -1,6 +1,7 @@
 package kr.ac.sunmoon.client;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.TextBox;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Position;
@@ -67,9 +68,24 @@ Window popup = new Window();
         		
         		//서버통신
         		KJMembershipServiceAsync service = GWT.create(KJMembershipService.class);
-        		service.LoginService(crKJmember, asyncCallback);
-            }
-        });
+        		service.LoginService(loginmember, new AsyncCallback<Boolean>() {
+
+					public void onSuccess(Boolean result) {
+						// TODO Auto-generated method stub
+						popup.setTitle("Login is Complete!");
+						popup.show();
+						LoginService.this.hide();
+						
+					}
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						popup.setTitle("Sorry, please try again after few minutes.");
+						popup.show();
+						LoginService.this.hide();
+					}
+				});
+			}
+		});
         loginform.addButton(btnlogin);  
         
         // Cancel btn

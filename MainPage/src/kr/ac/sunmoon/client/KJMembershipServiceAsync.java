@@ -11,7 +11,7 @@ public interface KJMembershipServiceAsync {
 	void Register_Membership(KJMember kjMember, AsyncCallback<Void> callback);
 	
 	void checkID(KJMember kjMember, AsyncCallback<Boolean> asyncCallback);
-	void LoginService(KJMember crKJmember, AsyncCallback<Boolean> asyncCallback);
+	void LoginService(KJMember loginmember, AsyncCallback<Boolean> asyncCallback);
 	void findLCS(String iD, AsyncCallback<String> callback);
 
 
