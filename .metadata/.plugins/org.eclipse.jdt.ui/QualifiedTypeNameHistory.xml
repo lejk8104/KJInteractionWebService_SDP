@@ -30,4 +30,5 @@
 <fullyQualifiedTypeName name="com.google.gwt.user.client.Window"/>
 <fullyQualifiedTypeName name="java.sql.ResultSet"/>
 <fullyQualifiedTypeName name="kr.ac.sunmoon.client.KJMembershipService"/>
+<fullyQualifiedTypeName name="kr.ac.sunmoon.sqlTest"/>
 </qualifiedTypeNameHistroy>
