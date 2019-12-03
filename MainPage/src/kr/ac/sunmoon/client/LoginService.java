@@ -1,5 +1,6 @@
 package kr.ac.sunmoon.client;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.TextBox;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Position;
@@ -10,10 +11,13 @@ import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.form.FormPanel;
 import com.gwtext.client.widgets.form.TextField;
 
+import kr.ac.sunmoon.shared.KJMember;
+
 public class LoginService extends Window{
 
-private TextBox[] logininputs;
-	
+String[] logindata = new String[2];
+Window popup = new Window();
+
 	public LoginService()  {
 	
 		super();
@@ -33,19 +37,37 @@ private TextBox[] logininputs;
         loginform.setButtonAlign(Position.CENTER);
   
         // ID input
-        TextField txtID = new TextField("ID", "id", 250);  
-        txtID.setAllowBlank(false);  
-        loginform.add(txtID);  
+        TextField loginID = new TextField("ID", "id", 250);  
+        loginID.setAllowBlank(false);  
+        loginform.add(loginID);  
   
 //        txtID.getText()
         // Password input
-        TextField txtPassword = new TextField("Password", "password", 250);  
-        loginform.add(txtPassword);  
+        TextField loginPassword = new TextField("Password", "password", 250);  
+        loginform.add(loginPassword);  
   
         //login btn
         Button btnlogin = new Button("Login", new ButtonListenerAdapter() {
             public void onClick(Button btnlogin, EventObject e) {  
-//                this.show();      //로그인
+            	
+            	// login data list
+            	logindata[0] = loginID.getText().trim();
+            	logindata[1] = loginPassword.getText().trim();
+            	
+        		for(int i=0; i<logindata.length; i++) { 
+        			if(logindata[i].equals("")) {
+        				popup.setTitle("Please, input your membership data");
+        				popup.show();
+        				return;
+        			}
+        		}
+        		KJMember loginmember = new KJMember();
+        		loginmember.setID(logindata[0]);
+        		loginmember.setPassword(logindata[1]);
+        		
+        		//서버통신
+        		KJMembershipServiceAsync service = GWT.create(KJMembershipService.class);
+        		service.LoginService(crKJmember, asyncCallback);
             }
         });
         loginform.addButton(btnlogin);  

@@ -4,6 +4,8 @@ import java.awt.List;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.data.Record;
@@ -24,6 +26,7 @@ import com.gwtext.client.widgets.layout.FormLayout;
 import com.sun.java.swing.plaf.windows.resources.windows;
 
 import kr.ac.sunmoon.shared.KJMember;
+import kr.ac.sunmoon.shared.Survey_data;
   
   
 public class Register_Membership extends Window{  
@@ -280,8 +283,44 @@ public class Register_Membership extends Window{
 //				kjMember.setBirth(membershipdata[6]);
 				kjMember.setCountry(membershipdata[7]);
 				kjMember.setLocal(membershipdata[7]);
-        	}
-        });  
+				
+				//survey data set
+				Survey_data survey_set = new Survey_data();
+				survey_set.setID(membershipdata[0]);
+				survey_set.setName(membershipdata[3]);
+				survey_set.setPreference(surveydata[0]);
+				survey_set.setA(surveydata[1]);
+				survey_set.setB(surveydata[2]);
+				survey_set.setC(surveydata[3]);
+				
+				//Korean survey data Statistice
+				
+				//Japanese survey data Statistic
+				
+				//서버통신
+				KJMembershipServiceAsync service = GWT.create(KJMembershipService.class);
+				service.Register_Membership(kjMember, new AsyncCallback<Void>() {
+
+					@Override
+					public void onSuccess(Void result) {
+						// TODO Auto-generated method stub
+						popup.setTitle("Welcome to the membership");
+        				popup.show();
+						Register_Membership.this.hide();
+
+					}
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+
+						popup.setTitle("Sorry, Please try agian after few minutes");
+        				popup.show();
+						Register_Membership.this.hide();
+					}
+				});
+			}
+		});
+        // Cancel
         final Button btncancel = new Button("Cancel",new ButtonListenerAdapter() {
             public void onClick(Button btncancel, EventObject e) {  
                 Register_Membership.this.hide();
@@ -301,7 +340,6 @@ public class Register_Membership extends Window{
 //				
 //	};
 //}
-    
     // list object
     private Object[][] Getgender()  {
     	return new Object[][] {
@@ -309,7 +347,6 @@ public class Register_Membership extends Window{
     		new Object[] {"Female","gender"}
     	};
     }
-    
     
     private Object[][] countries = new Object[][]{  
         new Object[]{"K", "Korean"},  
@@ -375,4 +412,3 @@ public class Register_Membership extends Window{
     	};
     }
 }
-    
