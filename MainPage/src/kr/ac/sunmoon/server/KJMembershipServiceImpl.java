@@ -22,52 +22,52 @@ import kr.ac.sunmoon.shared.KJMember;
 public class KJMembershipServiceImpl extends RemoteServiceServlet implements KJMembershipService {
 	
 	public KJMember findKJmember(String ID, String Name) {
-//		// TODO Auto-generated method stub
-//		KJMember kjmember = new KJMember();
-//		try {
-//			String url = "jdbc:mysql://localhost:3306/sdp2?useSSL=false";
-//			String user = "root";
-//			String password_ = "seiya411";
-//			
-//			Connection con = DriverManager.getConnection(url, user, password_);
-//			
-//			Statement stmt = con.createStatement();
-//			String sql = "SELECT* FROM members1hip_data.kjmember Inner Join members1hip_data.local on kjmember.country= local.country; ";
-//			ResultSet rs1 = stmt.executeQuery(sql);
-//			while(rs1.next()) {				
-//				String id = rs1.getString("ID");
-//				String Password = rs1.getString("PassWord");
-//				String Check_Password = rs1.getString("Check_Password");
-//				String name = rs1.getString("Name");
-//				String Gender = rs1.getString("Gender");
-//				String Birth = rs1.getString("Birth");
-//				String Country = rs1.getString("Country");
-//				String Local = rs1.getString(" Local");
-//				//패스워드 찾기
-//				if (ID.equals(id) && Name.equals(name)) {
-//					kjmember.setID(id);
-//					kjmember.setCheckPassword(Check_Password);
-//					kjmember.setName(name);
-//					kjmember.setGender(Gender);
-////					kjmember.setBirth(Birth);
-//					kjmember.setCountry(Country);
-//					kjmember.setLocal(Local);
-//					rs1.close();
-//					stmt.close();
-//					con.close();
-//					return kjmember;
-//				}
-//				//아이디찾기
-////				else if 
-//			}
-//			rs1.close();
-//			stmt.close();
-//			con.close();
-//				
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			e.printStackTrace();
-//		}
+		// TODO Auto-generated method stub
+		KJMember kjmember = new KJMember();
+		try {
+			String url = "jdbc:mysql://localhost:3306/sdp2?useSSL=false";
+			String user = "root";
+			String password_ = "seiya411";
+			
+			Connection con = DriverManager.getConnection(url, user, password_);
+			
+			Statement stmt = con.createStatement();
+			String sql = "SELECT* FROM members1hip_data.kjmember Inner Join members1hip_data.local on kjmember.country= local.country; ";
+			ResultSet rs1 = stmt.executeQuery(sql);
+			while(rs1.next()) {				
+				String id = rs1.getString("ID");
+				String Password = rs1.getString("PassWord");
+				String Check_Password = rs1.getString("Check_Password");
+				String name = rs1.getString("Name");
+				String Gender = rs1.getString("Gender");
+				String Birth = rs1.getString("Birth");
+				String Country = rs1.getString("Country");
+				String Local = rs1.getString(" Local");
+				//패스워드 찾기
+				if (ID.equals(id) && Name.equals(name)) {
+					kjmember.setID(id);
+					kjmember.setCheckPassword(Check_Password);
+					kjmember.setName(name);
+					kjmember.setGender(Gender);
+//					kjmember.setBirth(Birth);
+					kjmember.setCountry(Country);
+					kjmember.setLocal(Local);
+					rs1.close();
+					stmt.close();
+					con.close();
+					return kjmember;
+				}
+				//아이디찾기
+//				else if 
+			}
+			rs1.close();
+			stmt.close();
+			con.close();
+				
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 		return null;
 	}
 	
