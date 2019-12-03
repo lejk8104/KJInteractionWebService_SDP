@@ -31,6 +31,7 @@ public class Register_Membership extends Window{
 	private ArrayList<String> inputlList = new ArrayList<String>();
 	String[] membershipdata = new String[9];
 	String[] surveydata =  new String[4];
+	Window popup = new Window();
 	
     public Register_Membership() {  
 
@@ -256,14 +257,15 @@ public class Register_Membership extends Window{
         		surveydata[3] = C.getText().trim();
         		for(int i=0; i<membershipdata.length; i++) {
         			if(membershipdata[i].equals("")) {
-        				Window popup = new Window();
+        				popup.setTitle("Please, input your membership data");
+        				popup.show();
         				return;
         			}
         		}
         		for(int i=0; i<surveydata.length; i++) {
         			if(surveydata[i].equals("")) {
-        				Window popup = new Window();
         				popup.setTitle("Please, input your survey data");
+        				popup.show();
         				return;
         			}
         		}
