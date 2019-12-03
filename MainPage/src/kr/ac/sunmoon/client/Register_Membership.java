@@ -280,8 +280,11 @@ public class Register_Membership extends Window{
 				kjMember.setLocal(membershipdata[7]);
         	}
         });  
-        final Button btncancel = new Button("Cancel");  
-  
+        final Button btncancel = new Button("Cancel",new ButtonListenerAdapter() {
+            public void onClick(Button btncancel, EventObject e) {  
+                Register_Membership.this.hide();
+            }
+        });    
         formPanel.addButton(btnok);  
         formPanel.addButton(btncancel);  
   

@@ -53,8 +53,7 @@ private TextBox[] logininputs;
         // Cancel btn
         Button btncancel = new Button("Cancel", new ButtonListenerAdapter() {
         	public void onClick(Button btncancel, EventObject e) {
-//        		
-        		//window ¿¬°á
+        		LoginService.this.hide();
         	}
         });  
         loginform.addButton(btncancel); 
