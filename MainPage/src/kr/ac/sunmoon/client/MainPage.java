@@ -139,19 +139,13 @@ public class MainPage implements EntryPoint  {
         
         
         // 광고실험로고
-//        Panel fourth_Column = new Panel();  
-//        fourth_Column.setLayout(new FormLayout());  
-//        fourth_Column.setBorder(false);
-//        fourth_Column.setMargins(0, 0, 0, 0);
-//
-//        Button logbtn = new Button("Login Service", new ButtonListenerAdapter() {
-//        	public void onClick(Button btnfindpassword, EventObject e) {
-//        		Advertise_KJinteration kjwindow = new Advertise_KJinteration();
-//        		kjwindow.show(); //window 연결
-//        	}
-//        });
-//        fourth_Column.add(logbtn);
-//        hpsearch.add(fourth_Column, new ColumnLayoutData(0.3));
+        Button adbtn = new Button("Advertise_KJinteration ", new ButtonListenerAdapter() {
+        	public void onClick(Button logbtn, EventObject e) {
+        		final Advertise_KJinteration adwindow = new Advertise_KJinteration();
+        		adwindow.show(); //window 연결
+        	}
+        });
+            fourth_Column.add(adbtn);
         
 
         // register logo
