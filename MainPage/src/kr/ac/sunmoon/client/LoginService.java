@@ -38,17 +38,17 @@ Window popup = new Window();
         loginform.setButtonAlign(Position.CENTER);
   
         // ID input
-        TextField loginID = new TextField("ID", "id", 250);  
+        final TextField loginID = new TextField("ID", "id", 250);  
         loginID.setAllowBlank(false);  
         loginform.add(loginID);  
   
 //        txtID.getText()
         // Password input
-        TextField loginPassword = new TextField("Password", "password", 250);  
+        final TextField loginPassword = new TextField("Password", "password", 250);  
         loginform.add(loginPassword);  
   
         //login btn
-        Button btnlogin = new Button("Login", new ButtonListenerAdapter() {
+        final Button btnlogin = new Button("Login", new ButtonListenerAdapter() {
             public void onClick(Button btnlogin, EventObject e) {  
             	
             	// login data list
