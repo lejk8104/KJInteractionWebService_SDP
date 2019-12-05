@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextBox;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.data.Record;
 import com.gwtext.client.data.SimpleStore;
@@ -19,10 +20,13 @@ import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.form.ComboBox;
 import com.gwtext.client.widgets.form.DateField;
 import com.gwtext.client.widgets.form.FormPanel;
+import com.gwtext.client.widgets.form.Label;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.form.VType;
 import com.gwtext.client.widgets.form.event.ComboBoxListenerAdapter;
 import com.gwtext.client.widgets.grid.RowSelectionModel;
+import com.gwtext.client.widgets.layout.AnchorLayoutData;
+import com.gwtext.client.widgets.layout.ColumnLayoutData;
 import com.gwtext.client.widgets.layout.FormLayout;
 import com.gwtext.client.widgets.layout.VerticalLayout;
 import com.sun.java.swing.plaf.windows.resources.windows;
@@ -177,8 +181,6 @@ public class Register_Membership extends Window{
         secondTab.setAutoHeight(true);  
         secondTab.setPaddings(15);  
         
-
-        
         // preference
         final ComboBox listpreference = new ComboBox();
         listpreference.setAllowBlank(false);
@@ -194,9 +196,21 @@ public class Register_Membership extends Window{
         listpreference.setResizable(true); //?
         secondTab.add(listpreference);
         
+        Panel inputdataform = new Panel();
+        inputdataform.setBorder(false);
+        inputdataform.setLayout(new FormLayout());
+        inputdataform.setMargins(5, 0, 10, 5);
+        
         // interst checkbox
         final CheckBox_Interest checkbox = new CheckBox_Interest();
         secondTab.add(checkbox);
+        
+        Label txtlabel = new Label("Another interest:         ");
+        inputdataform.add(txtlabel, new AnchorLayoutData("40%"));
+        TextBox inputinterest = new TextBox();
+        
+        inputdataform.add(inputinterest, new AnchorLayoutData("60%"));
+        secondTab.add(inputdataform);
         
         //A
         final ComboBox A = new ComboBox();

@@ -1,5 +1,6 @@
 package kr.ac.sunmoon.client;
 
+import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.RootPanel;  
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Position;
@@ -9,6 +10,7 @@ import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.Window;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.form.FormPanel;
+import com.gwtext.client.widgets.form.Label;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.grid.*;  
 import com.gwtext.client.widgets.layout.VerticalLayout; 
@@ -65,9 +67,10 @@ public class CheckBox_Interest extends GridPanel  {
 		
 		this.setSelectionModel(CheckboxInterest);
 		this.setWidth(300);
-		this.setHeight(200);
+		this.setHeight(180);
         this.setFrame(true);  
         this.setTitle("Input your Interest data");  
         this.setIconCls("grid-icon");
+        
 	}
 }
