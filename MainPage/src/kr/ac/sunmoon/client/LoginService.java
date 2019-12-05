@@ -134,15 +134,7 @@ Window popup = new Window();
         secondPanel.addButton(btnfindpassword); 
         loginform.add(secondPanel);
         
-        GridPanel ch = new GridPanel();
-//        final CheckBox_preference ch = new CheckBox_preference();
-//        eodsl.add(loginform);
-        eodsl.add(ch);
-        
-        
-        this.add(eodsl);
-//        this.add(loginform); 
-//        this.add(ch);
+        this.add(loginform); 
         
 //        loginPanel.add(window);
 

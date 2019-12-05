@@ -23,6 +23,7 @@ import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.form.VType;
 import com.gwtext.client.widgets.form.event.ComboBoxListenerAdapter;
 import com.gwtext.client.widgets.layout.FormLayout;
+import com.gwtext.client.widgets.layout.VerticalLayout;
 import com.sun.java.swing.plaf.windows.resources.windows;
 
 import kr.ac.sunmoon.shared.KJMember;
@@ -168,10 +169,14 @@ public class Register_Membership extends Window{
         // Survey
         final Panel secondTab = new Panel();  
         secondTab.setTitle("Survey");  
-        secondTab.setLayout(new FormLayout());  
+//        secondTab.setLayout(new FormLayout());
+        secondTab.setLayout(new VerticalLayout(0));
         secondTab.setAutoHeight(true);  
         secondTab.setPaddings(10);  
- 
+        
+        
+        final CheckBox_preference checkbox = new CheckBox_preference();
+        
         // preference
         final ComboBox listpreference = new ComboBox();
         listpreference.setAllowBlank(false);
@@ -192,51 +197,52 @@ public class Register_Membership extends Window{
         txtinterests.setAllowBlank(false);  
 //        txtinterests.setValue("interests"); 
         secondTab.add(txtinterests);
+        secondTab.add(checkbox);
         
-        //A
-        final ComboBox A = new ComboBox();
-        A.setAllowBlank(false);
-        A.setMinChars(1);
-        A.setFieldLabel("A");
-        A.setStore(a);
-        A.setDisplayField("Text");
-        A.setEmptyText("Select A"); 
-        A.setTriggerAction(ComboBox.ALL); //? 모르겠다
-        A.setTypeAhead(true);  // 이를 채우고 자동 선택한다
-        A.setSelectOnFocus(true); //데이터값 수신할 떄 자동채움
-        A.setWidth(200);  
-        A.setResizable(true); //?
-        secondTab.add(A);
-        
-        //B
-        final ComboBox B = new ComboBox();
-        B.setAllowBlank(false);
-        B.setMinChars(1);
-        B.setFieldLabel("B");
-        B.setStore(b);
-        B.setDisplayField("Text");
-        B.setEmptyText("Select B"); 
-        B.setTriggerAction(ComboBox.ALL); //? 모르겠다
-        B.setTypeAhead(true);  // 이를 채우고 자동 선택한다
-        B.setSelectOnFocus(true); //데이터값 수신할 떄 자동채움
-        B.setWidth(200);  
-        B.setResizable(true); //?
-        secondTab.add(B);
-        
-        //C
-        final ComboBox C = new ComboBox();
-        C.setAllowBlank(false);
-        C.setMinChars(1);
-        C.setFieldLabel("C");
-        C.setStore(c);
-        C.setDisplayField("Text");
-        C.setEmptyText("Select C"); 
-        C.setTriggerAction(ComboBox.ALL); //? 모르겠다
-        C.setTypeAhead(true);  // 이를 채우고 자동 선택한다
-        C.setSelectOnFocus(true); //데이터값 수신할 떄 자동채움
-        C.setWidth(200);  
-        C.setResizable(true); //?
-        secondTab.add(C);
+//        //A
+//        final ComboBox A = new ComboBox();
+//        A.setAllowBlank(false);
+//        A.setMinChars(1);
+//        A.setFieldLabel("A");
+//        A.setStore(a);
+//        A.setDisplayField("Text");
+//        A.setEmptyText("Select A"); 
+//        A.setTriggerAction(ComboBox.ALL); //? 모르겠다
+//        A.setTypeAhead(true);  // 이를 채우고 자동 선택한다
+//        A.setSelectOnFocus(true); //데이터값 수신할 떄 자동채움
+//        A.setWidth(200);  
+//        A.setResizable(true); //?
+//        secondTab.add(A);
+//        
+//        //B
+//        final ComboBox B = new ComboBox();
+//        B.setAllowBlank(false);
+//        B.setMinChars(1);
+//        B.setFieldLabel("B");
+//        B.setStore(b);
+//        B.setDisplayField("Text");
+//        B.setEmptyText("Select B"); 
+//        B.setTriggerAction(ComboBox.ALL); //? 모르겠다
+//        B.setTypeAhead(true);  // 이를 채우고 자동 선택한다
+//        B.setSelectOnFocus(true); //데이터값 수신할 떄 자동채움
+//        B.setWidth(200);  
+//        B.setResizable(true); //?
+//        secondTab.add(B);
+//        
+//        //C
+//        final ComboBox C = new ComboBox();
+//        C.setAllowBlank(false);
+//        C.setMinChars(1);
+//        C.setFieldLabel("C");
+//        C.setStore(c);
+//        C.setDisplayField("Text");
+//        C.setEmptyText("Select C"); 
+//        C.setTriggerAction(ComboBox.ALL); //? 모르겠다
+//        C.setTypeAhead(true);  // 이를 채우고 자동 선택한다
+//        C.setSelectOnFocus(true); //데이터값 수신할 떄 자동채움
+//        C.setWidth(200);  
+//        C.setResizable(true); //?
+//        secondTab.add(C);
 
         tabPanel.add(secondTab);
         
@@ -255,9 +261,9 @@ public class Register_Membership extends Window{
         		membershipdata[8] = listcity.getText().trim();
         		// survey data list 선언
         		surveydata[0] = listpreference.getText().trim();
-        		surveydata[1] = A.getText().trim();
-        		surveydata[2] = B.getText().trim();
-        		surveydata[3] = C.getText().trim();
+//        		surveydata[1] = A.getText().trim();
+//        		surveydata[2] = B.getText().trim();
+//        		surveydata[3] = C.getText().trim();
         		for(int i=0; i<membershipdata.length; i++) {
         			if(membershipdata[i].equals("")) {
         				popup.setTitle("Please, input your membership data");
