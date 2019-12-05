@@ -67,7 +67,7 @@ public class ChatRoom extends Window{
         chatroomform.add(imgPanel_c2, new ColumnLayoutData(0.2));
         
         Label lb1 = new Label("seiya.u77 ");
-        Label lb12 = new Label("jungkim ");
+        Label lb12 = new Label("jaekeunlee ");
 		
         Panel first_Column = new Panel();  
         first_Column.setLayout(new FormLayout());  
