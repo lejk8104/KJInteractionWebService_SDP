@@ -35,7 +35,7 @@ public class ChatService extends Panel {
 		
 		final FormPanel chatform = new FormPanel();  
         chatform.setFrame(true);
-        chatform.setTitle("Chatting Service");
+        chatform.setTitle("Recommendation Service");
         chatform.setWidth(550);
         chatform.setHeight(250);
         chatform.setLabelWidth(55);
@@ -49,7 +49,7 @@ public class ChatService extends Panel {
 		imglogo1.setUrl("image/login.png");
         chatform.add(imglogo1, new AnchorLayoutData("30%"));
         
-        Label lb0 = new Label("Succeeded in matching!");
+        Label lb0 = new Label("Recommended Pair!");
         chatform.add(lb0);
         
         Image imglogo2 = new Image();
