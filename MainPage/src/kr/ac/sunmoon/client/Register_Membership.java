@@ -280,12 +280,17 @@ public class Register_Membership extends Window{
         		surveydata[3] = C.getText().trim();
         		
         		// interest data list 선언
-        		RowSelectionModel interestdata = checkbox.getSelectionModel();
-//        		for (int i =0; i<interestdata.len)
+        		Record[] userInterests = checkbox.getCheckbox_data();
+        		for (int i =0; i<userInterests.length; i++) {
+        			Record userinterest = userInterests[i];
+        			userinterest.getAsString("interest");
+        		} 
+//        		String anoterinterest = inputinterest.getText().trim();
         		
-        		for(int i=0; i<membershipdata.length; i++) {
-        			if(membershipdata[i].equals("")) {
-        				popup.setTitle("Please, input your membership data");
+        		// empty data 처리
+        		for(int i=0; i<(userInterests.length-1); i++) {
+        			if(userInterests[i].equals("")) {
+        				popup.setTitle("Please, input your interest data");
         				popup.show();
         				return;
         			}
@@ -293,6 +298,13 @@ public class Register_Membership extends Window{
         		for(int i=0; i<surveydata.length; i++) {
         			if(surveydata[i].equals("")) {
         				popup.setTitle("Please, input your survey data");
+        				popup.show();
+        				return;
+        			}
+        		}
+        		for(int i=0; i<membershipdata.length; i++) {
+        			if(membershipdata[i].equals("")) {
+        				popup.setTitle("Please, input your membership data");
         				popup.show();
         				return;
         			}
