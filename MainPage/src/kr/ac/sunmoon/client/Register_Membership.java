@@ -44,8 +44,8 @@ public class Register_Membership extends Window{
 		this.setBorder(false);
 		this.setPaddings(0);
 		this.setClosable(true);
-		this.setWidth(335);
-		this.setHeight(415);
+		this.setWidth(360);
+		this.setHeight(435);
 		this.setPlain(true);
 		this.setCloseAction(this.HIDE);
     	
@@ -55,7 +55,7 @@ public class Register_Membership extends Window{
         formPanel.setTitle("KJ Membership Page");
         formPanel.setLabelWidth(65);  
         formPanel.setBorder(false);  
-        formPanel.setWidth(320);  
+        formPanel.setWidth(345);  
         
         //TabPanel 선언
         final TabPanel tabPanel = new TabPanel();  
@@ -65,7 +65,7 @@ public class Register_Membership extends Window{
         firstTab.setTitle("KJ Membership");  
         firstTab.setLayout(new FormLayout());  
         firstTab.setAutoHeight(true);  
-        firstTab.setPaddings(10);  
+        firstTab.setPaddings(25);  
   
         //list store 선언
         final Store gender = new SimpleStore(new String[] {"genderData","gender"}, Getgender());
@@ -132,6 +132,7 @@ public class Register_Membership extends Window{
     	listcountry.setForceSelection(true);  
 //    	listcountry.setValueField("country");  
     	listcountry.setReadOnly(true);  
+    	listcountry.setWidth(200);
 
     	// local
     	final ComboBox listcity = new ComboBox();  
@@ -144,6 +145,7 @@ public class Register_Membership extends Window{
 	    listcity.setLinked(true);  
 	    listcity.setForceSelection(true);  
 	    listcity.setReadOnly(true);  
+	    listcity.setWidth(200);
 
 	    //동작과정
 	    listcountry.addListener(new ComboBoxListenerAdapter() {  
@@ -173,10 +175,9 @@ public class Register_Membership extends Window{
 //        secondTab.setLayout(new FormLayout());
         secondTab.setLayout(new VerticalLayout(0));
         secondTab.setAutoHeight(true);  
-        secondTab.setPaddings(10);  
+        secondTab.setPaddings(15);  
         
-        // interst checkbox
-        final CheckBox_Interest checkbox = new CheckBox_Interest();
+
         
         // preference
         final ComboBox listpreference = new ComboBox();
@@ -189,10 +190,13 @@ public class Register_Membership extends Window{
         listpreference.setTriggerAction(ComboBox.ALL); //? 모르겠다
         listpreference.setTypeAhead(true);  // 이를 채우고 자동 선택한다
         listpreference.setSelectOnFocus(true); //데이터값 수신할 떄 자동채움
-        listpreference.setWidth(200);  
+        listpreference.setWidth(300);  
         listpreference.setResizable(true); //?
         secondTab.add(listpreference);
-
+        
+        // interst checkbox
+        final CheckBox_Interest checkbox = new CheckBox_Interest();
+        secondTab.add(checkbox);
         
         //A
         final ComboBox A = new ComboBox();
@@ -205,7 +209,7 @@ public class Register_Membership extends Window{
         A.setTriggerAction(ComboBox.ALL); //? 모르겠다
         A.setTypeAhead(true);  // 이를 채우고 자동 선택한다
         A.setSelectOnFocus(true); //데이터값 수신할 떄 자동채움
-        A.setWidth(200);  
+        A.setWidth(300);  
         A.setResizable(true); //?
         secondTab.add(A);
         
@@ -220,7 +224,7 @@ public class Register_Membership extends Window{
         B.setTriggerAction(ComboBox.ALL); //? 모르겠다
         B.setTypeAhead(true);  // 이를 채우고 자동 선택한다
         B.setSelectOnFocus(true); //데이터값 수신할 떄 자동채움
-        B.setWidth(200);  
+        B.setWidth(300);  
         B.setResizable(true); //?
         secondTab.add(B);
         
@@ -235,7 +239,7 @@ public class Register_Membership extends Window{
         C.setTriggerAction(ComboBox.ALL); //? 모르겠다
         C.setTypeAhead(true);  // 이를 채우고 자동 선택한다
         C.setSelectOnFocus(true); //데이터값 수신할 떄 자동채움
-        C.setWidth(200);  
+        C.setWidth(300);  
         C.setResizable(true); //?
         secondTab.add(C);
 

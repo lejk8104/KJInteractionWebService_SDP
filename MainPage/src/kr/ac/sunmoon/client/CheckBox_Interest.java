@@ -64,8 +64,8 @@ public class CheckBox_Interest extends GridPanel  {
 		this.setAutoExpandColumn("interest");  
 		
 		this.setSelectionModel(CheckboxInterest);
-		this.setWidth(350);
-		this.setHeight(250);
+		this.setWidth(300);
+		this.setHeight(200);
         this.setFrame(true);  
         this.setTitle("Input your Interest data");  
         this.setIconCls("grid-icon");
