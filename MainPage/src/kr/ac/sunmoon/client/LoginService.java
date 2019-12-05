@@ -11,6 +11,7 @@ import com.gwtext.client.widgets.Window;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.form.FormPanel;
 import com.gwtext.client.widgets.form.TextField;
+import com.gwtext.client.widgets.grid.GridPanel;
 
 import kr.ac.sunmoon.shared.KJMember;
 
@@ -30,7 +31,9 @@ Window popup = new Window();
 		this.setPlain(true);
 		this.setCloseAction(this.HIDE);
 		
-        final FormPanel loginform = new FormPanel();  
+		final Panel eodsl = new Panel();
+		
+		final FormPanel loginform = new FormPanel();  
         loginform.setFrame(true);
         loginform.setTitle("Login Service");
         loginform.setWidth(350);  
@@ -130,7 +133,16 @@ Window popup = new Window();
         });  
         secondPanel.addButton(btnfindpassword); 
         loginform.add(secondPanel);
-        this.add(loginform); 
+        
+        GridPanel ch = new GridPanel();
+//        final CheckBox_preference ch = new CheckBox_preference();
+//        eodsl.add(loginform);
+        eodsl.add(ch);
+        
+        
+        this.add(eodsl);
+//        this.add(loginform); 
+//        this.add(ch);
         
 //        loginPanel.add(window);
 
