@@ -1,16 +1,15 @@
 package kr.ac.sunmoon.client;
 
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.TextBox;
 import com.gwtext.client.core.Position;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.Window;
 import com.gwtext.client.widgets.form.FormPanel;
 import com.gwtext.client.widgets.form.Label;
+import com.gwtext.client.widgets.form.TextArea;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.layout.AnchorLayoutData;
 import com.gwtext.client.widgets.layout.ColumnLayout;
-import com.gwtext.client.widgets.layout.ColumnLayoutData;
 import com.gwtext.client.widgets.layout.FormLayout;
 import com.gwtext.client.widgets.layout.HorizontalLayout;
 import com.gwtext.client.widgets.layout.VerticalLayout;
@@ -63,7 +62,7 @@ public class ChatRoom extends Window{
         chatroomform.setMargins(30, 0, 0, 0);
         chatroomPanel.setBorder(false);
         
-        //메세지 막스
+        //메세지 박스
         TextField messagebox = new TextField();
         messagebox.setWidth("300");
         
@@ -71,6 +70,17 @@ public class ChatRoom extends Window{
         
         chatroomPanel.add(messagebox, new AnchorLayoutData("97%"));
         overallPanel.add(chatroomPanel);
+        
+        //현재 대화창
+        Label messagelabel = new Label("current message");
+        chatroomPanel.add(messagelabel);
+        
+        TextArea textArea = new TextArea("currentMessage", "subject");
+        textArea.setValue("message : ");
+        textArea.setWidth(300);
+        textArea.setHeight(200);
+        textArea.setHideLabel(true);  
+        chatroomPanel.add(textArea, new AnchorLayoutData("100% -53")); 
         
         //user1
         Panel user1Panel2 = new Panel();
