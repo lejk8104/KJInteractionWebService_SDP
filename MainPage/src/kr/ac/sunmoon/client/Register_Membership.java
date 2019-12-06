@@ -166,6 +166,16 @@ public class Register_Membership extends Window{
         //list store 선언
         final Store preference = new SimpleStore(new String[] {"Text","Preference","data"}, Getpreference());
         preference.load();
+        final Store interest1 = new SimpleStore(new String[] {"Text","interests"}, InterestList);
+        interest1.load();
+        final Store interest2 = new SimpleStore(new String[] {"Text","interests"}, InterestList);
+        interest2.load();
+        final Store interest3 = new SimpleStore(new String[] {"Text","interests"}, InterestList);
+        interest3.load();
+        final Store interest4 = new SimpleStore(new String[] {"Text","interests"}, InterestList);
+        interest4.load();
+        final Store interest5 = new SimpleStore(new String[] {"Text","interests"}, InterestList);
+        interest5.load();
         final Store a = new SimpleStore(new String[] {"Text","A","data"}, GetA());
         a.load();
         final Store b = new SimpleStore(new String[] {"Text","B","data"}, GetB());
@@ -186,7 +196,7 @@ public class Register_Membership extends Window{
         listpreference.setAllowBlank(false);
         listpreference.setMinChars(1);
         listpreference.setFieldLabel("Preference");
-        listpreference.setStore(c);
+        listpreference.setStore(preference);
         listpreference.setDisplayField("Text");
         listpreference.setEmptyText("Select Preference"); 
         listpreference.setTriggerAction(ComboBox.ALL); //? 모르겠다
@@ -202,8 +212,79 @@ public class Register_Membership extends Window{
         inputdataform.setMargins(5, 0, 10, 5);
         
         // interst checkbox
-        final CheckBox_Interest checkbox = new CheckBox_Interest();
-        secondTab.add(checkbox);
+        final ComboBox listinterest1 = new ComboBox();
+        final ComboBox listinterest2= new ComboBox();
+        final ComboBox listinterest3 = new ComboBox();
+        final ComboBox listinterest4 = new ComboBox();
+        final ComboBox listinterest5 = new ComboBox();
+        	
+        listinterest1.setAllowBlank(false);
+        listinterest1.setMinChars(1);
+        listinterest1.setFieldLabel("interests");
+        listinterest1.setStore(interest1);
+        listinterest1.setDisplayField("Text");
+        listinterest1.setEmptyText("Select Interest1"); 
+        listinterest1.setTriggerAction(ComboBox.ALL); //? 모르겠다
+        listinterest1.setTypeAhead(true);  // 이를 채우고 자동 선택한다
+        listinterest1.setSelectOnFocus(true); //데이터값 수신할 떄 자동채움
+        listinterest1.setWidth(300);  
+        listinterest1.setResizable(true);
+        secondTab.add(listinterest1);
+        
+        listinterest2.setAllowBlank(false);
+        listinterest2.setMinChars(1);
+        listinterest2.setFieldLabel("interests");
+        listinterest2.setStore(interest1);
+        listinterest2.setDisplayField("Text");
+        listinterest2.setEmptyText("Select Interest2"); 
+        listinterest2.setTriggerAction(ComboBox.ALL); //? 모르겠다
+        listinterest2.setTypeAhead(true);  // 이를 채우고 자동 선택한다
+        listinterest2.setSelectOnFocus(true); //데이터값 수신할 떄 자동채움
+        listinterest2.setWidth(300);  
+        listinterest2.setResizable(true);
+        secondTab.add(listinterest2);
+        
+        listinterest3.setAllowBlank(false);
+        listinterest3.setMinChars(1);
+        listinterest3.setFieldLabel("interests");
+        listinterest3.setStore(interest1);
+        listinterest3.setDisplayField("Text");
+        listinterest3.setEmptyText("Select Interest3"); 
+        listinterest3.setTriggerAction(ComboBox.ALL); //? 모르겠다
+        listinterest3.setTypeAhead(true);  // 이를 채우고 자동 선택한다
+        listinterest3.setSelectOnFocus(true); //데이터값 수신할 떄 자동채움
+        listinterest3.setWidth(300);  
+        listinterest3.setResizable(true);
+        secondTab.add(listinterest3);
+        
+        listinterest4.setAllowBlank(false);
+        listinterest4.setMinChars(1);
+        listinterest4.setFieldLabel("interests");
+        listinterest4.setStore(interest1);
+        listinterest4.setDisplayField("Text");
+        listinterest4.setEmptyText("Select Interest1"); 
+        listinterest4.setTriggerAction(ComboBox.ALL); //? 모르겠다
+        listinterest4.setTypeAhead(true);  // 이를 채우고 자동 선택한다
+        listinterest4.setSelectOnFocus(true); //데이터값 수신할 떄 자동채움
+        listinterest4.setWidth(300);  
+        listinterest4.setResizable(true);
+        secondTab.add(listinterest4);
+        
+        listinterest5.setAllowBlank(false);
+        listinterest5.setMinChars(1);
+        listinterest5.setFieldLabel("interests");
+        listinterest5.setStore(interest1);
+        listinterest5.setDisplayField("Text");
+        listinterest5.setEmptyText("Select Interest1"); 
+        listinterest5.setTriggerAction(ComboBox.ALL); //? 모르겠다
+        listinterest5.setTypeAhead(true);  // 이를 채우고 자동 선택한다
+        listinterest5.setSelectOnFocus(true); //데이터값 수신할 떄 자동채움
+        listinterest5.setWidth(300);  
+        listinterest5.setResizable(true);
+        secondTab.add(listinterest5);
+        
+//        final CheckBox_Interest checkbox = new CheckBox_Interest();
+//        secondTab.add(checkbox);
         
         Label txtlabel = new Label("Another interest:         ");
         inputdataform.add(txtlabel, new AnchorLayoutData("40%"));
@@ -274,27 +355,27 @@ public class Register_Membership extends Window{
         		membershipdata[8] = listcity.getText().trim();
         		
         		// survey data list 선언
-        		surveydata[0] = listpreference.getText().trim();
+        		surveydata[0] = listinterest5.getText().trim();
         		surveydata[1] = A.getText().trim();
         		surveydata[2] = B.getText().trim();
         		surveydata[3] = C.getText().trim();
         		
         		// interest data list 선언
-        		Record[] userInterests = checkbox.getCheckbox_data();
-        		for (int i =0; i<userInterests.length; i++) {
-        			Record userinterest = userInterests[i];
-        			userinterest.getAsString("interest");
-        		} 
+//        		Record[] userInterests = checkbox.getCheckbox_data();
+//        		for (int i =0; i<userInterests.length; i++) {
+//        			Record userinterest = userInterests[i];
+//        			userinterest.getAsString("interest");
+//        		} 
 //        		String anoterinterest = inputinterest.getText().trim();
         		
         		// empty data 처리
-        		for(int i=0; i<(userInterests.length-1); i++) {
-        			if(userInterests[i].equals("")) {
-        				popup.setTitle("Please, input your interest data");
-        				popup.show();
-        				return;
-        			}
-        		}
+//        		for(int i=0; i<(userInterests.length-1); i++) {
+//        			if(userInterests[i].equals("")) {
+//        				popup.setTitle("Please, input your interest data");
+//        				popup.show();
+//        				return;
+//        			}
+//        		}
         		for(int i=0; i<surveydata.length; i++) {
         			if(surveydata[i].equals("")) {
         				popup.setTitle("Please, input your survey data");
@@ -407,6 +488,18 @@ public class Register_Membership extends Window{
         new Object[]{new Integer(0014), "J", "Chugoku"},
         new Object[]{new Integer(0015), "J", "Shikoku"},
         new Object[]{new Integer(0016), "J", "Kyushu"}
+    };
+    
+    private Object[][] InterestList = new Object[][]{  
+        new Object[]{"1st", "intersts"},  
+        new Object[]{"2nd", "intersts"},
+        new Object[]{"3rd", "intersts"},
+        new Object[]{"4th", "intersts"},
+        new Object[]{"5th", "intersts"},
+        new Object[]{"6th", "intersts"},
+        new Object[]{"7th", "intersts"},
+        new Object[]{"8th", "intersts"},
+        new Object[]{"9th", "intersts"},
     };
     
     private Object[][] Getpreference()  {
