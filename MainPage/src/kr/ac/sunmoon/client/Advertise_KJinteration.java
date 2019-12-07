@@ -38,12 +38,9 @@ public class Advertise_KJinteration extends Window{
 //	    formpanel.setBorder(false);  
 	    formpanel.setWidth(650);
 	    
-	    Chart kjinteractionchart = createChart();
-	    formpanel.add(kjinteractionchart);
-	    this.add(formpanel);
-		
-		
-		
+//	    formpanel.add(createChart());
+//	    this.add(formpanel);
+	    this.add(createChart());
 	}
 	 public Chart createChart() {  
 		  
