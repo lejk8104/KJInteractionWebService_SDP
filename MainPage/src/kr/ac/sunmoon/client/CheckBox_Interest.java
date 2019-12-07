@@ -1,22 +1,18 @@
 package kr.ac.sunmoon.client;
 
-import java.awt.List;
-import java.time.LocalDate;
-
-import com.google.gwt.user.client.ui.Grid;
-import com.google.gwt.user.client.ui.RootPanel;  
-import com.gwtext.client.core.EventObject;
-import com.gwtext.client.core.Position;
-import com.gwtext.client.data.*;  
-import com.gwtext.client.widgets.Button;  
-import com.gwtext.client.widgets.Panel;
-import com.gwtext.client.widgets.Window;
-import com.gwtext.client.widgets.event.ButtonListenerAdapter;
-import com.gwtext.client.widgets.form.FormPanel;
-import com.gwtext.client.widgets.form.Label;
-import com.gwtext.client.widgets.form.TextField;
-import com.gwtext.client.widgets.grid.*;  
-import com.gwtext.client.widgets.layout.VerticalLayout; 
+import com.gwtext.client.data.ArrayReader;
+import com.gwtext.client.data.FieldDef;
+import com.gwtext.client.data.MemoryProxy;
+import com.gwtext.client.data.Record;
+import com.gwtext.client.data.RecordDef;
+import com.gwtext.client.data.Store;
+import com.gwtext.client.data.StringFieldDef;
+import com.gwtext.client.widgets.grid.BaseColumnConfig;
+import com.gwtext.client.widgets.grid.CheckboxColumnConfig;
+import com.gwtext.client.widgets.grid.CheckboxSelectionModel;
+import com.gwtext.client.widgets.grid.ColumnConfig;
+import com.gwtext.client.widgets.grid.ColumnModel;
+import com.gwtext.client.widgets.grid.GridPanel; 
 
 public class CheckBox_Interest extends GridPanel  {
 	

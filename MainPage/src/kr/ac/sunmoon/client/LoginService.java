@@ -31,8 +31,6 @@ Window popup = new Window();
 		this.setPlain(true);
 		this.setCloseAction(this.HIDE);
 		
-		final Panel eodsl = new Panel();
-		
 		final FormPanel loginform = new FormPanel();  
         loginform.setFrame(true);
         loginform.setTitle("Login Service");

@@ -1,18 +1,22 @@
 package kr.ac.sunmoon.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.logical.shared.AttachEvent;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Margins;
+import com.gwtext.client.core.Position;
 import com.gwtext.client.core.RegionPosition;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.HTMLPanel;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.TabPanel;
 import com.gwtext.client.widgets.Viewport;
+import com.gwtext.client.widgets.Window;
 import com.gwtext.client.widgets.event.ButtonListener;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.form.ComboBox;
@@ -30,6 +34,8 @@ import com.gwtext.client.widgets.menu.Menu;
 import com.gwtext.client.widgets.tree.TreeEditor;
 import com.gwtext.client.widgets.tree.TreeNode;
 import com.gwtext.client.widgets.tree.TreePanel;
+
+import kr.ac.sunmoon.shared.KJMember;
 
 public class MainPage implements EntryPoint  {
 
@@ -72,7 +78,7 @@ public class MainPage implements EntryPoint  {
         firstColumn.setMargins(5, 5, 5, 5);
         
         Image imglogo = new Image();
-		imglogo.setUrl("image/interactionlog.png");
+        imglogo.setUrl("image/interactionlog.png");
         firstColumn.add(imglogo, new AnchorLayoutData("100%"));
         hpsearch.add(firstColumn, new ColumnLayoutData(0.17));
 		
@@ -216,7 +222,7 @@ public class MainPage implements EntryPoint  {
         eastPanel.setWidth(250);  
   
         Panel accordionPanel = createAccordionPanel();  
-        accordionPanel.setHeight(400);  
+        accordionPanel.setHeight(170);  
         accordionPanel.setWidth(250);
         
         BorderLayoutData eastData = new BorderLayoutData(RegionPosition.EAST);  
@@ -410,9 +416,11 @@ public class MainPage implements EntryPoint  {
         Panel accordionPanel = new Panel();  
         accordionPanel.setLayout(new AccordionLayout(true));  
   
-        Panel mypagePanel = new Panel("", "<p>Mypage</p>");
+        Panel mypagePanel = new Panel();
         mypagePanel.setTitle("Mypage");
 //        mypagePanel.setIconCls("settings-icon");  
+        FormPanel loginform = loginform();
+        mypagePanel.add(loginform);
         accordionPanel.add(mypagePanel);  
   
         Panel loginservicePanel = new Panel("Login Service", "<p>Login Service</p>");  
@@ -420,6 +428,70 @@ public class MainPage implements EntryPoint  {
         accordionPanel.add(loginservicePanel);  
         
         return accordionPanel;
+	}
+	private FormPanel loginform() {
+		final FormPanel loginform = new FormPanel();  
+        loginform.setFrame(true);
+        loginform.setWidth(250);  
+        loginform.setHeight(120);
+        loginform.setLabelWidth(55);
+        loginform.setMargins(10, 10, 10, 0);
+        loginform.setButtonAlign(Position.CENTER);
+		
+        final Window popup = new Window();
+        
+     // ID input
+        final TextField loginID = new TextField("ID", "id", 150);  
+        loginID.setAllowBlank(false);  
+        loginform.add(loginID);  
+  
+//        txtID.getText()
+        // Password input
+        final TextField loginPassword = new TextField("Password", "password", 150);  
+        loginform.add(loginPassword);  
+  
+        //login btn
+        final Button btnlogin = new Button("Login", new ButtonListenerAdapter() {
+            public void onClick(Button btnlogin, EventObject e) {  
+            	String[] logindata = new String[2];
+            	// login data list
+            	logindata[0] = loginID.getText().trim();
+            	logindata[1] = loginPassword.getText().trim();
+            	
+        		for(int i=0; i<logindata.length; i++) { 
+        			if(logindata[i].equals("")) {
+        				popup.setTitle("Please, input your membership data");
+        				popup.show();
+        				return;
+        			}
+        		}
+        		KJMember loginmember = new KJMember();
+        		loginmember.setID(logindata[0]);
+        		loginmember.setPassword(logindata[1]);
+        		
+        		//서버통신
+        		KJMembershipServiceAsync service = GWT.create(KJMembershipService.class);
+        		service.LoginService(loginmember, new AsyncCallback<Boolean>() {
+
+					public void onSuccess(Boolean result) {
+						// TODO Auto-generated method stub
+						popup.setTitle("Login is Complete!");
+						popup.show();
+						popup.hide();
+						
+					}
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						popup.setTitle("Sorry, please try again after few minutes.");
+						popup.show();
+						popup.hide();
+					}
+				});
+			}
+		});
+        loginform.addButton(btnlogin);  
+		
+        return loginform;
 	}
 }
  	  
