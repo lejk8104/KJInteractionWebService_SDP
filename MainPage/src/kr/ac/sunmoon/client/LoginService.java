@@ -19,7 +19,6 @@ public class LoginService extends Window{
 
 	String[] logindata = new String[2];
 	Window popup = new Window();
-	KJMember kjmember;
 
 	public LoginService()  {
 	
@@ -31,8 +30,6 @@ public class LoginService extends Window{
 		this.setHeight(170);
 		this.setPlain(true);
 		this.setCloseAction(this.HIDE);
-		
-		final Panel eodsl = new Panel();
 		
 		final FormPanel loginform = new FormPanel();  
         loginform.setFrame(true);
@@ -77,7 +74,7 @@ public class LoginService extends Window{
 					public void onSuccess(KJMember result) {
 						// TODO Auto-generated method stub
 						popup.setTitle("Login is Complete!");
-						kjmember = result;
+						MainPage.setKJMember(result);
 						popup.show();
 						LoginService.this.hide();
 						

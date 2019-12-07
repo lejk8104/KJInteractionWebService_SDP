@@ -104,35 +104,35 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements KJM
 
 //	@Override
 	public void Register_Membership(KJMember kjMember) {
-//		// TODO Auto-generated method stub
-//		try {
-//			String id = kjMember.getID();
-//			String password = kjMember.getPassword();
-//			String checkpassword = kjMember.getCheckPassword();
-//			String name = kjMember.getName();
-//			String gender = kjMember.getGender();
-//			String birh = kjMember.getBirth();
-//			String country = kjMember.getCountry();
-//			String local = kjMember.getLocal();
-//			
-//			String url = "jdbc:mysql://localhost:3306/sdp2?useSSL=false";
-//			String user = "root";
-//			String password_ = "seiya411";
-//			
-//			Connection con = DriverManager.getConnection(url, user, password_);
-//			
-//			Statement stmt = con.createStatement();
-//			String sql = "INSERT * into kj_members1hip_db values(\"id\", \"password\", \"checkpassword\" , \"name\", \"gender\", \"year\" , \"date\", \"country\", \"local\")";
-//			ResultSet rs1 = stmt.executeQuery(sql);
-//			
-//			rs1.close();
-//			stmt.close();
-//			con.close();
-//		}
-//		catch(Exception e)
-//			{
-//			e.printStackTrace();
-//			}
+		// TODO Auto-generated method stub
+		try {
+			String id = kjMember.getID();
+			String password = kjMember.getPassword();
+			String checkpassword = kjMember.getCheckPassword();
+			String name = kjMember.getName();
+			String gender = kjMember.getGender();
+			String birh = kjMember.getBirth();
+			String country = kjMember.getCountry();
+			String local = kjMember.getLocal();
+			
+			String url = "jdbc:mysql://localhost:3306/sdp2?useSSL=false";
+			String user = "root";
+			String password_ = "seiya411";
+			
+			Connection con = DriverManager.getConnection(url, user, password_);
+			
+			Statement stmt = con.createStatement();
+			String sql = "INSERT * into kj_members1hip_db values(\"id\", \"password\", \"checkpassword\" , \"name\", \"gender\", \"year\" , \"date\", \"country\", \"local\")";
+			ResultSet rs1 = stmt.executeQuery(sql);
+			
+			rs1.close();
+			stmt.close();
+			con.close();
+		}
+		catch(Exception e)
+			{
+			e.printStackTrace();
+			}
 	}
 	
 	@Override
