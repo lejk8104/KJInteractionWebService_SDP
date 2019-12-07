@@ -417,6 +417,7 @@ public class MainPage implements EntryPoint  {
         Panel accordionPanel = new Panel();  
         accordionPanel.setLayout(new AccordionLayout(true));  
   
+        //mypage
         Panel mypagePanel = new Panel();
         mypagePanel.setTitle("Mypage");
 //        mypagePanel.setIconCls("settings-icon");  
@@ -424,10 +425,16 @@ public class MainPage implements EntryPoint  {
         mypagePanel.add(loginform);
         accordionPanel.add(mypagePanel);  
   
-        Panel loginservicePanel = new Panel("Login Service", "<p>Login Service</p>");  
-//        loginservicePanel.setIconCls("folder-icon");  
-        accordionPanel.add(loginservicePanel);  
+        //user image list
+        Panel selectImagePanel = new Panel("Select Image");
+        CheckBox_Userimage userlist = new CheckBox_Userimage();
+        Button button = new Button("Get Selected");
+        selectImagePanel.add(userlist);
+        accordionPanel.add(selectImagePanel);  
         
+        //change another interest
+        Panel ChangeInterest = new Panel("Change Interest", "<p>Change Interest</p>");  
+
         return accordionPanel;
 	}
 	public static void setKJMember(KJMember kjmember) {

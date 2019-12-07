@@ -22,55 +22,37 @@ import com.gwtext.client.widgets.grid.ColumnModel;
 import com.gwtext.client.widgets.grid.GridPanel;
 import com.gwtext.client.widgets.layout.VerticalLayout;
 
-public class CheckBox_Userimage extends Panel {
+public class CheckBox_Userimage extends GridPanel {
 
 	// Main method
 	public CheckBox_Userimage() {
 		super();
 		this.setBorder(false);
-		this.setPaddings(25);
+		this.setPaddings(5);
 		this.setButtonAlign(Position.CENTER);
-		this.setLayout(new VerticalLayout(25));
+//		this.setLayout(new VerticalLayout(25));
 		
 		//Gird panel 선언
-		GridPanel grid = new GridPanel(); 
 		// data setting 1: store 선언
         Store loginStore = new Store(proxy, reader);  
         loginStore.load();  
-        grid.setStore(loginStore);  
+        this.setStore(loginStore);  
   
         // data setting 2 : grid에 들어갈 colunm 선언
         ColumnModel columnModel = new ColumnModel(columns);  
-        grid.setColumnModel(columnModel);  
+        this.setColumnModel(columnModel);  
   
-        grid.setFrame(true);  
-        grid.setStripeRows(true);  
-        grid.setAutoExpandColumn("image");  
+        this.setFrame(true);  
+        this.setStripeRows(true);  
+        this.setAutoExpandColumn("image");  
   
-        grid.setSelectionModel(CheckboxUser);
-        grid.setWidth(350);  
-        grid.setHeight(250);  
-        grid.setFrame(true);  
-        grid.setTitle("Check your User Image");  
-        grid.setIconCls("grid-icon");  
+        this.setSelectionModel(CheckboxUser);
+        this.setWidth(350);  
+        this.setHeight(250);  
+        this.setFrame(true);  
+        this.setIconCls("grid-icon");  
   
-
-        Button button = new Button("Get Selected", new ButtonListenerAdapter() {  
-            public void onClick(Button button, EventObject e) {  
-                Record[] records = CheckboxUser.getSelections();  
-                String msg = "";  
-                for (int i = 0; i < records.length; i++) {  
-                    Record record = records[i];  
-                    msg += record.getAsString("image") + " ";  
-                }  
-                System.out.println("Records Selected :" + msg);  
-            }  
-        });  
-        
-        this.add(grid);  
-        this.add(button);  
 	}
-	
 	// 체크박스 만들기
 	final CheckboxSelectionModel CheckboxUser = new CheckboxSelectionModel();  
 
@@ -91,7 +73,7 @@ public class CheckBox_Userimage extends Panel {
     // userimage list read
     RecordDef recordDef = new RecordDef(  
             new FieldDef[]{  
-                    new StringFieldDef("image"),
+                    new StringFieldDef("image")
             }  
     );
     final Object[][] imagelist = UserImageList();
