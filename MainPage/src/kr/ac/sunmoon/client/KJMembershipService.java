@@ -12,7 +12,7 @@ public interface KJMembershipService extends RemoteService {
 	public KJMember findKJmember(String iD, String name);
 	public void Register_Membership(KJMember kjMember);
 	public boolean checkID(KJMember kjMember);
-	public boolean LoginService(KJMember loginmember);
+	public KJMember LoginService(KJMember loginmember);
 	public String findLCS(String ID);
 
 }

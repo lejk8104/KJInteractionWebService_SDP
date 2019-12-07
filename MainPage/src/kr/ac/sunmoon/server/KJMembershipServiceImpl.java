@@ -73,7 +73,6 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements KJM
 	
 	@Override
 	public boolean checkID(KJMember kjMember) {
-//		// TODO Auto-generated method stub
 //		try {
 //			String id = kjMember.getID();
 //			String url = "jdbc:mysql://localhost:3306/sdp2?useSSL=false";
@@ -82,7 +81,7 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements KJM
 //			Connection con = DriverManager.getConnection(url, user, password_);
 //		
 //			Statement stmt = con.createStatement();
-//			String sql = "SELECT ID kj_members1hip_db.kjmember where ID='" + id + "';";
+//			String sql = "SELECT ID kjmember where ID='" + id + "';";
 //			ResultSet rs1 = stmt.executeQuery(sql);
 //			if(rs1.getMetaData().getColumnCount() == 1) {
 //				rs1.close();
@@ -137,40 +136,43 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements KJM
 	}
 	
 	@Override
-	public boolean LoginService(KJMember loginmember) {
-//		String id = loginmember.getID();
-//		String password = loginmember.getPassword();
+	public KJMember LoginService(KJMember loginmember) {
+		String id = loginmember.getID();
+		String password = loginmember.getPassword();
 //		List returnlist = new List();
-//		try {
-//			String url = "jdbc:mysql://localhost:3306/sdp2?useSSL=false";
-//			String user = "root";
-//			String password_ = "seiya411";
-//			
-//			Connection con = DriverManager.getConnection(url, user, password_);
-//			Statement stmt = con.createStatement();
-//			String sql = "SELECT ID,Password FROM kj_members1hip_db.`members1hip_data.kjmember`;";
-//			ResultSet rs1 = stmt.executeQuery(sql);
-//			
-//			while(rs1.next()) {
-//				String ID = rs1.getString("ID");
-//				String Password = rs1.getString("Password");
-//				if(ID.equals(id) && Password.equals(password)) {
-//					rs1.close();
-//					stmt.close();
-//					con.close();
-//					return true;
-//				}
-//			}
-//			rs1.close();
-//			stmt.close();
-//			con.close();
-//			return false;
-//			
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			e.printStackTrace();
-//		}
-		return false;
+		try {
+			String url = "jdbc:mysql://localhost:3306/sdp2?useSSL=false";
+			String user = "root";
+			String password_ = "seiya411";
+			
+			Connection con = DriverManager.getConnection(url, user, password_);
+			Statement stmt = con.createStatement();
+			String sql = "SELECT ID,Password FROM kjmember;";
+			ResultSet rs1 = stmt.executeQuery(sql);
+			
+			while(rs1.next()) {
+				String ID = rs1.getString("ID");
+				String Password = rs1.getString("Password");
+				if(ID.equals(id) && Password.equals(password)) {
+					loginmember.setCheckPassword(rs1.getString("Check_Password"));
+					loginmember.setName(rs1.getString("Name"));
+					loginmember.setGender(rs1.getString("Gender"));
+					loginmember.setBitrh(rs1.getString("Birth"));
+					loginmember.setCountry(rs1.getString("Country"));
+					loginmember.setEmail(rs1.getString("Email"));
+					rs1.close();
+					stmt.close();
+					con.close();
+					return loginmember;
+				}
+			}
+			rs1.close();
+			stmt.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return loginmember;
 	}
 	
 	private int findLCS(int[][] c, String[] X, String[] Y) { //LCS알고리즘 구현

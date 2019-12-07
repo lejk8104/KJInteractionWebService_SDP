@@ -31,11 +31,14 @@ import com.gwtext.client.widgets.tree.TreeEditor;
 import com.gwtext.client.widgets.tree.TreeNode;
 import com.gwtext.client.widgets.tree.TreePanel;
 
+import kr.ac.sunmoon.shared.KJMember;
+
 public class MainPage implements EntryPoint  {
 
     private Menu menu;  
     private TreeNode ctxNode;  
     private TreeEditor treeEditor; 
+    private KJMember kjmember;
     
     private native void drawMap() /*-{
     	$wnd.dramMap();
@@ -420,6 +423,9 @@ public class MainPage implements EntryPoint  {
         accordionPanel.add(loginservicePanel);  
         
         return accordionPanel;
+	}
+	private void setKJMember(KJMember kjmember) {
+		this.kjmember = kjmember;
 	}
 }
  	  

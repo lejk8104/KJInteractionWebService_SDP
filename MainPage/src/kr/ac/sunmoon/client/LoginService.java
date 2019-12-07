@@ -17,8 +17,9 @@ import kr.ac.sunmoon.shared.KJMember;
 
 public class LoginService extends Window{
 
-String[] logindata = new String[2];
-Window popup = new Window();
+	String[] logindata = new String[2];
+	Window popup = new Window();
+	KJMember kjmember;
 
 	public LoginService()  {
 	
@@ -71,11 +72,12 @@ Window popup = new Window();
         		
         		//서버통신
         		KJMembershipServiceAsync service = GWT.create(KJMembershipService.class);
-        		service.LoginService(loginmember, new AsyncCallback<Boolean>() {
+        		service.LoginService(loginmember, new AsyncCallback<KJMember>() {
 
-					public void onSuccess(Boolean result) {
+					public void onSuccess(KJMember result) {
 						// TODO Auto-generated method stub
 						popup.setTitle("Login is Complete!");
+						kjmember = result;
 						popup.show();
 						LoginService.this.hide();
 						
