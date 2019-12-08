@@ -13,6 +13,6 @@ public interface KJMembershipService extends RemoteService {
 	public void Register_Membership(KJMember kjMember);
 	public boolean checkID(KJMember kjMember);
 	public KJMember LoginService(KJMember loginmember);
-	public KJMember findLCS(KJMember kjmember);
+	public KJMember[] findLCS(KJMember kjmember);
 
 }

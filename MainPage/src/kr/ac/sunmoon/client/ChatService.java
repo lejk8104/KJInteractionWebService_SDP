@@ -104,12 +104,12 @@ public class ChatService extends Panel {
 	}        
     private void kjMatching() {
     	KJMembershipServiceAsync service = GWT.create(KJMembershipService.class);
-		service.findLCS(MainPage.getKJMember(), new AsyncCallback<KJMember>() {
+		service.findLCS(MainPage.getKJMember(), new AsyncCallback<KJMember[]>() {
 			
 			@Override
-			public void onSuccess(KJMember result) {
-				com.google.gwt.user.client.Window.alert(result.getID() +", " + result.getName());
-				lb2.setText(result.getID());
+			public void onSuccess(KJMember[] result) {
+				com.google.gwt.user.client.Window.alert(result[0].getID() +", " + result[1].getID());
+				lb2.setText(result[0].getID());
 			}
 			
 			@Override

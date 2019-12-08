@@ -491,6 +491,7 @@ public class Register_Membership extends Window{
     };
     
     private Object[][] InterestList = new Object[][]{  
+    	new Object[] {"문화교류", "interests"},
         new Object[]{"음악", "interests"},  
         new Object[]{"영화", "interests"},
         new Object[]{"게임", "interests"},

@@ -12,7 +12,7 @@ public interface KJMembershipServiceAsync {
 	
 	void checkID(KJMember kjMember, AsyncCallback<Boolean> asyncCallback);
 	void LoginService(KJMember loginmember, AsyncCallback<KJMember> asyncCallback);
-	void findLCS(KJMember kjmember, AsyncCallback<KJMember> callback);
+	void findLCS(KJMember kjmember, AsyncCallback<KJMember[]> callback);
 
 
 

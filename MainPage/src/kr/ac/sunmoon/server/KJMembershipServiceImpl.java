@@ -190,10 +190,11 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements KJM
 	}
 	
 	@Override
-	public KJMember findLCS(KJMember kjmember){
+	public KJMember[] findLCS(KJMember kjmember){
 		System.out.println("you've successfully connected to server, and findLCS method has worked well.");
 		System.out.println("His/Her inputted ID is : " + kjmember.getID());
 		System.out.println("His/Her inputted Password is : " + kjmember.getPassword());
+		KJMember[] kjmembers = new KJMember[2];
 		String matchingID = null;
 		try {
 			String url = "jdbc:mysql://localhost:3306/sdp2?useSSL=false";
@@ -204,7 +205,7 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements KJM
 			
 			Statement stmt = con.createStatement();
 			
-			String sql1 = "select interest1, interest2, interest3, interest4, interest5 from survey where ID = '" + kjmember.getID() + "';";
+			String sql1 = "select interest1, interest2, interest3, interest4, interest5 from kjmember where ID = '" + kjmember.getID() + "';";
 			ResultSet rs1 = stmt.executeQuery(sql1);
 			String[] myInterests = new String[5];
 			while(rs1.next()) {
@@ -214,11 +215,12 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements KJM
 				myInterests[3] = rs1.getString("interest4");
 				myInterests[4] = rs1.getString("interest5");
 			}
-//			kjmember.setInterests(myInterests);
+			kjmember.setInterests(myInterests);
+			kjmembers[0] = kjmember;
 			
-			String sql2 = "select ID, interest1, interest2, interest3, interest4, interest5 from survey where ID != '" + kjmember.getID() + "';";
+			String sql2 = "select ID, interest1, interest2, interest3, interest4, interest5 from kjmember where ID != '" + kjmember.getID() + "';";
 			ResultSet rs2 = stmt.executeQuery(sql2);
-			String[] interests;
+			String[] interests = null;
 			int maxLCS = 0;
 			ArrayList<String> tmpID = new ArrayList<String>();
 			while(rs2.next()) {
@@ -244,13 +246,16 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements KJM
 				}
 			}
 			matchingID = tmpID.get((int)(Math.random()*tmpID.size()));
-			kjmember.setID(matchingID);
+			KJMember kjmember2 = new KJMember();
+			kjmember2.setID(matchingID);
+			kjmember2.setInterests(interests);
+			kjmembers[1] = kjmember2;
 			rs2.close();
 			stmt.close();
 			con.close();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return kjmember;
+		return kjmembers;
 	}
 }
