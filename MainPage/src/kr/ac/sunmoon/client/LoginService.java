@@ -135,8 +135,5 @@ public class LoginService extends Window{
         
         this.add(loginform); 
         
-//        loginPanel.add(window);
-
-//        RootPanel.get().add(loginPanel);  
     }  
 }

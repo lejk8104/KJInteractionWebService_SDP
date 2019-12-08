@@ -45,6 +45,7 @@ public class MainPage implements EntryPoint  {
     private Menu menu;  
     private TreeNode ctxNode;  
     private TreeEditor treeEditor; 
+    //이벤트 후처리
     private static KJMember kjmember;
     private static Panel accordionPanel;
     private static FormPanel loginform = loginform();
@@ -52,9 +53,10 @@ public class MainPage implements EntryPoint  {
     private static Panel thirdtab = new Panel();
     private static ChatService chatservice = new ChatService();
     private static CheckBox_Userimage userlist = new CheckBox_Userimage();
-    private static Panel selectImagePanel = new Panel("Select Image");
     
-	public void onModuleLoad() {
+    private static Panel nomalPanel;
+	
+    public void onModuleLoad() {
 		// TODO Auto-generated method stub
 		Panel mainPanel = new Panel();  
         mainPanel.setBorder(false);  
@@ -63,7 +65,7 @@ public class MainPage implements EntryPoint  {
   
         Panel borderPanel = new Panel();  
         borderPanel.setLayout(new BorderLayout());  
-  
+        
         //add north panel  
         Panel northPanel = new Panel();  
         northPanel.setEl(new HTML("<p></p>").getElement());
@@ -283,6 +285,8 @@ public class MainPage implements EntryPoint  {
 //        thirdtab.addButton(chatBtn);
         
         thirdtab.setTitle("Chatting");
+        Panel nomalpanel = nomalPanel();
+        thirdtab.add(nomalpanel);
         //동영상 추천
         Panel fourthtab = new Panel();
         fourthtab.add(new HTML("<iframe width='560' height='315' src='https://www.youtube.com/embed/3SV36d1q740' "
@@ -451,7 +455,7 @@ public class MainPage implements EntryPoint  {
 	
 	// Accoredion Panel
 	private Panel createAccordionPanel() {  
-        Panel accordionPanel = new Panel();  
+        Panel accordionPanel = new Panel();      //여기서 문제생김
         accordionPanel.setLayout(new AccordionLayout(true));  
   
         //mypage
@@ -462,15 +466,15 @@ public class MainPage implements EntryPoint  {
         accordionPanel.add(mypagePanel);  
   
         //user image list
+        Panel selectImagePanel = new Panel("Select Image");
         
-
+        Panel nomalPanel2 = nomalPanel2();
+        selectImagePanel.add(nomalPanel2);
         Button button = new Button("Get Selected");
-        
         accordionPanel.add(selectImagePanel);  
         
         //change another interest
         Panel ChangeInterest = new Panel("Change Interest", "<p>Change Interest</p>");  
-
         return accordionPanel;
 	}
 	
@@ -486,10 +490,27 @@ public class MainPage implements EntryPoint  {
 //		thirdtab.remove(w);
 		thirdtab.add(chatservice);
 		
-//		selectImagePanel.remove(d);
-		selectImagePanel.add(userlist);
+		accordionPanel.add(userlist);
 		
 	}
+	// 비로그인 시 나타나는 화면 정의
+	private static Panel nomalPanel() {
+		final Panel panel = new Panel();
+		panel.setFrame(true);
+		panel.setWidth(1000);  
+		panel.setHeight(500);
+		panel.setHtml("<p>Our service support only KJ members. </p> <p> please input your login ID</p>");
+		return panel;
+	}
+	private static Panel nomalPanel2() {
+		final Panel panel = new Panel();
+		panel.setFrame(true);
+		panel.setWidth(250);  
+		panel.setHeight(120);
+		panel.setHtml("<p>Our service support only KJ members. </p> <p> please input your login ID</p>");
+		return panel;
+	}
+	
 	// 로그인 폼
 	private static FormPanel loginform() {
 		final FormPanel loginform = new FormPanel();  
