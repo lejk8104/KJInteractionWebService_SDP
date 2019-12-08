@@ -18,16 +18,18 @@ import kr.ac.sunmoon.shared.KJMember;
 
 public class GridBox_Interest extends GridPanel  {
 		
+//	private static KJMember kjmember;
+
 	// Main method
 	public GridBox_Interest() {
 		super();	
 		
-		// data setting 1: store ¼±¾ð
+		// data setting 1: store ï¿½ï¿½ï¿½ï¿½
         final Store interestStore = new Store(proxy, reader);  
         interestStore.load(); 
 		this.setStore(interestStore);
 		
-		// data setting 2 : grid¿¡ µé¾î°¥ colunm ¼±¾ð
+		// data setting 2 : gridï¿½ï¿½ ï¿½ï¿½î°¥ colunm ï¿½ï¿½ï¿½ï¿½
 		ColumnModel columnModel = new ColumnModel(columns);
 		this.setColumnModel(columnModel);
 		
@@ -38,7 +40,7 @@ public class GridBox_Interest extends GridPanel  {
 //		this.setSelectionModel(CheckboxInterest);
 		this.setWidth(140);
 		this.setHeight(150);
-        this.setFrame(true);  
+        this.setFrame(true);
 	}
 	
 	final public Record[] getCheckbox_data() {
@@ -46,11 +48,13 @@ public class GridBox_Interest extends GridPanel  {
 		return userInterests;
 	}
 	
-	// Ã¼Å©¹Ú½º ¸¸µé±â
+	// Ã¼Å©ï¿½Ú½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 	final CheckboxSelectionModel CheckboxInterest = new CheckboxSelectionModel();  
 	
-	// °¡Á®¿Â Ã¼Å©¹Ú½º
-	private Object[][] InterestList(){  
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©ï¿½Ú½ï¿½
+	private Object[][] InterestList(){
+		KJMember c = MainPage.getKJMember();
+		String[] list = c.getInterests();
         return new Object[][]{  
                 new Object[]{"kjmember"},  
                 new Object[]{"chatting"},  
@@ -67,7 +71,7 @@ public class GridBox_Interest extends GridPanel  {
             }  
     );
     
-    //Db¸¦ ÅëÇØ °®°í¿Â preferlist object ¼±¾ð
+    //Dbï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ preferlist object ï¿½ï¿½ï¿½ï¿½
     final Object[][] interestlist = InterestList();
     
     final MemoryProxy proxy = new MemoryProxy(interestlist);

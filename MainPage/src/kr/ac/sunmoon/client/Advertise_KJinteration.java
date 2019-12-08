@@ -42,7 +42,7 @@ public class Advertise_KJinteration extends Panel{
 		Chart chart = createChart();
 		
 		Label adlbl = new Label("A lot of people are participating in kJ interaction\r\n" + 
-				"If you lead to change, com on join us");
+				"If you lead to change, come on join us!!!");
 		formpanel.add(chart);
 		formpanel.add(adlbl);
 	    this.add(formpanel);
@@ -87,15 +87,12 @@ public class Advertise_KJinteration extends Panel{
 	                    }  
 	                })  
 	            );  
-	       
 	        chart.addSeries(chart.createSeries()  
 	            .setName("Low KJ Interaction")  
 	            .setPoints(new Point[]{  
 	                new Point("Chungcheongnam-do", 0.06),  
 	                new Point("Hokkaido", 1.5),  
-	                new Point("Chubu", 3.78)  
-	                    .setSliced(true)  
-	                    .setSelected(true),  
+	                new Point("Chubu", 3.78),  
 	                new Point("Chugoku", 5.0),  
 	                new Point("Gyeongsangbuk-", 9.5),  
 	                new Point("Chungcheongbuk-", 13.8),

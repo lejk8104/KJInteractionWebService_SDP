@@ -22,23 +22,26 @@ import com.gwtext.client.widgets.grid.ColumnModel;
 import com.gwtext.client.widgets.grid.GridPanel;
 import com.gwtext.client.widgets.layout.VerticalLayout;
 
+import kr.ac.sunmoon.shared.KJMember;
+
 public class CheckBox_Userimage extends GridPanel {
 
-	// Main method
+	
 	public CheckBox_Userimage() {
+		
 		super();
 		this.setBorder(false);
 		this.setPaddings(5);
 		this.setButtonAlign(Position.CENTER);
 //		this.setLayout(new VerticalLayout(25));
 		
-		//Gird panel ¼±¾ð
-		// data setting 1: store ¼±¾ð
+		//Gird panel ï¿½ï¿½ï¿½ï¿½
+		// data setting 1: store ï¿½ï¿½ï¿½ï¿½
         Store loginStore = new Store(proxy, reader);  
         loginStore.load();  
         this.setStore(loginStore);  
   
-        // data setting 2 : grid¿¡ µé¾î°¥ colunm ¼±¾ð
+        // data setting 2 : gridï¿½ï¿½ ï¿½ï¿½î°¥ colunm ï¿½ï¿½ï¿½ï¿½
         ColumnModel columnModel = new ColumnModel(columns);  
         this.setColumnModel(columnModel);  
   
@@ -56,7 +59,7 @@ public class CheckBox_Userimage extends GridPanel {
         this.setCollapsible(true);  
         this.setAnimCollapse(false);
 	}
-	// Ã¼Å©¹Ú½º ¸¸µé±â
+	// Ã¼Å©ï¿½Ú½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 	final CheckboxSelectionModel CheckboxUser = new CheckboxSelectionModel();  
 
 	//Userimage object

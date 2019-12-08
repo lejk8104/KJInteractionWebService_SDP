@@ -472,13 +472,13 @@ public class MainPage implements EntryPoint  {
 
 	public static void afterLogin() {
 		accordionPanel.remove(loginform);
-		accordionPanel.add(userpage);
+		accordionPanel.insert(0, userpage);
 		
 		MainPage.chatservice();
 //		thirdtab.remove(w);
 		
 		
-		accordionPanel.add(userlist);
+		accordionPanel.insert(0, userlist);
 		
 	}
 	public static void chatservice() {
