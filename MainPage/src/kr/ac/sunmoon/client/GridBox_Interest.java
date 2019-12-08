@@ -54,13 +54,13 @@ public class GridBox_Interest extends GridPanel  {
 	final CheckboxSelectionModel CheckboxInterest = new CheckboxSelectionModel();  
 	
 	// ������ üũ�ڽ�
-	private Object[][] InterestList(String[] interest){
+	private Object[][] InterestList(){
         return new Object[][]{  
-                new Object[]{interest[0]},  
-                new Object[]{interest[1]},  
-                new Object[]{interest[2]},  
-                new Object[]{interest[3]},  
-                new Object[]{interest[4]},    
+                new Object[]{"kjinteraction"},  
+                new Object[]{"chatting"},  
+                new Object[]{"fancing"},  
+                new Object[]{"soccer"},  
+                new Object[]{"yoga"},    
         };  
     }  
 	
@@ -72,7 +72,7 @@ public class GridBox_Interest extends GridPanel  {
     );
     
     //Db�� ���� ����� preferlist object ����
-    final Object[][] interestlist = InterestList(kjmember.getInterests());
+    final Object[][] interestlist = InterestList();
     
     final MemoryProxy proxy = new MemoryProxy(interestlist);
     final ArrayReader reader = new ArrayReader(recordDef); 
