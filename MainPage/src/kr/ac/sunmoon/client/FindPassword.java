@@ -61,6 +61,5 @@ public class FindPassword extends Window {
 
         this.add(findpasswordform);  
 
-        RootPanel.get().add(this);  
     }  
 }  

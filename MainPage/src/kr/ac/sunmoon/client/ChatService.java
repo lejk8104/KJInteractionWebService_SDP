@@ -14,6 +14,7 @@ import com.gwtext.client.widgets.form.FormPanel;
 import com.gwtext.client.widgets.form.Label;
 import com.gwtext.client.widgets.layout.AnchorLayoutData;
 import com.gwtext.client.widgets.layout.ColumnLayoutData;
+import com.gwtext.client.widgets.layout.HorizontalLayout;
 
 import javafx.scene.control.Alert;
 
@@ -25,40 +26,50 @@ public class ChatService extends Panel {
 		super();
 		this.setBorder(false);
 		this.setPaddings(0);
-		this.setClosable(true);
-		this.setWidth(700);
+//		this.setClosable(true);
+		this.setWidth(835);
 //		this.setBodyStyle("background-color:#CDEB8B");  
-		this.setHeight(600);
-		this.setMargins(20, 70, 50, 20);
+		this.setHeight(850);
+		this.setMargins(100, 150, 30, 100);
 //		this.setPlain(true);
 //		this.setCloseAction(this.HIDE);
 		
 		final FormPanel chatform = new FormPanel();  
         chatform.setFrame(true);
+        chatform.setLayout(new HorizontalLayout(0));
         chatform.setTitle("Recommendation Service");
-        chatform.setWidth(550);
-        chatform.setHeight(250);
-        chatform.setLabelWidth(55);
+        chatform.setWidth(755);
+        chatform.setHeight(270);
         chatform.setButtonAlign(Position.CENTER);
         chatform.setMargins(0, 0, 0, 0);
         
-        Label lb1 = new Label("seiya.u77 ");
-        chatform.add(lb1, new AnchorLayoutData("200%"));
+        //User
+        Panel user1Panel = new Panel();
+        user1Panel.setBorder(false);
+        user1Panel.setPaddings(0);
+        UserPage userpage = new UserPage();
+        user1Panel.add(userpage);
         
-        Image imglogo1 = new Image();
-		imglogo1.setUrl("image/login.png");
-        chatform.add(imglogo1, new AnchorLayoutData("30%"));
+      //matching finished
+        Panel middlePanel = new Panel();
+        middlePanel.setBorder(false);
+        middlePanel.setPaddings(0);
+        Label lbl = new Label("Recommended Pair!");
+        middlePanel.add(lbl);
         
-        Label lb0 = new Label("Recommended Pair!");
-        chatform.add(lb0);
+      //another user
+        Panel user2Panel = new Panel();
+        user2Panel.setBorder(false);
+        user2Panel.setPaddings(0);
         
-        Image imglogo2 = new Image();
-		imglogo2.setUrl("image/login.png");
-        chatform.add(imglogo2, new AnchorLayoutData("30%"));
+        UserPage userpage2 = new UserPage();
+        user2Panel.add(userpage2);
         
-		lb2 = new Label();
-		chatform.add(lb2, new AnchorLayoutData("200%"));
         
+        chatform.add(user1Panel);
+        chatform.add(middlePanel);
+        chatform.add(user2Panel);
+		
 		KJMembershipServiceAsync service = GWT.create(KJMembershipService.class);
 		service.findLCS("lejk8104", new AsyncCallback<String>() {
 			

@@ -21,6 +21,7 @@ import com.gwtext.client.widgets.event.ButtonListener;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.form.ComboBox;
 import com.gwtext.client.widgets.form.FormPanel;
+import com.gwtext.client.widgets.form.Label;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.layout.AccordionLayout;
 import com.gwtext.client.widgets.layout.AnchorLayoutData;
@@ -30,6 +31,8 @@ import com.gwtext.client.widgets.layout.ColumnLayout;
 import com.gwtext.client.widgets.layout.ColumnLayoutData;
 import com.gwtext.client.widgets.layout.FitLayout;
 import com.gwtext.client.widgets.layout.FormLayout;
+import com.gwtext.client.widgets.layout.HorizontalLayout;
+import com.gwtext.client.widgets.layout.VerticalLayout;
 import com.gwtext.client.widgets.menu.Menu;
 import com.gwtext.client.widgets.tree.TreeEditor;
 import com.gwtext.client.widgets.tree.TreeNode;
@@ -42,14 +45,18 @@ public class MainPage implements EntryPoint  {
     private Menu menu;  
     private TreeNode ctxNode;  
     private TreeEditor treeEditor; 
+    //이벤트 후처리
     private static KJMember kjmember;
+    private static Panel accordionPanel;
+    private static FormPanel loginform = loginform();
+    private static UserPage userpage = new UserPage();
+    private static Panel thirdtab = new Panel();
+    private static ChatService chatservice = new ChatService();
+    private static CheckBox_Userimage userlist = new CheckBox_Userimage();
     
-    private native void drawMap() /*-{
-    	$wnd.dramMap();
-    }-*/;
-    
-	@Override
-	public void onModuleLoad() {
+    private static Panel nomalPanel;
+	
+    public void onModuleLoad() {
 		// TODO Auto-generated method stub
 		Panel mainPanel = new Panel();  
         mainPanel.setBorder(false);  
@@ -58,7 +65,7 @@ public class MainPage implements EntryPoint  {
   
         Panel borderPanel = new Panel();  
         borderPanel.setLayout(new BorderLayout());  
-  
+        
         //add north panel  
         Panel northPanel = new Panel();  
         northPanel.setEl(new HTML("<p></p>").getElement());
@@ -223,7 +230,7 @@ public class MainPage implements EntryPoint  {
         eastPanel.setWidth(250);  
   
         Panel accordionPanel = createAccordionPanel();  
-        accordionPanel.setHeight(170);  
+        accordionPanel.setHeight(220);  
         accordionPanel.setWidth(250);
         
         BorderLayoutData eastData = new BorderLayoutData(RegionPosition.EAST);  
@@ -268,7 +275,7 @@ public class MainPage implements EntryPoint  {
         Panel secondTab = new Panel();
         secondTab.setTitle("Main Page");
         //채팅방 들어가기
-        Panel thirdtab = new Panel();
+        
 //        Button chatBtn = new Button("Chatting Start", new ButtonListenerAdapter() {
 //        	public void onClick(Button chatBtn, EventObject e) {
 //        		final ChatService chatService = new ChatService();
@@ -276,9 +283,10 @@ public class MainPage implements EntryPoint  {
 //        	}
 //        });
 //        thirdtab.addButton(chatBtn);
-        ChatService chatservice = new ChatService();
-        thirdtab.add(chatservice);
+        
         thirdtab.setTitle("Chatting");
+        Panel nomalpanel = nomalPanel();
+        thirdtab.add(nomalpanel);
         //동영상 추천
         Panel fourthtab = new Panel();
         fourthtab.add(new HTML("<iframe width='560' height='315' src='https://www.youtube.com/embed/3SV36d1q740' "
@@ -307,10 +315,10 @@ public class MainPage implements EntryPoint  {
         // Main Mathod
         centerPanel.add(tabPanel);
         HTMLPanel htmlPannel = new HTMLPanel();
-        htmlPannel.setMargins(10, 50, 53, 10);
-        htmlPannel.setHtml("<iframe width='560' height='315' src='https://www.youtube.com/embed/bkcitbJzi6c' "
-        		+ "frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>");
-        centerPanel.add(htmlPannel);
+//        htmlPannel.setMargins(10, 50, 53, 10);
+//        htmlPannel.setHtml("<iframe width='560' height='315' src='https://www.youtube.com/embed/bkcitbJzi6c' "
+//        		+ "frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>");
+//        centerPanel.add(htmlPannel);
         borderPanel.add(centerPanel, new BorderLayoutData(RegionPosition.CENTER));  
 
         mainPanel.add(borderPanel);  
@@ -408,42 +416,106 @@ public class MainPage implements EntryPoint  {
             setHeight(400);  
             setEnableDD(true);  
             setRootNode(mainService);
-            
+//            afterLogin();
         }  
         
     }  
+	private Panel UserPage() {
+		
+		//호출용 User Panel
+		Panel userpage = new Panel();
+		userpage.setBorder(false);
+		userpage.setLayout(new HorizontalLayout(10));
+		userpage.setPaddings(0);
+		userpage.setWidth(300);
+		userpage.setHeight(300);
+		userpage.setMargins(10, 15, 15, 10);
+//		this.setButtonAlign(Position.CENTER);
+		
+		Panel userform = new Panel();
+		userform.setBorder(false);
+		userform.setLayout(new VerticalLayout(10));
+		userform.setPaddings(0);
+		
+		Panel interestform = new Panel();
+		interestform.setBorder(false);
+		interestform.setPaddings(0);
+		
+		Image userimage = new Image("UserImage/JapaneseFemale.png");
+		Label txtlabel = new Label("seiya.u77");
+		GridBox_Interest userinterest = new GridBox_Interest();
+		
+		userform.add(userimage);
+		userform.add(txtlabel);
+		interestform.add(userinterest);
+		userpage.add(userform);
+		userpage.add(userinterest);
+		return userpage;
+	}
+	
 	// Accoredion Panel
 	private Panel createAccordionPanel() {  
-        Panel accordionPanel = new Panel();  
+        Panel accordionPanel = new Panel();      //여기서 문제생김
         accordionPanel.setLayout(new AccordionLayout(true));  
   
         //mypage
         Panel mypagePanel = new Panel();
         mypagePanel.setTitle("Mypage");
-//        mypagePanel.setIconCls("settings-icon");  
-        FormPanel loginform = loginform();
+        
         mypagePanel.add(loginform);
         accordionPanel.add(mypagePanel);  
   
         //user image list
         Panel selectImagePanel = new Panel("Select Image");
-        CheckBox_Userimage userlist = new CheckBox_Userimage();
+        
+        Panel nomalPanel2 = nomalPanel2();
+        selectImagePanel.add(nomalPanel2);
         Button button = new Button("Get Selected");
-        selectImagePanel.add(userlist);
         accordionPanel.add(selectImagePanel);  
         
         //change another interest
         Panel ChangeInterest = new Panel("Change Interest", "<p>Change Interest</p>");  
-
         return accordionPanel;
 	}
+	
+	//로그인 후처리
 	public static void setKJMember(KJMember kjmember) {
 		MainPage.kjmember = kjmember;
 	}
 	public static KJMember getKJMember() {
 		return kjmember;
 	}
-	private FormPanel loginform() {
+
+	public static void afterLogin() {
+		accordionPanel.remove(loginform);
+		accordionPanel.add(userpage);
+		
+//		thirdtab.remove(w);
+		thirdtab.add(chatservice);
+		
+		accordionPanel.add(userlist);
+		
+	}
+	// 비로그인 시 나타나는 화면 정의
+	private static Panel nomalPanel() {
+		final Panel panel = new Panel();
+		panel.setFrame(true);
+		panel.setWidth(1000);  
+		panel.setHeight(500);
+		panel.setHtml("<p>Our service support only KJ members. </p> <p> please input your login ID</p>");
+		return panel;
+	}
+	private static Panel nomalPanel2() {
+		final Panel panel = new Panel();
+		panel.setFrame(true);
+		panel.setWidth(250);  
+		panel.setHeight(120);
+		panel.setHtml("<p>Our service support only KJ members. </p> <p> please input your login ID</p>");
+		return panel;
+	}
+	
+	// 로그인 폼
+	private static FormPanel loginform() {
 		final FormPanel loginform = new FormPanel();  
         loginform.setFrame(true);
         loginform.setWidth(250);  
@@ -508,5 +580,6 @@ public class MainPage implements EntryPoint  {
 		
         return loginform;
 	}
+	//After event handling
 }
  	  

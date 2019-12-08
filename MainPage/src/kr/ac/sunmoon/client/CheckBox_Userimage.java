@@ -47,11 +47,14 @@ public class CheckBox_Userimage extends GridPanel {
         this.setAutoExpandColumn("image");  
   
         this.setSelectionModel(CheckboxUser);
-        this.setWidth(350);  
+        this.setWidth(200);  
         this.setHeight(250);  
         this.setFrame(true);  
-        this.setIconCls("grid-icon");  
-  
+        this.setIconCls("grid-icon");
+        
+        this.setStripeRows(true); 
+        this.setCollapsible(true);  
+        this.setAnimCollapse(false);
 	}
 	// 체크박스 만들기
 	final CheckboxSelectionModel CheckboxUser = new CheckboxSelectionModel();  
@@ -59,15 +62,15 @@ public class CheckBox_Userimage extends GridPanel {
 	//Userimage object
     private Object[][] UserImageList() {  
         return new Object[][]{ 
-        	new Object[]{new Image("UserImage/Nomal.png"),"UserImage/Nomal.png"},
-                new Object[]{new Image("UserImage/JapaneseFemale.png"),"UserImage/JapaneseFemale.png"},  
-                new Object[]{new Image("UserImage/JapaneseFemale2.png"),"UserImage/JapaneseFemale2.png"},  
-                new Object[]{new Image("UserImage/JapaneseMale.png"),"UserImage/JapaneseMale.png"},  
-                new Object[]{new Image("UserImage/JapaneseMale2.png"),"UserImage/JapaneseMale2.png"},  
-                new Object[]{new Image("UserImage/KoreanFemale.png"),"UserImage/KoreanFemale.png"},
-                new Object[]{new Image("UserImage/KoreanFemale2.png"),"UserImage/KoreanFemale2.png"},
-                new Object[]{new Image("UserImage/KoreanMale.png"),"UserImage/KoreanMale.png"},
-                new Object[]{new Image("UserImage/KoreanMale2.png"),"UserImage/KoreanMale2.png"}
+        	new Object[]{new Image("UserImage/Nomal.png")},
+                new Object[]{new Image("UserImage/JapaneseFemale.png")},  
+                new Object[]{new Image("UserImage/JapaneseFemale2.png")},  
+                new Object[]{new Image("UserImage/JapaneseMale.png")},  
+                new Object[]{new Image("UserImage/JapaneseMale2.png")},  
+                new Object[]{new Image("UserImage/KoreanFemale.png")},
+                new Object[]{new Image("UserImage/KoreanFemale2.png")},
+                new Object[]{new Image("UserImage/KoreanMale.png")},
+                new Object[]{new Image("UserImage/KoreanMale2.png")}
         };  
     }
     // userimage list read
@@ -85,6 +88,6 @@ public class CheckBox_Userimage extends GridPanel {
     final BaseColumnConfig[] columns = new BaseColumnConfig[]{  
             new CheckboxColumnConfig(CheckboxUser),  
             //column ID is company which is later used in setAutoExpandColumn  
-            new ColumnConfig("Please, Check to only One Image ", "image", 160, true, null, "image"),  
+            new ColumnConfig("Check to only One Image ", "image", 200, true, null, "image"),  
     };  
 }
