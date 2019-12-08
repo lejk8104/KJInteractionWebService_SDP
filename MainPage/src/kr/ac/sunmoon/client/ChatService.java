@@ -70,7 +70,45 @@ public class ChatService extends Panel {
         chatform.add(middlePanel);
         chatform.add(user2Panel);
 		
-		KJMembershipServiceAsync service = GWT.create(KJMembershipService.class);
+        kjMatching();
+        
+//		KJMembershipServiceAsync service = GWT.create(KJMembershipService.class);
+//		service.findLCS("lejk8104", new AsyncCallback<String>() {
+//			
+//			@Override
+//			public void onSuccess(String result) {
+//				com.google.gwt.user.client.Window.alert(result);
+//				lb2.setText(result);
+//			}
+//			
+//			@Override
+//			public void onFailure(Throwable caught) {
+//				com.google.gwt.user.client.Window.alert("failed with matching");
+//			}
+//		});
+		
+		Button startBtn = new Button("chatting start", new ButtonListenerAdapter() {
+			public void onClick(Button startBtn, EventObject e) {
+				ChatRoom chatRoom = new ChatRoom();
+				chatRoom.show();
+			}
+		});
+		chatform.addButton(startBtn);
+		
+		Button againBtn = new Button("matching again", new ButtonListenerAdapter() {
+			public void onClick(Button againBtn, EventObject e) {
+				kjMatching();
+			}
+		});
+		chatform.addButton(againBtn);
+		
+		Button cancelBtn = new Button("cancel");
+		chatform.addButton(cancelBtn);
+		
+        this.add(chatform);
+	}        
+    private void kjMatching() {
+    	KJMembershipServiceAsync service = GWT.create(KJMembershipService.class);
 		service.findLCS("lejk8104", new AsyncCallback<String>() {
 			
 			@Override
@@ -84,21 +122,5 @@ public class ChatService extends Panel {
 				com.google.gwt.user.client.Window.alert("failed with matching");
 			}
 		});
-		
-		Button startBtn = new Button("chatting start", new ButtonListenerAdapter() {
-			public void onClick(Button startBtn, EventObject e) {
-				ChatRoom chatRoom = new ChatRoom();
-				chatRoom.show();
-			}
-		});
-		chatform.addButton(startBtn);
-		
-		Button againBtn = new Button("matching again");
-		chatform.addButton(againBtn);
-		
-		Button cancelBtn = new Button("cancel");
-		chatform.addButton(cancelBtn);
-		
-        this.add(chatform);
-	}
+    }
 }
