@@ -276,18 +276,11 @@ public class MainPage implements EntryPoint  {
         TabPanel tabPanel = new TabPanel();  
         tabPanel.setPlain(true);  
         tabPanel.setActiveTab(0);  
-
+        
         Panel secondTab = new Panel();
         secondTab.setTitle("Main Page");
-        //채팅방 들어가기
-        
-//        Button chatBtn = new Button("Chatting Start", new ButtonListenerAdapter() {
-//        	public void onClick(Button chatBtn, EventObject e) {
-//        		final ChatService chatService = new ChatService();
-//        		chatService.show();
-//        	}
-//        });
-//        thirdtab.addButton(chatBtn);
+        Advertise_KJinteration piechartPanel = new Advertise_KJinteration();
+        secondTab.add(piechartPanel);
         
         thirdtab.setTitle("Chatting");
         Panel nomalpanel = nomalPanel();

@@ -1,6 +1,5 @@
 package kr.ac.sunmoon.client;
 
-import java.awt.List;
 import org.moxieapps.gwt.highcharts.client.Chart;
 import org.moxieapps.gwt.highcharts.client.Legend;
 import org.moxieapps.gwt.highcharts.client.Point;
@@ -13,8 +12,9 @@ import org.moxieapps.gwt.highcharts.client.labels.DataLabelsFormatter;
 import org.moxieapps.gwt.highcharts.client.labels.PieDataLabels;
 import org.moxieapps.gwt.highcharts.client.plotOptions.PiePlotOptions;
 import org.moxieapps.gwt.highcharts.client.plotOptions.PlotOptions;
+
 import com.gwtext.client.widgets.Panel;
-import com.gwtext.client.widgets.Window;
+import com.gwtext.client.widgets.layout.VerticalLayout;
 
 
 public class Advertise_KJinteration extends Panel{
@@ -27,18 +27,20 @@ public class Advertise_KJinteration extends Panel{
 		this.setBorder(false);
 		this.setPaddings(0);
 		this.setClosable(true);
-		this.setWidth(650);
-		this.setHeight(500);
+		this.setWidth(950);
+		this.setHeight(700);
+		this.setMargins(30, 75, 100, 0);
 
-		final Panel advertisePanel = new Panel();
-		advertisePanel.setBorder(false);
-		advertisePanel.setFrame(true);
-	    
-//	    formpanel.add(createChart());
-//	    this.add(formpanel);
+		Panel formpanel = new Panel();
+		formpanel.setFrame(true);
+		formpanel.setLayout(new VerticalLayout(10));
+		formpanel.setWidth(950);
+		formpanel.setHeight(700);
+	    formpanel.setMargins(20, 135, 100, 20);
+		
 		Chart chart = createChart();
-		advertisePanel.add(chart);
-	    this.add(advertisePanel);
+		formpanel.add(chart);
+	    this.add(formpanel);
 	}
 	 public Chart createChart() {  
 		  
