@@ -17,9 +17,8 @@ import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.Window;
 
 
-public class Advertise_KJinteration extends Window{
+public class Advertise_KJinteration extends Panel{
 
-	private final Panel formpanel = new Panel();
 	private String [] kjinteractioncitylist = new String[16];
 	
 	public Advertise_KJinteration() {
@@ -30,24 +29,23 @@ public class Advertise_KJinteration extends Window{
 		this.setClosable(true);
 		this.setWidth(650);
 		this.setHeight(500);
-		this.setPlain(true);
-		this.setCloseAction(this.HIDE);
 
-		formpanel.setFrame(true);
-		formpanel.setTitle("Adbertise"); 
-//	    formpanel.setBorder(false);  
-	    formpanel.setWidth(650);
+		final Panel advertisePanel = new Panel();
+		advertisePanel.setBorder(false);
+		advertisePanel.setFrame(true);
 	    
 //	    formpanel.add(createChart());
 //	    this.add(formpanel);
-	    this.add(createChart());
+		Chart chart = createChart();
+		advertisePanel.add(chart);
+	    this.add(advertisePanel);
 	}
 	 public Chart createChart() {  
 		  
 	        final Chart chart = new Chart()  
 	            .setType(Series.Type.PIE)  
 	            .setChartTitleText("Statistics city of low KJ Interaction")  
-//	            .setPlotBackgroundColor((String) null)  //±×¶óµ¥ÀÌ¼Ç
+//	            .setPlotBackgroundColor((String) null)  //ï¿½×¶ï¿½ï¿½Ì¼ï¿½
 	            .setPlotBorderWidth(null)  
 	            .setPlotShadow(true)  
 	            .setPiePlotOptions(new PiePlotOptions()  
