@@ -79,6 +79,7 @@ public class GridBox_Interest extends GridPanel  {
     String b = "'s interest";
     //input grid columns
     ColumnConfig[] columns = new ColumnConfig[]{  
+    		
             new ColumnConfig(a+b, "interest", 160, true, null, "interest"),  
     };  
 }

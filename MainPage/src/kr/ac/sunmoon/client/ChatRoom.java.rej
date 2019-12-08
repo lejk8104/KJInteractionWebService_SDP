@@ -1,0 +1,45 @@
+diff a/MainPage/src/kr/ac/sunmoon/client/ChatRoom.java b/MainPage/src/kr/ac/sunmoon/client/ChatRoom.java	(rejected hunks)
+@@ -81,36 +81,26 @@
+         chatroomform.setMargins(0, 0, 0, 0);
+         chatroomPanel.setBorder(false);
+         
+-        Panel messagePanel = new Panel();
+-        messagePanel.setLayout(new HorizontalLayout(5));
+-        messagePanel.setMargins(0, 0, 0, 0);
+-        messagePanel.setBorder(false);
+-        
++        //�޼��� �ڽ�
++//        TextField messagebox = new TextField();
++//        messagebox.setWidth("300");
+         final TextArea sendArea = new TextArea();
+         sendArea.setWidth(250);
+         sendArea.setHeight(50);
++        
+         chatroomPanel.setHtml("<p>Send your message</p>");
+         
++        chatroomPanel.add(sendArea, new AnchorLayoutData("97%"));
++        
+         final Button sendBtn = new Button("Send", new ButtonListenerAdapter() {
+         	public void onClick(Button sendBtn, EventObject e) {
+         		DateTimeFormat dtf = DateTimeFormat.getFormat("yyyyMMddHHmmss");
+-        		textArea.setVtypeText("aaa");
+         		textArea.setValue(dtf.format(date, TimeZone.createTimeZone(0)));
+         		textArea.setValue(sendArea.getText());    		
+         	}
+         }); 
+-        messagePanel.add(sendArea, new AnchorLayoutData("97%"));
+-        messagePanel.add(sendBtn);
+-        
+-        chatroomPanel.add(messagePanel);
+         
+-        //�޼��� �ڽ�
+-//        TextField messagebox = new TextField();
+-//        messagebox.setWidth("300");
+-
+-        
+-        chatroomPanel.setHtml("<p>Send your message</p>");
+-//        chatroomPanel.add(sendArea, new AnchorLayoutData("97%"));
++        chatroomPanel.add(sendBtn);
+         overallPanel.add(chatroomPanel);
+         
+         //���� ��ȭâ
