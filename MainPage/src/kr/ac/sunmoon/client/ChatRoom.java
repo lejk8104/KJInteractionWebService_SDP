@@ -96,47 +96,49 @@ public class ChatRoom extends Window{
         chatroomform.add(user1Panel2);
         
         //interests panel
-        Panel interest_user1 = new Panel();  
-        interest_user1.setLayout(new FormLayout()); 
-        interest_user1.setBorder(false);
+        GridBox_Interest user1interest = new GridBox_Interest();
         
+//        Panel interest_user1 = new Panel();  
+//        interest_user1.setLayout(new FormLayout()); 
+//        interest_user1.setBorder(false);
+//        
         Panel interest_user2 = new Panel();  
         interest_user2.setLayout(new FormLayout());  
         interest_user2.setBorder(false);
-        
-        //interest_user1
-        final TextField interest1 = new TextField("Interest1", "data", 75);  
-        interest1.setAllowBlank(false);  
-        interest1.setValue("kjinteraction"); 
-        interest_user1.add(interest1);
-
-        final TextField interest2 = new TextField("Interest2", "data", 75);  
-        interest2.setAllowBlank(false);  
-        interest2.setValue("chatting"); 
-        interest_user1.add(interest2);
-        
-        final TextField interest3 = new TextField("Interest3", "data", 75);  
-        interest3.setAllowBlank(false);  
-        interest3.setValue("fencing"); 
-        interest_user1.add(interest3);
-
-        final TextField interest4 = new TextField("Interest4", "data", 75);  
-        interest4.setAllowBlank(false);  
-        interest4.setValue("trip"); 
-        interest_user1.add(interest4);
-        
-        final TextField interest5 = new TextField("Interest5", "data", 75);  
-        interest5.setAllowBlank(false);  
-        interest5.setValue("movie"); 
-        interest_user1.add(interest5);
-        
-        user1Panel.add(interest_user1);
+//        
+//        //interest_user1
+//        final TextField interest1 = new TextField("Interest1", "data", 75);  
+//        interest1.setAllowBlank(false);  
+//        interest1.setValue("kjinteraction"); 
+//        interest_user1.add(interest1);
+//
+//        final TextField interest2 = new TextField("Interest2", "data", 75);  
+//        interest2.setAllowBlank(false);  
+//        interest2.setValue("chatting"); 
+//        interest_user1.add(interest2);
+//        
+//        final TextField interest3 = new TextField("Interest3", "data", 75);  
+//        interest3.setAllowBlank(false);  
+//        interest3.setValue("fencing"); 
+//        interest_user1.add(interest3);
+//
+//        final TextField interest4 = new TextField("Interest4", "data", 75);  
+//        interest4.setAllowBlank(false);  
+//        interest4.setValue("trip"); 
+//        interest_user1.add(interest4);
+//        
+//        final TextField interest5 = new TextField("Interest5", "data", 75);  
+//        interest5.setAllowBlank(false);  
+//        interest5.setValue("movie"); 
+//        interest_user1.add(interest5);
+//        
+        user1Panel.add(user1interest);
         
         //interest_user2
         final TextField interest_1 = new TextField("Interest1", "data", 75);  
         interest_1.setAllowBlank(false);  
         interest_1.setValue("kjinteraction"); 
-        interest_user2.add(interest_1);
+//        interest_user2.add(interest_1);
         
         final TextField interest_2 = new TextField("Interest2", "data", 75);  
         interest_2.setAllowBlank(false);  
