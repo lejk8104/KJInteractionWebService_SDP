@@ -15,6 +15,7 @@ import kr.ac.sunmoon.shared.KJMember;
 
 public class ChatService extends Panel {
 	private Label lb2;
+	static KJMember kjmember;
 
 	public ChatService() {
 		
@@ -109,7 +110,7 @@ public class ChatService extends Panel {
 			@Override
 			public void onSuccess(KJMember[] result) { // you can get ID and 5 interests
 				com.google.gwt.user.client.Window.alert(result[0].getID() +", " + result[1].getID());
-				lb2.setText(result[0].getID());
+				kjmember = result[0];
 			}
 			
 			@Override

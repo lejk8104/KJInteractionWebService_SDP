@@ -25,6 +25,8 @@ public class GridBox_Interest extends GridPanel  {
 	public GridBox_Interest() {
 		super();	
 		
+		kjmember = ChatService.kjmember;
+		
 		// data setting 1: store ����
         final Store interestStore = new Store(proxy, reader);  
         interestStore.load(); 
