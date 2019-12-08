@@ -67,17 +67,20 @@ public class LoginService extends Window{
         		loginmember.setID(logindata[0]);
         		loginmember.setPassword(logindata[1]);
         		
-        		//¼­¹öÅë½Å
+        		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         		KJMembershipServiceAsync service = GWT.create(KJMembershipService.class);
         		service.LoginService(loginmember, new AsyncCallback<KJMember>() {
 
 					public void onSuccess(KJMember result) {
 						// TODO Auto-generated method stub
-						popup.setTitle("Login is Complete!");
-						MainPage.setKJMember(result);
+						if (result.getName() != "") {
+							popup.setTitle("Login is Complete!");
+							MainPage.setKJMember(result);
+							MainPage.chatservice();
+						} else if (result.getName() == "")
+							popup.setTitle("Login failed");
 						popup.show();
 						LoginService.this.hide();
-						
 					}
 					public void onFailure(Throwable caught) {
 						// TODO Auto-generated method stub
@@ -107,7 +110,7 @@ public class LoginService extends Window{
         });
         loginform.addButton(btnregister);  
   
-        //µÎ¹øÂ° form
+        //ï¿½Î¹ï¿½Â° form
         Panel secondPanel = new Panel();
         secondPanel.setButtonAlign(Position.CENTER);
 //        secondPanel.setLayout(new ColumnLayout());

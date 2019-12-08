@@ -7,6 +7,7 @@ import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.Widget;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Margins;
 import com.gwtext.client.core.Position;
@@ -48,10 +49,11 @@ public class MainPage implements EntryPoint  {
     //이벤트 후처리
     private static KJMember kjmember;
     private static Panel accordionPanel;
+    private static Panel mypagePanel;
     private static FormPanel loginform = loginform();
     private static UserPage userpage = new UserPage();
     private static Panel thirdtab = new Panel();
-    private static ChatService chatservice = new ChatService();
+    private static ChatService chatservice;
     private static CheckBox_Userimage userlist = new CheckBox_Userimage();
     
     private static Panel nomalPanel;
@@ -462,7 +464,7 @@ public class MainPage implements EntryPoint  {
         Panel mypagePanel = new Panel();
         mypagePanel.setTitle("Mypage");
         
-        mypagePanel.add(loginform);
+        mypagePanel.add(loginform());
         accordionPanel.add(mypagePanel);  
   
         //user image list
@@ -490,11 +492,17 @@ public class MainPage implements EntryPoint  {
 		accordionPanel.remove(loginform);
 		accordionPanel.add(userpage);
 		
+		MainPage.chatservice();
 //		thirdtab.remove(w);
-		thirdtab.add(chatservice);
+		
 		
 		accordionPanel.add(userlist);
 		
+	}
+	public static void chatservice() {
+//		thirdtab.remove(nomalPanel);
+		chatservice = new ChatService();
+		thirdtab.add(chatservice);
 	}
 	// 비로그인 시 나타나는 화면 정의
 	private static Panel nomalPanel() {
@@ -576,9 +584,8 @@ public class MainPage implements EntryPoint  {
 				});
 			}
 		});
-        loginform.addButton(btnlogin);  
-		
-        return loginform;
+        loginform.addButton(btnlogin);
+		return loginform;  
 	}
 	//After event handling
 }

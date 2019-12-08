@@ -134,7 +134,7 @@ public class Register_Membership extends Window{
         listcountry.setMode(ComboBox.LOCAL);  
     	listcountry.setTriggerAction(ComboBox.ALL);  
     	listcountry.setForceSelection(true);  
-    	listcountry.setValueField("country");  
+//    	listcountry.setValueField("country");  
     	listcountry.setReadOnly(true);  
     	listcountry.setWidth(200);
 
@@ -147,16 +147,15 @@ public class Register_Membership extends Window{
     	listcity.setMode(ComboBox.LOCAL);  
 	    listcity.setTriggerAction(ComboBox.ALL);  
 	    listcity.setLinked(true);  
-	    listcity.setForceSelection(true); 
-	    listcity.setValueField("interests");
+	    listcity.setForceSelection(true);  
 	    listcity.setReadOnly(true);  
 	    listcity.setWidth(200);
 
 	    //동작과정
 	    listcountry.addListener(new ComboBoxListenerAdapter() {  
-	    	public void onSelect(ComboBox comboBox, Record record, int index) {  
-	    		listcity.setValue("");  
-	    		citiesStore.filter("country", comboBox.getValue());  
+        public void onSelect(ComboBox comboBox, Record record, int index) {  
+            listcity.setValue("");  
+            citiesStore.filter("country", comboBox.getValue());  
         	}  
 	    });  
 	    firstTab.add(listcountry);
@@ -432,7 +431,7 @@ public class Register_Membership extends Window{
 					public void onFailure(Throwable caught) {
 						// TODO Auto-generated method stub
 
-						popup.setTitle("Sorry, Please try agian after few minutes");
+						popup.setTitle("Sorry, Please try again after few minutes");
         				popup.show();
 						Register_Membership.this.hide();
 					}

@@ -37,7 +37,7 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements KJM
 			while(rs1.next()) {				
 				String id = rs1.getString("ID");
 				String Password = rs1.getString("PassWord");
-				String Check_Password = rs1.getString("Check_Password");
+				String Check_Password = rs1.getString("CheckPassword");
 				String name = rs1.getString("Name");
 				String Gender = rs1.getString("Gender");
 				String Birth = rs1.getString("Birth");
@@ -147,14 +147,14 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements KJM
 			
 			Connection con = DriverManager.getConnection(url, user, password_);
 			Statement stmt = con.createStatement();
-			String sql = "SELECT ID,Password FROM kjmember;";
+			String sql = "SELECT * FROM kjmember;";
 			ResultSet rs1 = stmt.executeQuery(sql);
 			
 			while(rs1.next()) {
 				String ID = rs1.getString("ID");
 				String Password = rs1.getString("Password");
 				if(ID.equals(id) && Password.equals(password)) {
-					loginmember.setCheckPassword(rs1.getString("Check_Password"));
+					loginmember.setCheckPassword(rs1.getString("CheckPassword"));
 					loginmember.setName(rs1.getString("Name"));
 					loginmember.setGender(rs1.getString("Gender"));
 					loginmember.setBitrh(rs1.getString("Birth"));
@@ -163,6 +163,7 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements KJM
 					rs1.close();
 					stmt.close();
 					con.close();
+					System.out.println(loginmember.getName());
 					return loginmember;
 				}
 			}
