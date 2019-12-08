@@ -61,7 +61,7 @@ public class Register_Membership extends Window{
         formPanel.setBorder(false);  
         formPanel.setWidth(345);  
         
-        //TabPanel ¼±¾ğ
+        //TabPanel ì„ ì–¸
         final TabPanel tabPanel = new TabPanel();  
         tabPanel.setActiveTab(0);  
   
@@ -71,7 +71,7 @@ public class Register_Membership extends Window{
         firstTab.setAutoHeight(true);  
         firstTab.setPaddings(25);  
   
-        //list store ¼±¾ğ
+        //list store ì„ ì–¸
         final Store gender = new SimpleStore(new String[] {"genderData","gender"}, Getgender());
         gender.load();
         final Store countriesStore = new SimpleStore(new String[]{"country", "countryData"}, countries);  
@@ -114,9 +114,9 @@ public class Register_Membership extends Window{
         listgender.setStore(gender);
         listgender.setDisplayField("genderData");
         listgender.setEmptyText("Select Gender"); 
-        listgender.setTriggerAction(ComboBox.ALL); //? ¸ğ¸£°Ú´Ù
-        listgender.setTypeAhead(true);  // ÀÌ¸¦ Ã¤¿ì°í ÀÚµ¿ ¼±ÅÃÇÑ´Ù
-        listgender.setSelectOnFocus(true); //µ¥ÀÌÅÍ°ª ¼ö½ÅÇÒ ‹š ÀÚµ¿Ã¤¿ò
+        listgender.setTriggerAction(ComboBox.ALL); //? ëª¨ë¥´ê² ë‹¤
+        listgender.setTypeAhead(true);  // ì´ë¥¼ ì±„ìš°ê³  ìë™ ì„ íƒí•œë‹¤
+        listgender.setSelectOnFocus(true); //ë°ì´í„°ê°’ ìˆ˜ì‹ í•  ë–„ ìë™ì±„ì›€
         listgender.setWidth(200);  
         listgender.setResizable(true); //?
         firstTab.add(listgender);
@@ -151,7 +151,7 @@ public class Register_Membership extends Window{
 	    listcity.setReadOnly(true);  
 	    listcity.setWidth(200);
 
-	    //µ¿ÀÛ°úÁ¤
+	    //ë™ì‘ê³¼ì •
 	    listcountry.addListener(new ComboBoxListenerAdapter() {  
         public void onSelect(ComboBox comboBox, Record record, int index) {  
             listcity.setValue("");  
@@ -163,7 +163,7 @@ public class Register_Membership extends Window{
   
         tabPanel.add(firstTab);  
         
-        //list store ¼±¾ğ
+        //list store ì„ ì–¸
         final Store preference = new SimpleStore(new String[] {"Text","Preference","data"}, Getpreference());
         preference.load();
         final Store interest1 = new SimpleStore(new String[] {"Text","interests"}, InterestList);
@@ -199,12 +199,12 @@ public class Register_Membership extends Window{
         listpreference.setStore(preference);
         listpreference.setDisplayField("Text");
         listpreference.setEmptyText("Select Preference"); 
-        listpreference.setTriggerAction(ComboBox.ALL); //? ¸ğ¸£°Ú´Ù
-        listpreference.setTypeAhead(true);  // ÀÌ¸¦ Ã¤¿ì°í ÀÚµ¿ ¼±ÅÃÇÑ´Ù
-        listpreference.setSelectOnFocus(true); //µ¥ÀÌÅÍ°ª ¼ö½ÅÇÒ ‹š ÀÚµ¿Ã¤¿ò
+        listpreference.setTriggerAction(ComboBox.ALL); //? ëª¨ë¥´ê² ë‹¤
+        listpreference.setTypeAhead(true);  // ì´ë¥¼ ì±„ìš°ê³  ìë™ ì„ íƒí•œë‹¤
+        listpreference.setSelectOnFocus(true); //ë°ì´í„°ê°’ ìˆ˜ì‹ í•  ë–„ ìë™ì±„ì›€
         listpreference.setWidth(300);  
         listpreference.setResizable(true); //?
-        secondTab.add(listpreference);
+//        secondTab.add(listpreference);
         
         Panel inputdataform = new Panel();
         inputdataform.setBorder(false);
@@ -224,9 +224,9 @@ public class Register_Membership extends Window{
         listinterest1.setStore(interest1);
         listinterest1.setDisplayField("Text");
         listinterest1.setEmptyText("Select Interest1"); 
-        listinterest1.setTriggerAction(ComboBox.ALL); //? ¸ğ¸£°Ú´Ù
-        listinterest1.setTypeAhead(true);  // ÀÌ¸¦ Ã¤¿ì°í ÀÚµ¿ ¼±ÅÃÇÑ´Ù
-        listinterest1.setSelectOnFocus(true); //µ¥ÀÌÅÍ°ª ¼ö½ÅÇÒ ‹š ÀÚµ¿Ã¤¿ò
+        listinterest1.setTriggerAction(ComboBox.ALL); //? ëª¨ë¥´ê² ë‹¤
+        listinterest1.setTypeAhead(true);  // ì´ë¥¼ ì±„ìš°ê³  ìë™ ì„ íƒí•œë‹¤
+        listinterest1.setSelectOnFocus(true); //ë°ì´í„°ê°’ ìˆ˜ì‹ í•  ë–„ ìë™ì±„ì›€
         listinterest1.setWidth(300);  
         listinterest1.setResizable(true);
         secondTab.add(listinterest1);
@@ -237,9 +237,9 @@ public class Register_Membership extends Window{
         listinterest2.setStore(interest1);
         listinterest2.setDisplayField("Text");
         listinterest2.setEmptyText("Select Interest2"); 
-        listinterest2.setTriggerAction(ComboBox.ALL); //? ¸ğ¸£°Ú´Ù
-        listinterest2.setTypeAhead(true);  // ÀÌ¸¦ Ã¤¿ì°í ÀÚµ¿ ¼±ÅÃÇÑ´Ù
-        listinterest2.setSelectOnFocus(true); //µ¥ÀÌÅÍ°ª ¼ö½ÅÇÒ ‹š ÀÚµ¿Ã¤¿ò
+        listinterest2.setTriggerAction(ComboBox.ALL); //? ëª¨ë¥´ê² ë‹¤
+        listinterest2.setTypeAhead(true);  // ì´ë¥¼ ì±„ìš°ê³  ìë™ ì„ íƒí•œë‹¤
+        listinterest2.setSelectOnFocus(true); //ë°ì´í„°ê°’ ìˆ˜ì‹ í•  ë–„ ìë™ì±„ì›€
         listinterest2.setWidth(300);  
         listinterest2.setResizable(true);
         secondTab.add(listinterest2);
@@ -250,9 +250,9 @@ public class Register_Membership extends Window{
         listinterest3.setStore(interest1);
         listinterest3.setDisplayField("Text");
         listinterest3.setEmptyText("Select Interest3"); 
-        listinterest3.setTriggerAction(ComboBox.ALL); //? ¸ğ¸£°Ú´Ù
-        listinterest3.setTypeAhead(true);  // ÀÌ¸¦ Ã¤¿ì°í ÀÚµ¿ ¼±ÅÃÇÑ´Ù
-        listinterest3.setSelectOnFocus(true); //µ¥ÀÌÅÍ°ª ¼ö½ÅÇÒ ‹š ÀÚµ¿Ã¤¿ò
+        listinterest3.setTriggerAction(ComboBox.ALL); //? ëª¨ë¥´ê² ë‹¤
+        listinterest3.setTypeAhead(true);  // ì´ë¥¼ ì±„ìš°ê³  ìë™ ì„ íƒí•œë‹¤
+        listinterest3.setSelectOnFocus(true); //ë°ì´í„°ê°’ ìˆ˜ì‹ í•  ë–„ ìë™ì±„ì›€
         listinterest3.setWidth(300);  
         listinterest3.setResizable(true);
         secondTab.add(listinterest3);
@@ -262,10 +262,10 @@ public class Register_Membership extends Window{
         listinterest4.setFieldLabel("interests");
         listinterest4.setStore(interest1);
         listinterest4.setDisplayField("Text");
-        listinterest4.setEmptyText("Select Interest1"); 
-        listinterest4.setTriggerAction(ComboBox.ALL); //? ¸ğ¸£°Ú´Ù
-        listinterest4.setTypeAhead(true);  // ÀÌ¸¦ Ã¤¿ì°í ÀÚµ¿ ¼±ÅÃÇÑ´Ù
-        listinterest4.setSelectOnFocus(true); //µ¥ÀÌÅÍ°ª ¼ö½ÅÇÒ ‹š ÀÚµ¿Ã¤¿ò
+        listinterest4.setEmptyText("Select Interest4"); 
+        listinterest4.setTriggerAction(ComboBox.ALL); //? ëª¨ë¥´ê² ë‹¤
+        listinterest4.setTypeAhead(true);  // ì´ë¥¼ ì±„ìš°ê³  ìë™ ì„ íƒí•œë‹¤
+        listinterest4.setSelectOnFocus(true); //ë°ì´í„°ê°’ ìˆ˜ì‹ í•  ë–„ ìë™ì±„ì›€
         listinterest4.setWidth(300);  
         listinterest4.setResizable(true);
         secondTab.add(listinterest4);
@@ -275,10 +275,10 @@ public class Register_Membership extends Window{
         listinterest5.setFieldLabel("interests");
         listinterest5.setStore(interest1);
         listinterest5.setDisplayField("Text");
-        listinterest5.setEmptyText("Select Interest1"); 
-        listinterest5.setTriggerAction(ComboBox.ALL); //? ¸ğ¸£°Ú´Ù
-        listinterest5.setTypeAhead(true);  // ÀÌ¸¦ Ã¤¿ì°í ÀÚµ¿ ¼±ÅÃÇÑ´Ù
-        listinterest5.setSelectOnFocus(true); //µ¥ÀÌÅÍ°ª ¼ö½ÅÇÒ ‹š ÀÚµ¿Ã¤¿ò
+        listinterest5.setEmptyText("Select Interest5"); 
+        listinterest5.setTriggerAction(ComboBox.ALL); //? ëª¨ë¥´ê² ë‹¤
+        listinterest5.setTypeAhead(true);  // ì´ë¥¼ ì±„ìš°ê³  ìë™ ì„ íƒí•œë‹¤
+        listinterest5.setSelectOnFocus(true); //ë°ì´í„°ê°’ ìˆ˜ì‹ í•  ë–„ ìë™ì±„ì›€
         listinterest5.setWidth(300);  
         listinterest5.setResizable(true);
         secondTab.add(listinterest5);
@@ -301,9 +301,9 @@ public class Register_Membership extends Window{
         A.setStore(a);
         A.setDisplayField("Text");
         A.setEmptyText("Select A"); 
-        A.setTriggerAction(ComboBox.ALL); //? ¸ğ¸£°Ú´Ù
-        A.setTypeAhead(true);  // ÀÌ¸¦ Ã¤¿ì°í ÀÚµ¿ ¼±ÅÃÇÑ´Ù
-        A.setSelectOnFocus(true); //µ¥ÀÌÅÍ°ª ¼ö½ÅÇÒ ‹š ÀÚµ¿Ã¤¿ò
+        A.setTriggerAction(ComboBox.ALL); //? ëª¨ë¥´ê² ë‹¤
+        A.setTypeAhead(true);  // ì´ë¥¼ ì±„ìš°ê³  ìë™ ì„ íƒí•œë‹¤
+        A.setSelectOnFocus(true); //ë°ì´í„°ê°’ ìˆ˜ì‹ í•  ë–„ ìë™ì±„ì›€
         A.setWidth(300);  
         A.setResizable(true); //?
         secondTab.add(A);
@@ -316,9 +316,9 @@ public class Register_Membership extends Window{
         B.setStore(b);
         B.setDisplayField("Text");
         B.setEmptyText("Select B"); 
-        B.setTriggerAction(ComboBox.ALL); //? ¸ğ¸£°Ú´Ù
-        B.setTypeAhead(true);  // ÀÌ¸¦ Ã¤¿ì°í ÀÚµ¿ ¼±ÅÃÇÑ´Ù
-        B.setSelectOnFocus(true); //µ¥ÀÌÅÍ°ª ¼ö½ÅÇÒ ‹š ÀÚµ¿Ã¤¿ò
+        B.setTriggerAction(ComboBox.ALL); //? ëª¨ë¥´ê² ë‹¤
+        B.setTypeAhead(true);  // ì´ë¥¼ ì±„ìš°ê³  ìë™ ì„ íƒí•œë‹¤
+        B.setSelectOnFocus(true); //ë°ì´í„°ê°’ ìˆ˜ì‹ í•  ë–„ ìë™ì±„ì›€
         B.setWidth(300);  
         B.setResizable(true); //?
         secondTab.add(B);
@@ -331,9 +331,9 @@ public class Register_Membership extends Window{
         C.setStore(c);
         C.setDisplayField("Text");
         C.setEmptyText("Select C"); 
-        C.setTriggerAction(ComboBox.ALL); //? ¸ğ¸£°Ú´Ù
-        C.setTypeAhead(true);  // ÀÌ¸¦ Ã¤¿ì°í ÀÚµ¿ ¼±ÅÃÇÑ´Ù
-        C.setSelectOnFocus(true); //µ¥ÀÌÅÍ°ª ¼ö½ÅÇÒ ‹š ÀÚµ¿Ã¤¿ò
+        C.setTriggerAction(ComboBox.ALL); //? ëª¨ë¥´ê² ë‹¤
+        C.setTypeAhead(true);  // ì´ë¥¼ ì±„ìš°ê³  ìë™ ì„ íƒí•œë‹¤
+        C.setSelectOnFocus(true); //ë°ì´í„°ê°’ ìˆ˜ì‹ í•  ë–„ ìë™ì±„ì›€
         C.setWidth(300);  
         C.setResizable(true); //?
         secondTab.add(C);
@@ -343,7 +343,7 @@ public class Register_Membership extends Window{
         final Button btnok = new Button("OK", new ButtonListenerAdapter() {
         	
         	public void onClick(Button btnok, EventObject e) {
-        		// membershipdata list ¼±¾ğ
+        		// membershipdata list ì„ ì–¸
         		membershipdata[0] = txtID.getText().trim();
         		membershipdata[1] = txtPassword.getText().trim();
         		membershipdata[2] = txtCheckPassword.getText().trim();
@@ -354,13 +354,13 @@ public class Register_Membership extends Window{
         		membershipdata[7] = listcountry.getText().trim();
         		membershipdata[8] = listcity.getText().trim();
         		
-        		// survey data list ¼±¾ğ
+        		// survey data list ì„ ì–¸
         		surveydata[0] = listinterest5.getText().trim();
         		surveydata[1] = A.getText().trim();
         		surveydata[2] = B.getText().trim();
         		surveydata[3] = C.getText().trim();
         		
-        		// interest data list ¼±¾ğ
+        		// interest data list ì„ ì–¸
 //        		Record[] userInterests = checkbox.getCheckbox_data();
 //        		for (int i =0; i<userInterests.length; i++) {
 //        			Record userinterest = userInterests[i];
@@ -368,7 +368,7 @@ public class Register_Membership extends Window{
 //        		} 
 //        		String anoterinterest = inputinterest.getText().trim();
         		
-        		// empty data Ã³¸®
+        		// empty data ì²˜ë¦¬
 //        		for(int i=0; i<(userInterests.length-1); i++) {
 //        			if(userInterests[i].equals("")) {
 //        				popup.setTitle("Please, input your interest data");
@@ -415,7 +415,7 @@ public class Register_Membership extends Window{
 				
 				//Japanese survey data Statistic
 				
-				//¼­¹öÅë½Å
+				//ì„œë²„í†µì‹ 
 				KJMembershipServiceAsync service = GWT.create(KJMembershipService.class);
 				service.Register_Membership(kjMember, new AsyncCallback<Void>() {
 
@@ -491,15 +491,18 @@ public class Register_Membership extends Window{
     };
     
     private Object[][] InterestList = new Object[][]{  
-        new Object[]{"1st", "intersts"},  
-        new Object[]{"2nd", "intersts"},
-        new Object[]{"3rd", "intersts"},
-        new Object[]{"4th", "intersts"},
-        new Object[]{"5th", "intersts"},
-        new Object[]{"6th", "intersts"},
-        new Object[]{"7th", "intersts"},
-        new Object[]{"8th", "intersts"},
-        new Object[]{"9th", "intersts"},
+        new Object[]{"ìŒì•…", "interests"},  
+        new Object[]{"ì˜í™”", "interests"},
+        new Object[]{"ê²Œì„", "interests"},
+        new Object[]{"ìš´ë™", "interests"},
+        new Object[]{"ë…ì„œ", "interests"},
+        new Object[]{"TV", "interests"},
+        new Object[]{"ì—¬í–‰", "interests"},
+        new Object[]{"ìš”ë¦¬", "interests"},
+        new Object[]{"ë“±ì‚°", "interests"},
+        new Object[]{"ì¶•êµ¬", "interests"},
+        new Object[] {"ë‚šì‹œ", "interests"},
+        new Object[] {"ê·¸ë¦¼ê·¸ë¦¬ê¸°", "interests"}
     };
     
     private Object[][] Getpreference()  {

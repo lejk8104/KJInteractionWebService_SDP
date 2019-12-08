@@ -60,7 +60,7 @@ public class ChatService extends Panel {
 		chatform.add(lb2, new AnchorLayoutData("200%"));
         
 		KJMembershipServiceAsync service = GWT.create(KJMembershipService.class);
-		service.findLCS("seiya.u77", new AsyncCallback<String>() {
+		service.findLCS("lejk8104", new AsyncCallback<String>() {
 			
 			@Override
 			public void onSuccess(String result) {

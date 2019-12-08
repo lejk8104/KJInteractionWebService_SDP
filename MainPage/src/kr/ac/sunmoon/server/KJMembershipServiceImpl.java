@@ -43,7 +43,7 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements KJM
 				String Birth = rs1.getString("Birth");
 				String Country = rs1.getString("Country");
 				String Local = rs1.getString(" Local");
-				//ÆÐ½º¿öµå Ã£±â
+				//ï¿½Ð½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½
 				if (ID.equals(id) && Name.equals(name)) {
 					kjmember.setID(id);
 					kjmember.setCheckPassword(Check_Password);
@@ -57,7 +57,7 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements KJM
 					con.close();
 					return kjmember;
 				}
-				//¾ÆÀÌµðÃ£±â
+				//ï¿½ï¿½ï¿½Ìµï¿½Ã£ï¿½ï¿½
 //				else if 
 			}
 			rs1.close();
@@ -111,7 +111,7 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements KJM
 			String checkpassword = kjMember.getCheckPassword();
 			String name = kjMember.getName();
 			String gender = kjMember.getGender();
-			String birh = kjMember.getBirth();
+			String birth = kjMember.getBirth();
 			String country = kjMember.getCountry();
 			String local = kjMember.getLocal();
 			
@@ -122,7 +122,7 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements KJM
 			Connection con = DriverManager.getConnection(url, user, password_);
 			
 			Statement stmt = con.createStatement();
-			String sql = "INSERT * into kj_members1hip_db values(\"id\", \"password\", \"checkpassword\" , \"name\", \"gender\", \"year\" , \"date\", \"country\", \"local\")";
+			String sql = "INSERT into kjmember values(\"" +id + "\", \"" + password + "\", \"" + checkpassword + "\", \"" + name + "\", \"" + gender + "\", \"" + birth + "\", \"" + country + "\", \"" + local + "\");";
 			ResultSet rs1 = stmt.executeQuery(sql);
 			
 			rs1.close();
@@ -175,7 +175,7 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements KJM
 		return loginmember;
 	}
 	
-	private int findLCS(int[][] c, String[] X, String[] Y) { //LCS¾Ë°í¸®Áò ±¸Çö
+	private int findLCS(int[][] c, String[] X, String[] Y) { //LCSï¿½Ë°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		for(int i=1; i<X.length+1; i++) {
 			for(int j=1; j<Y.length+1; j++) {
 				if(X[i-1].equals(Y[j-1]))
@@ -209,8 +209,6 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements KJM
 				myInterests[3] = rs1.getString("interest4");
 				myInterests[4] = rs1.getString("interest5");
 			}
-			for(int i=0; i<myInterests.length; i++)
-				System.out.println(myInterests[i] + ", ");
 			
 			String sql2 = "select ID, interest1, interest2, interest3, interest4, interest5 from survey where ID != '" + ID + "';";
 			ResultSet rs2 = stmt.executeQuery(sql2);

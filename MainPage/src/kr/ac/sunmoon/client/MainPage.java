@@ -438,7 +438,10 @@ public class MainPage implements EntryPoint  {
         return accordionPanel;
 	}
 	public static void setKJMember(KJMember kjmember) {
-		kjmember = kjmember;
+		MainPage.kjmember = kjmember;
+	}
+	public static KJMember getKJMember() {
+		return kjmember;
 	}
 	private FormPanel loginform() {
 		final FormPanel loginform = new FormPanel();  

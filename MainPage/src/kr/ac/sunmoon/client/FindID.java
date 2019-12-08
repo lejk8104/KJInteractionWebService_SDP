@@ -40,14 +40,14 @@ public class FindID extends Window {
   
         // Email input
         TextField txtemail = new TextField("Email", "email", 230);  
-//        ÀÌ¸ŞÀÏÅØ½ºÆ® È®ÀÎ
+//        ì´ë©”ì¼í…ìŠ¤íŠ¸ í™•ì¸
         txtemail.setAllowBlank(false);  
         findidform.add(txtemail); 
   
         // find id btn
         Button btnfindid = new Button("Find ID", new ButtonListenerAdapter() {
     		public void onClick(Button btnfindid, EventObject e) {
-//			window.show(); //window ¿¬°á ¹öÆ° ½ÇÁ¦ µ¿ÀÛ°úÁ¤
+//			window.show(); //window ì—°ê²° ë²„íŠ¼ ì‹¤ì œ ë™ì‘ê³¼ì •
     			}
     		});  
         findidform.addButton(btnfindid); 
@@ -61,6 +61,6 @@ public class FindID extends Window {
 
         this.add(findidform);  
 
-        RootPanel.get().add(this);  
+        RootPanel.get().add(this);
     }  
 }  
