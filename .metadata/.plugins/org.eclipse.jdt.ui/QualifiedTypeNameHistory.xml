@@ -5,13 +5,9 @@
 <fullyQualifiedTypeName name="com.google.gwt.event.logical.shared.AttachEvent.Handler"/>
 <fullyQualifiedTypeName name="com.google.gwt.user.client.ui.HTML"/>
 <fullyQualifiedTypeName name="com.google.gwt.dom.client.Style.Unit"/>
-<fullyQualifiedTypeName name="com.google.gwt.user.client.ui.Button"/>
 <fullyQualifiedTypeName name="com.google.gwt.event.dom.client.ClickHandler"/>
-<fullyQualifiedTypeName name="kr.ac.sunmoon.client.ChatService"/>
 <fullyQualifiedTypeName name="com.google.gwt.user.client.ui.HorizontalPanel"/>
 <fullyQualifiedTypeName name="com.gwtext.client.widgets.event.ButtonListener"/>
-<fullyQualifiedTypeName name="com.gwtext.client.widgets.Button"/>
-<fullyQualifiedTypeName name="com.gwtext.client.widgets.event.ButtonListenerAdapter"/>
 <fullyQualifiedTypeName name="com.gwtext.client.core.EventObject"/>
 <fullyQualifiedTypeName name="java.lang.Exception"/>
 <fullyQualifiedTypeName name="java.sql.Connection"/>
@@ -32,4 +28,13 @@
 <fullyQualifiedTypeName name="kr.ac.sunmoon.sqlTest"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.util.Collections"/>
+<fullyQualifiedTypeName name="com.gwtext.client.widgets.Panel"/>
+<fullyQualifiedTypeName name="kr.ac.sunmoon.LocalGlobaltest"/>
+<fullyQualifiedTypeName name="kr.ac.sunmoon.client.LoginService"/>
+<fullyQualifiedTypeName name="kr.ac.sunmoon.client.ChatService"/>
+<fullyQualifiedTypeName name="com.gwtext.client.widgets.event.ButtonListenerAdapter"/>
+<fullyQualifiedTypeName name="com.google.gwt.user.client.ui.Button"/>
+<fullyQualifiedTypeName name="com.gwtext.client.widgets.Button"/>
+<fullyQualifiedTypeName name="kr.ac.sunmoon.client.MainPage"/>
+<fullyQualifiedTypeName name="kr.ac.sunmoon.shared.KJMember"/>
 </qualifiedTypeNameHistroy>

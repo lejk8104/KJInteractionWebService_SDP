@@ -1,11 +1,20 @@
 package kr.ac.sunmoon.client;
 
-import com.google.gwt.i18n.client.*;  
-import com.google.gwt.core.client.EntryPoint;  
+import org.moxieapps.gwt.highcharts.client.Chart;
+import org.moxieapps.gwt.highcharts.client.Legend;
+import org.moxieapps.gwt.highcharts.client.Point;
+import org.moxieapps.gwt.highcharts.client.Series;
+import org.moxieapps.gwt.highcharts.client.ToolTip;
+import org.moxieapps.gwt.highcharts.client.ToolTipData;
+import org.moxieapps.gwt.highcharts.client.ToolTipFormatter;
+import org.moxieapps.gwt.highcharts.client.labels.DataLabelsData;
+import org.moxieapps.gwt.highcharts.client.labels.DataLabelsFormatter;
+import org.moxieapps.gwt.highcharts.client.labels.PieDataLabels;
+import org.moxieapps.gwt.highcharts.client.plotOptions.PiePlotOptions;
+import org.moxieapps.gwt.highcharts.client.plotOptions.PlotOptions;
+
+import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootPanel;  
-import org.moxieapps.gwt.highcharts.client.*;  
-import org.moxieapps.gwt.highcharts.client.labels.*;  
-import org.moxieapps.gwt.highcharts.client.plotOptions.*;  
 
 public class Testchart implements EntryPoint {
 	public void onModuleLoad() {

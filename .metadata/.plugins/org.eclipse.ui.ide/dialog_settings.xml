@@ -5,6 +5,7 @@
 		<item key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID" value="false"/>
 		<item key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED" value="false"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="D:\GitHub\KJInteractionWebService_SDP\testchart"/>
 			<item value="D:\GitHub\KJInteractionWebService_SDP\TestSQL"/>
 			<item value="D:\GitHub\KJInteractionWebService_SDP\LCSAlgorithm2"/>
 			<item value="D:\GitHub\KJInteractionWebService_SDP\LCSAlgorithm"/>

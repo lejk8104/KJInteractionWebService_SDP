@@ -13,6 +13,7 @@ public class KJMember implements IsSerializable {
 	private String Birth;
 	private String Country;
 	private String Local;
+	private String[] Interests;
 	 
 	public String getID() {
 		return ID;
@@ -67,5 +68,14 @@ public class KJMember implements IsSerializable {
 	}
 	public void setLocal(String Local) {
 		this.Local = Local;
+	}
+	public String[] getInterests() {
+		return Interests;
+	}
+	public void setInterests(String[] interests) {
+		Interests = interests;
+	}
+	public void setBirth(String birth) {
+		Birth = birth;
 	}
 }

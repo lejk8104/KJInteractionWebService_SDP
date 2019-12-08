@@ -108,7 +108,7 @@ public class ChatService extends Panel {
 			
 			@Override
 			public void onSuccess(KJMember result) {
-				com.google.gwt.user.client.Window.alert(result.getID());
+				com.google.gwt.user.client.Window.alert(result.getID() +", " + result.getName());
 				lb2.setText(result.getID());
 			}
 			

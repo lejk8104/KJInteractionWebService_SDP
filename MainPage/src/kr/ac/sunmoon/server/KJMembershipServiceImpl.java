@@ -191,8 +191,9 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements KJM
 	
 	@Override
 	public KJMember findLCS(KJMember kjmember){
-		System.out.println("you've successfully connected to server, and findLCS method worked well.");
-		System.out.println(MainPage.getKJMember().getID());
+		System.out.println("you've successfully connected to server, and findLCS method has worked well.");
+		System.out.println("His/Her inputted ID is : " + kjmember.getID());
+		System.out.println("His/Her inputted Password is : " + kjmember.getPassword());
 		String matchingID = null;
 		try {
 			String url = "jdbc:mysql://localhost:3306/sdp2?useSSL=false";
@@ -213,6 +214,7 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements KJM
 				myInterests[3] = rs1.getString("interest4");
 				myInterests[4] = rs1.getString("interest5");
 			}
+//			kjmember.setInterests(myInterests);
 			
 			String sql2 = "select ID, interest1, interest2, interest3, interest4, interest5 from survey where ID != '" + kjmember.getID() + "';";
 			ResultSet rs2 = stmt.executeQuery(sql2);
