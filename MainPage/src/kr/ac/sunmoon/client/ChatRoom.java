@@ -81,16 +81,15 @@ public class ChatRoom extends Window{
         chatroomform.setMargins(0, 0, 0, 0);
         chatroomPanel.setBorder(false);
         
-        //�޼��� �ڽ�
-//        TextField messagebox = new TextField();
-//        messagebox.setWidth("300");
+        Panel messagePanel = new Panel();
+        messagePanel.setLayout(new HorizontalLayout(5));
+        messagePanel.setMargins(0, 0, 0, 0);
+        messagePanel.setBorder(false);
+        
         final TextArea sendArea = new TextArea();
         sendArea.setWidth(250);
         sendArea.setHeight(50);
-        
         chatroomPanel.setHtml("<p>Send your message</p>");
-        
-        chatroomPanel.add(sendArea, new AnchorLayoutData("97%"));
         
         final Button sendBtn = new Button("Send", new ButtonListenerAdapter() {
         	public void onClick(Button sendBtn, EventObject e) {
@@ -100,8 +99,18 @@ public class ChatRoom extends Window{
         		textArea.setValue(sendArea.getText());    		
         	}
         }); 
+        messagePanel.add(sendArea, new AnchorLayoutData("97%"));
+        messagePanel.add(sendBtn);
         
-        chatroomPanel.add(sendBtn);
+        chatroomPanel.add(messagePanel);
+        
+        //�޼��� �ڽ�
+//        TextField messagebox = new TextField();
+//        messagebox.setWidth("300");
+
+        
+        chatroomPanel.setHtml("<p>Send your message</p>");
+//        chatroomPanel.add(sendArea, new AnchorLayoutData("97%"));
         overallPanel.add(chatroomPanel);
         
         //���� ��ȭâ

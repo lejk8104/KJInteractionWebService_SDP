@@ -18,7 +18,8 @@ import kr.ac.sunmoon.shared.KJMember;
 
 public class GridBox_Interest extends GridPanel  {
 		
-//	private static KJMember kjmember;
+	private static KJMember kjmember;
+//	private String id = kjmember.getID();
 
 	// Main method
 	public GridBox_Interest() {
@@ -53,8 +54,6 @@ public class GridBox_Interest extends GridPanel  {
 	
 	// ������ üũ�ڽ�
 	private Object[][] InterestList(){
-		KJMember c = MainPage.getKJMember();
-		String[] list = c.getInterests();
         return new Object[][]{  
                 new Object[]{"kjmember"},  
                 new Object[]{"chatting"},  
