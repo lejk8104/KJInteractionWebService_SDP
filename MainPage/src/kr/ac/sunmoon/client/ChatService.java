@@ -1,22 +1,17 @@
 package kr.ac.sunmoon.client;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Image;
 import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Position;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.Panel;
-import com.gwtext.client.widgets.Window;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.form.FormPanel;
 import com.gwtext.client.widgets.form.Label;
-import com.gwtext.client.widgets.layout.AnchorLayoutData;
-import com.gwtext.client.widgets.layout.ColumnLayoutData;
 import com.gwtext.client.widgets.layout.HorizontalLayout;
 
-import javafx.scene.control.Alert;
+import kr.ac.sunmoon.shared.KJMember;
 
 public class ChatService extends Panel {
 	private Label lb2;
@@ -70,7 +65,7 @@ public class ChatService extends Panel {
         chatform.add(middlePanel);
         chatform.add(user2Panel);
 		
-        kjMatching();
+        this.kjMatching();
         
 //		KJMembershipServiceAsync service = GWT.create(KJMembershipService.class);
 //		service.findLCS("lejk8104", new AsyncCallback<String>() {
@@ -109,12 +104,12 @@ public class ChatService extends Panel {
 	}        
     private void kjMatching() {
     	KJMembershipServiceAsync service = GWT.create(KJMembershipService.class);
-		service.findLCS("lejk8104", new AsyncCallback<String>() {
+		service.findLCS(MainPage.getKJMember(), new AsyncCallback<KJMember>() {
 			
 			@Override
-			public void onSuccess(String result) {
-				com.google.gwt.user.client.Window.alert(result);
-				lb2.setText(result);
+			public void onSuccess(KJMember result) {
+				com.google.gwt.user.client.Window.alert(result.getID());
+				lb2.setText(result.getID());
 			}
 			
 			@Override

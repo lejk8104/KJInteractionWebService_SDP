@@ -189,7 +189,7 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements KJM
 	}
 	
 	@Override
-	public String findLCS(String ID){
+	public KJMember findLCS(KJMember kjmember){
 		String matchingID = null;
 		try {
 			String url = "jdbc:mysql://localhost:3306/sdp2?useSSL=false";
@@ -200,7 +200,7 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements KJM
 			
 			Statement stmt = con.createStatement();
 			
-			String sql1 = "select interest1, interest2, interest3, interest4, interest5 from survey where ID = '" + ID + "';";
+			String sql1 = "select interest1, interest2, interest3, interest4, interest5 from survey where ID = '" + kjmember.getID() + "';";
 			ResultSet rs1 = stmt.executeQuery(sql1);
 			String[] myInterests = new String[5];
 			while(rs1.next()) {
@@ -211,7 +211,7 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements KJM
 				myInterests[4] = rs1.getString("interest5");
 			}
 			
-			String sql2 = "select ID, interest1, interest2, interest3, interest4, interest5 from survey where ID != '" + ID + "';";
+			String sql2 = "select ID, interest1, interest2, interest3, interest4, interest5 from survey where ID != '" + kjmember.getID() + "';";
 			ResultSet rs2 = stmt.executeQuery(sql2);
 			String[] interests;
 			int maxLCS = 0;
@@ -239,12 +239,13 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements KJM
 				}
 			}
 			matchingID = tmpID.get((int)(Math.random()*tmpID.size()));
+			kjmember.setID(matchingID);
 			rs2.close();
 			stmt.close();
 			con.close();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return matchingID;
+		return kjmember;
 	}
 }
