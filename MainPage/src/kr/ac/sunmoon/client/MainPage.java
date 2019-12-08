@@ -155,18 +155,6 @@ public class MainPage implements EntryPoint  {
         fourth_Column.add(logbtn);
         hpsearch.add(fourth_Column, new ColumnLayoutData(0.3));
         
-        
-        
-        // 광고실험로고
-        Button adbtn = new Button("Advertise_KJinteration ", new ButtonListenerAdapter() {
-        	public void onClick(Button logbtn, EventObject e) {
-        		final Advertise_KJinteration adwindow = new Advertise_KJinteration();
-        		adwindow.show(); //window 연결
-        	}
-        });
-            fourth_Column.add(adbtn);
-        
-
         // register logo
         Panel fiveth_Panel = new Panel();  
         fiveth_Panel.setLayout(new FormLayout());  
@@ -318,9 +306,7 @@ public class MainPage implements EntryPoint  {
 //        		+ "frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>");
 //        centerPanel.add(htmlPannel);
         borderPanel.add(centerPanel, new BorderLayoutData(RegionPosition.CENTER));  
-
         mainPanel.add(borderPanel);  
-  
         Viewport viewport = new Viewport(mainPanel);  
     } 
 	
