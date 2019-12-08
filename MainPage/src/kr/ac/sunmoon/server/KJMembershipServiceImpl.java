@@ -205,10 +205,11 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements KJM
 			
 			Statement stmt = con.createStatement();
 			
-			String sql1 = "select interest1, interest2, interest3, interest4, interest5 from kjmember where ID = '" + kjmember.getID() + "';";
+			String sql1 = "select Country, interest1, interest2, interest3, interest4, interest5 from kjmember where ID = '" + kjmember.getID() + "';";
 			ResultSet rs1 = stmt.executeQuery(sql1);
 			String[] myInterests = new String[5];
 			while(rs1.next()) {
+				kjmember.setCountry(rs1.getString("Country"));
 				myInterests[0] = rs1.getString("interest1");
 				myInterests[1] = rs1.getString("interest2");
 				myInterests[2] = rs1.getString("interest3");
@@ -217,36 +218,39 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements KJM
 			}
 			kjmember.setInterests(myInterests);
 			kjmembers[0] = kjmember;
+			System.out.println(kjmember.getCountry());
 			
-			String sql2 = "select ID, interest1, interest2, interest3, interest4, interest5 from kjmember where ID != '" + kjmember.getID() + "';";
+			String sql2 = "select ID, Country, interest1, interest2, interest3, interest4, interest5 from kjmember where ID != '" + kjmember.getID() + "';";
 			ResultSet rs2 = stmt.executeQuery(sql2);
 			String[] interests = null;
 			int maxLCS = 0;
 			ArrayList<String> tmpID = new ArrayList<String>();
+			KJMember kjmember2 = new KJMember();
 			while(rs2.next()) {
 				interests = new String[5];
-				String interest1 = rs2.getString("interest1");
-				interests[0] = interest1;
-				String interest2 = rs2.getString("interest2");
-				interests[1] = interest2;
-				String interest3 = rs2.getString("interest3");
-				interests[2] = interest3;
-				String interest4 = rs2.getString("interest4");
-				interests[3] = interest4;
-				String interest5 = rs2.getString("interest5");
-				interests[4] = interest5;
-				int[][] c = new int[myInterests.length+1][interests.length+1];
-				int LCS = findLCS(c, myInterests, interests);
-				if(LCS > maxLCS) {
-					maxLCS = LCS;
-					tmpID.removeAll(tmpID);
-				}
-				if(LCS >= maxLCS) {
-					tmpID.add(rs2.getString("ID"));
+				if (!(kjmember.getCountry().equals(rs2.getString("Country")))) {
+					String interest1 = rs2.getString("interest1");
+					interests[0] = interest1;
+					String interest2 = rs2.getString("interest2");
+					interests[1] = interest2;
+					String interest3 = rs2.getString("interest3");
+					interests[2] = interest3;
+					String interest4 = rs2.getString("interest4");
+					interests[3] = interest4;
+					String interest5 = rs2.getString("interest5");
+					interests[4] = interest5;
+					int[][] c = new int[myInterests.length+1][interests.length+1];
+					int LCS = findLCS(c, myInterests, interests);
+					if(LCS > maxLCS) {
+						maxLCS = LCS;
+						tmpID.removeAll(tmpID);
+					}
+					if(LCS >= maxLCS) {
+						tmpID.add(rs2.getString("ID"));
+					}
 				}
 			}
 			matchingID = tmpID.get((int)(Math.random()*tmpID.size()));
-			KJMember kjmember2 = new KJMember();
 			kjmember2.setID(matchingID);
 			kjmember2.setInterests(interests);
 			kjmembers[1] = kjmember2;
