@@ -12,10 +12,12 @@ import com.gwtext.client.widgets.grid.CheckboxColumnConfig;
 import com.gwtext.client.widgets.grid.CheckboxSelectionModel;
 import com.gwtext.client.widgets.grid.ColumnConfig;
 import com.gwtext.client.widgets.grid.ColumnModel;
-import com.gwtext.client.widgets.grid.GridPanel; 
+import com.gwtext.client.widgets.grid.GridPanel;
+
+import kr.ac.sunmoon.shared.KJMember; 
 
 public class GridBox_Interest extends GridPanel  {
-	
+		
 	// Main method
 	public GridBox_Interest() {
 		super();	
@@ -37,7 +39,6 @@ public class GridBox_Interest extends GridPanel  {
 		this.setWidth(140);
 		this.setHeight(150);
         this.setFrame(true);  
-        this.setIconCls("grid-icon");
 	}
 	
 	final public Record[] getCheckbox_data() {
@@ -51,7 +52,7 @@ public class GridBox_Interest extends GridPanel  {
 	// 가져온 체크박스
 	private Object[][] InterestList(){  
         return new Object[][]{  
-                new Object[]{"kjinteraction"},  
+                new Object[]{"kjmember"},  
                 new Object[]{"chatting"},  
                 new Object[]{"fencing"},  
                 new Object[]{"trip"},  
@@ -71,7 +72,7 @@ public class GridBox_Interest extends GridPanel  {
     
     final MemoryProxy proxy = new MemoryProxy(interestlist);
     final ArrayReader reader = new ArrayReader(recordDef); 
-    String a = "lejk8104";
+    String a = "seiya.u77";
     String b = "'s interest";
     //input grid columns
     ColumnConfig[] columns = new ColumnConfig[]{  

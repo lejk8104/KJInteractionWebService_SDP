@@ -43,7 +43,7 @@ public class MainPage implements EntryPoint  {
     private TreeNode ctxNode;  
     private TreeEditor treeEditor; 
     private static KJMember kjmember;
-    
+   
     private native void drawMap() /*-{
     	$wnd.dramMap();
     }-*/;
@@ -223,7 +223,7 @@ public class MainPage implements EntryPoint  {
         eastPanel.setWidth(250);  
   
         Panel accordionPanel = createAccordionPanel();  
-        accordionPanel.setHeight(170);  
+        accordionPanel.setHeight(220);  
         accordionPanel.setWidth(250);
         
         BorderLayoutData eastData = new BorderLayoutData(RegionPosition.EAST);  
@@ -421,8 +421,9 @@ public class MainPage implements EntryPoint  {
         Panel mypagePanel = new Panel();
         mypagePanel.setTitle("Mypage");
 //        mypagePanel.setIconCls("settings-icon");  
-        FormPanel loginform = loginform();
-        mypagePanel.add(loginform);
+//        FormPanel loginform = loginform();
+        UserPage userform = new UserPage();
+        mypagePanel.add(userform);
         accordionPanel.add(mypagePanel);  
   
         //user image list
@@ -437,9 +438,15 @@ public class MainPage implements EntryPoint  {
 
         return accordionPanel;
 	}
+	
 	public static void setKJMember(KJMember kjmember) {
 		kjmember = kjmember;
 	}
+	public static void afterLogin() {
+		
+	}
+	
+	// 로그인 폼
 	private FormPanel loginform() {
 		final FormPanel loginform = new FormPanel();  
         loginform.setFrame(true);
@@ -505,5 +512,6 @@ public class MainPage implements EntryPoint  {
 		
         return loginform;
 	}
+	//After event handling
 }
  	  

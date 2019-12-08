@@ -14,6 +14,8 @@ import com.gwtext.client.widgets.layout.FormLayout;
 import com.gwtext.client.widgets.layout.HorizontalLayout;
 import com.gwtext.client.widgets.layout.VerticalLayout;
 
+import kr.ac.sunmoon.shared.KJMember;
+
 public class ChatRoom extends Window{
 	public ChatRoom() {
 		super();
@@ -40,7 +42,6 @@ public class ChatRoom extends Window{
 //        overallPanel.setPaddings(15);
         overallPanel.setLayout(new HorizontalLayout(15));
         chatroomform.add(overallPanel);
-          
         
         //user1
         Panel user1Panel = new Panel();
@@ -48,12 +49,12 @@ public class ChatRoom extends Window{
         user1Panel.setBorder(false);
         
         Image imglogo1 = new Image();
-		imglogo1.setUrl("image/login.png");
+		imglogo1.setUrl("UserImage/JapaneseFemale.png");
 		user1Panel.add(imglogo1, new AnchorLayoutData("97%"));
 		
 		overallPanel.add(user1Panel);  
 		Label lb1 = new Label("seiya.u77 ");
-		lb1.setPosition(30, 10);
+		lb1.setPosition(50, 10);
 		user1Panel.add(lb1, new AnchorLayoutData("97%"));
 		
 		// Ã¤ÆÃ·ë
