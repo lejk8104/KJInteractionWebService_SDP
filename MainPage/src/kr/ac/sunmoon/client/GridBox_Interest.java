@@ -25,6 +25,7 @@ public class GridBox_Interest extends GridPanel  {
 	public GridBox_Interest() {
 		super();	
 		
+		kjmember = ChatService.kjmember;
 		// data setting 1: store ����
         final Store interestStore = new Store(proxy, reader);  
         interestStore.load(); 
@@ -53,13 +54,13 @@ public class GridBox_Interest extends GridPanel  {
 	final CheckboxSelectionModel CheckboxInterest = new CheckboxSelectionModel();  
 	
 	// ������ üũ�ڽ�
-	private Object[][] InterestList(){
+	private Object[][] InterestList(String[] interest){
         return new Object[][]{  
-                new Object[]{"kjmember"},  
-                new Object[]{"chatting"},  
-                new Object[]{"fencing"},  
-                new Object[]{"trip"},  
-                new Object[]{"movie"},    
+                new Object[]{interest[0]},  
+                new Object[]{interest[1]},  
+                new Object[]{interest[2]},  
+                new Object[]{interest[3]},  
+                new Object[]{interest[4]},    
         };  
     }  
 	
@@ -71,7 +72,7 @@ public class GridBox_Interest extends GridPanel  {
     );
     
     //Db�� ���� ����� preferlist object ����
-    final Object[][] interestlist = InterestList();
+    final Object[][] interestlist = InterestList(kjmember.getInterests());
     
     final MemoryProxy proxy = new MemoryProxy(interestlist);
     final ArrayReader reader = new ArrayReader(recordDef); 
@@ -79,7 +80,6 @@ public class GridBox_Interest extends GridPanel  {
     String b = "'s interest";
     //input grid columns
     ColumnConfig[] columns = new ColumnConfig[]{  
-    		
             new ColumnConfig(a+b, "interest", 160, true, null, "interest"),  
     };  
 }
