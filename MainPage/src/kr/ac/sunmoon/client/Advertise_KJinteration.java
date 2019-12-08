@@ -14,6 +14,7 @@ import org.moxieapps.gwt.highcharts.client.plotOptions.PiePlotOptions;
 import org.moxieapps.gwt.highcharts.client.plotOptions.PlotOptions;
 
 import com.gwtext.client.widgets.Panel;
+import com.gwtext.client.widgets.form.Label;
 import com.gwtext.client.widgets.layout.VerticalLayout;
 
 
@@ -29,7 +30,7 @@ public class Advertise_KJinteration extends Panel{
 		this.setClosable(true);
 		this.setWidth(950);
 		this.setHeight(700);
-		this.setMargins(30, 75, 100, 0);
+		this.setMargins(10, 55, 100, 0);
 
 		Panel formpanel = new Panel();
 		formpanel.setFrame(true);
@@ -39,11 +40,15 @@ public class Advertise_KJinteration extends Panel{
 	    formpanel.setMargins(20, 135, 100, 20);
 		
 		Chart chart = createChart();
+		
+		Label adlbl = new Label("A lot of people are participating in kJ interaction\r\n" + 
+				"If you lead to change, com on join us");
 		formpanel.add(chart);
+		formpanel.add(adlbl);
 	    this.add(formpanel);
 	}
-	 public Chart createChart() {  
-		  
+	public Chart createChart() {  
+		
 	        final Chart chart = new Chart()  
 	            .setType(Series.Type.PIE)  
 	            .setChartTitleText("Statistics city of low KJ Interaction")  
@@ -82,7 +87,7 @@ public class Advertise_KJinteration extends Panel{
 	                    }  
 	                })  
 	            );  
-	  
+	       
 	        chart.addSeries(chart.createSeries()  
 	            .setName("Low KJ Interaction")  
 	            .setPoints(new Point[]{  
@@ -98,7 +103,6 @@ public class Advertise_KJinteration extends Panel{
 	                new Point("Gyeonggi", 45.2)
 	            })  
 	        );  
-	  
 	        return chart;  
 	    }  
 }
