@@ -93,8 +93,6 @@ public class ChatRoom extends Window{
         textArea.setHideLabel(true);  
         chatroomPanel.add(textArea, new AnchorLayoutData("100% -53")); 
         
-        
-        
         TextArea textArea2 = new TextArea("currentMessage", "subject");
 //        textArea2.setValue(id+name+text);
         textArea.setValue("message : ");

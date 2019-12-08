@@ -21,6 +21,7 @@ import com.gwtext.client.widgets.event.ButtonListener;
 import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.form.ComboBox;
 import com.gwtext.client.widgets.form.FormPanel;
+import com.gwtext.client.widgets.form.Label;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.layout.AccordionLayout;
 import com.gwtext.client.widgets.layout.AnchorLayoutData;
@@ -30,6 +31,8 @@ import com.gwtext.client.widgets.layout.ColumnLayout;
 import com.gwtext.client.widgets.layout.ColumnLayoutData;
 import com.gwtext.client.widgets.layout.FitLayout;
 import com.gwtext.client.widgets.layout.FormLayout;
+import com.gwtext.client.widgets.layout.HorizontalLayout;
+import com.gwtext.client.widgets.layout.VerticalLayout;
 import com.gwtext.client.widgets.menu.Menu;
 import com.gwtext.client.widgets.tree.TreeEditor;
 import com.gwtext.client.widgets.tree.TreeNode;
@@ -43,12 +46,14 @@ public class MainPage implements EntryPoint  {
     private TreeNode ctxNode;  
     private TreeEditor treeEditor; 
     private static KJMember kjmember;
-   
-    private native void drawMap() /*-{
-    	$wnd.dramMap();
-    }-*/;
+    private static Panel accordionPanel;
+    private static FormPanel loginform = loginform();
+    private static UserPage userpage = new UserPage();
+    private static Panel thirdtab = new Panel();
+    private static ChatService chatservice = new ChatService();
+    private static CheckBox_Userimage userlist = new CheckBox_Userimage();
+    private static Panel selectImagePanel = new Panel("Select Image");
     
-	@Override
 	public void onModuleLoad() {
 		// TODO Auto-generated method stub
 		Panel mainPanel = new Panel();  
@@ -268,7 +273,7 @@ public class MainPage implements EntryPoint  {
         Panel secondTab = new Panel();
         secondTab.setTitle("Main Page");
         //채팅방 들어가기
-        Panel thirdtab = new Panel();
+        
 //        Button chatBtn = new Button("Chatting Start", new ButtonListenerAdapter() {
 //        	public void onClick(Button chatBtn, EventObject e) {
 //        		final ChatService chatService = new ChatService();
@@ -276,8 +281,7 @@ public class MainPage implements EntryPoint  {
 //        	}
 //        });
 //        thirdtab.addButton(chatBtn);
-        ChatService chatservice = new ChatService();
-        thirdtab.add(chatservice);
+        
         thirdtab.setTitle("Chatting");
         //동영상 추천
         Panel fourthtab = new Panel();
@@ -307,10 +311,10 @@ public class MainPage implements EntryPoint  {
         // Main Mathod
         centerPanel.add(tabPanel);
         HTMLPanel htmlPannel = new HTMLPanel();
-        htmlPannel.setMargins(10, 50, 53, 10);
-        htmlPannel.setHtml("<iframe width='560' height='315' src='https://www.youtube.com/embed/bkcitbJzi6c' "
-        		+ "frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>");
-        centerPanel.add(htmlPannel);
+//        htmlPannel.setMargins(10, 50, 53, 10);
+//        htmlPannel.setHtml("<iframe width='560' height='315' src='https://www.youtube.com/embed/bkcitbJzi6c' "
+//        		+ "frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>");
+//        centerPanel.add(htmlPannel);
         borderPanel.add(centerPanel, new BorderLayoutData(RegionPosition.CENTER));  
 
         mainPanel.add(borderPanel);  
@@ -408,10 +412,43 @@ public class MainPage implements EntryPoint  {
             setHeight(400);  
             setEnableDD(true);  
             setRootNode(mainService);
-            
+//            afterLogin();
         }  
         
     }  
+	private Panel UserPage() {
+		
+		//호출용 User Panel
+		Panel userpage = new Panel();
+		userpage.setBorder(false);
+		userpage.setLayout(new HorizontalLayout(10));
+		userpage.setPaddings(0);
+		userpage.setWidth(300);
+		userpage.setHeight(300);
+		userpage.setMargins(10, 15, 15, 10);
+//		this.setButtonAlign(Position.CENTER);
+		
+		Panel userform = new Panel();
+		userform.setBorder(false);
+		userform.setLayout(new VerticalLayout(10));
+		userform.setPaddings(0);
+		
+		Panel interestform = new Panel();
+		interestform.setBorder(false);
+		interestform.setPaddings(0);
+		
+		Image userimage = new Image("UserImage/JapaneseFemale.png");
+		Label txtlabel = new Label("seiya.u77");
+		GridBox_Interest userinterest = new GridBox_Interest();
+		
+		userform.add(userimage);
+		userform.add(txtlabel);
+		interestform.add(userinterest);
+		userpage.add(userform);
+		userpage.add(userinterest);
+		return userpage;
+	}
+	
 	// Accoredion Panel
 	private Panel createAccordionPanel() {  
         Panel accordionPanel = new Panel();  
@@ -420,17 +457,15 @@ public class MainPage implements EntryPoint  {
         //mypage
         Panel mypagePanel = new Panel();
         mypagePanel.setTitle("Mypage");
-//        mypagePanel.setIconCls("settings-icon");  
-//        FormPanel loginform = loginform();
-        UserPage userform = new UserPage();
-        mypagePanel.add(userform);
+        
+        mypagePanel.add(loginform);
         accordionPanel.add(mypagePanel);  
   
         //user image list
-        Panel selectImagePanel = new Panel("Select Image");
-        CheckBox_Userimage userlist = new CheckBox_Userimage();
+        
+
         Button button = new Button("Get Selected");
-        selectImagePanel.add(userlist);
+        
         accordionPanel.add(selectImagePanel);  
         
         //change another interest
@@ -439,15 +474,24 @@ public class MainPage implements EntryPoint  {
         return accordionPanel;
 	}
 	
+	//로그인 후처리
 	public static void setKJMember(KJMember kjmember) {
 		kjmember = kjmember;
 	}
+
 	public static void afterLogin() {
+		accordionPanel.remove(loginform);
+		accordionPanel.add(userpage);
+		
+//		thirdtab.remove(w);
+		thirdtab.add(chatservice);
+		
+//		selectImagePanel.remove(d);
+		selectImagePanel.add(userlist);
 		
 	}
-	
 	// 로그인 폼
-	private FormPanel loginform() {
+	private static FormPanel loginform() {
 		final FormPanel loginform = new FormPanel();  
         loginform.setFrame(true);
         loginform.setWidth(250);  
