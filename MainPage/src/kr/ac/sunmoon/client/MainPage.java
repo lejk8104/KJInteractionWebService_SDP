@@ -50,11 +50,14 @@ public class MainPage implements EntryPoint  {
     private static KJMember kjmember;
     private static Panel accordionPanel;
     private static Panel mypagePanel;
+    static Panel hpsearch;
+    static Panel fourth_Column;
     private static FormPanel loginform = loginform();
     private static UserPage userpage = new UserPage();
     private static Panel thirdtab = new Panel();
     private static ChatService chatservice;
     private static CheckBox_Userimage userlist = new CheckBox_Userimage();
+    static Button logbtn;
     
     private static Panel nomalPanel;
 	
@@ -77,7 +80,7 @@ public class MainPage implements EntryPoint  {
         borderPanel.add(northPanel, new BorderLayoutData(RegionPosition.NORTH));  
         
         
-        Panel hpsearch = new Panel();
+        hpsearch = new Panel();
         hpsearch.setLayout(new ColumnLayout());
         hpsearch.setMargins(5, 233, 252, 5);
         
@@ -126,12 +129,12 @@ public class MainPage implements EntryPoint  {
 //        hpsearch.add(third_Column, new ColumnLayoutData(0.1));
         
         // login logo
-        Panel fourth_Column = new Panel();  
+        fourth_Column = new Panel();  
         fourth_Column.setLayout(new FormLayout());  
         fourth_Column.setBorder(false);
         fourth_Column.setMargins(0, 0, 0, 0);
 
-        Button logbtn = new Button("Login Service", new ButtonListenerAdapter() {
+        logbtn = new Button("Login Service", new ButtonListenerAdapter() {
         	public void onClick(Button logbtn, EventObject e) {
         		final LoginService loginwindow = new LoginService();
         		loginwindow.show(); //window 연결

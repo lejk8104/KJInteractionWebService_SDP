@@ -13,6 +13,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import kr.ac.sunmoon.client.KJMembershipService;
 import kr.ac.sunmoon.client.LoginService;
+import kr.ac.sunmoon.client.MainPage;
 import kr.ac.sunmoon.shared.KJMember;
 
 /**
@@ -190,6 +191,8 @@ public class KJMembershipServiceImpl extends RemoteServiceServlet implements KJM
 	
 	@Override
 	public KJMember findLCS(KJMember kjmember){
+		System.out.println("you've successfully connected to server, and findLCS method worked well.");
+		System.out.println(MainPage.getKJMember().getID());
 		String matchingID = null;
 		try {
 			String url = "jdbc:mysql://localhost:3306/sdp2?useSSL=false";

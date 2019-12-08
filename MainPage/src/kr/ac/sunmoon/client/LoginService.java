@@ -12,6 +12,7 @@ import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.form.FormPanel;
 import com.gwtext.client.widgets.form.TextField;
 import com.gwtext.client.widgets.grid.GridPanel;
+import com.gwtext.client.widgets.layout.ColumnLayoutData;
 
 import kr.ac.sunmoon.shared.KJMember;
 
@@ -19,6 +20,7 @@ public class LoginService extends Window{
 
 	String[] logindata = new String[2];
 	Window popup = new Window();
+	final FormPanel loginform;
 
 	public LoginService()  {
 	
@@ -31,7 +33,7 @@ public class LoginService extends Window{
 		this.setPlain(true);
 		this.setCloseAction(this.HIDE);
 		
-		final FormPanel loginform = new FormPanel();  
+		loginform = new FormPanel();  
         loginform.setFrame(true);
         loginform.setTitle("Login Service");
         loginform.setWidth(350);  
@@ -80,6 +82,8 @@ public class LoginService extends Window{
 						} else if (result.getName() == "")
 							popup.setTitle("Login failed");
 						popup.show();
+						MainPage.logbtn.destroy();
+						LoginService.this.createLogoutButton();
 						LoginService.this.hide();
 					}
 					public void onFailure(Throwable caught) {
@@ -91,7 +95,7 @@ public class LoginService extends Window{
 				});
 			}
 		});
-        loginform.addButton(btnlogin);  
+        loginform.addButton(btnlogin);    
         
         // Cancel btn
         Button btncancel = new Button("Cancel", new ButtonListenerAdapter() {
@@ -139,4 +143,11 @@ public class LoginService extends Window{
         this.add(loginform); 
         
     }  
+	private void createLogoutButton() {
+		final Button logout = new Button("Logout");
+		MainPage.fourth_Column.insert(0, logout);
+		MainPage.hpsearch.insert(0, MainPage.fourth_Column);
+		logout.setVisible(true);
+//		MainPage.hpsearch.add(MainPage.fourth_Column, new ColumnLayoutData(0.3));
+	}
 }

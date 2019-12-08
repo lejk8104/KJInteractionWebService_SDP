@@ -16,7 +16,7 @@ import kr.ac.sunmoon.shared.KJMember;
 
 public class UserPage extends Panel {
 	
-	private static KJMember kjmember;
+//	private static KJMember kjmember;
 	
 	public UserPage() {
 		this.setBorder(false);
@@ -37,7 +37,8 @@ public class UserPage extends Panel {
 		interestform.setPaddings(0);
 		
 		Image userimage = new Image("UserImage/JapaneseFemale.png");
-		Label txtlabel = new Label("seiya.u77");
+		Label txtlabel = new Label();
+		txtlabel.setText("seiya.u77");
 		GridBox_Interest userinterest = new GridBox_Interest();
 		
 		userform.add(userimage);
