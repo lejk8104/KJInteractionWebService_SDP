@@ -502,7 +502,7 @@ public class MainPage implements EntryPoint  {
 	public static void chatservice() {
 //		thirdtab.remove(nomalPanel);
 		chatservice = new ChatService();
-		thirdtab.add(chatservice);
+		thirdtab.insert(0, chatservice);
 	}
 	// 비로그인 시 나타나는 화면 정의
 	private static Panel nomalPanel() {
