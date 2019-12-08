@@ -107,7 +107,7 @@ public class ChatService extends Panel {
 		service.findLCS(MainPage.getKJMember(), new AsyncCallback<KJMember[]>() {
 			
 			@Override
-			public void onSuccess(KJMember[] result) {
+			public void onSuccess(KJMember[] result) { // you can get ID and 5 interests
 				com.google.gwt.user.client.Window.alert(result[0].getID() +", " + result[1].getID());
 				lb2.setText(result[0].getID());
 			}
