@@ -2,7 +2,9 @@ package kr.ac.sunmoon.client;
 
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import com.gwtext.client.core.Position;
+import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.Window;
 import com.gwtext.client.widgets.form.FormPanel;
@@ -65,57 +67,70 @@ public class ChatRoom extends Window{
 		lb1.setPosition(50, 10);
 		user1Panel.add(lb1, new AnchorLayoutData("97%"));
 		
-		// Ã¤ÆÃ·ë
+		// Ã¤ï¿½Ã·ï¿½
         Panel chatroomPanel = new Panel();  
         chatroomPanel.setLayout(new VerticalLayout(15));
         chatroomform.setMargins(0, 0, 0, 0);
         chatroomPanel.setBorder(false);
         
-        //¸Þ¼¼Áö ¹Ú½º
-        TextField messagebox = new TextField();
-        messagebox.setWidth("300");
+        //ï¿½Þ¼ï¿½ï¿½ï¿½ ï¿½Ú½ï¿½
+//        TextField messagebox = new TextField();
+//        messagebox.setWidth("300");
+        TextArea sendArea = new TextArea();
+        sendArea.setWidth(250);
+        sendArea.setHeight(50);
         
         chatroomPanel.setHtml("<p>Send your message</p>");
         
-        chatroomPanel.add(messagebox, new AnchorLayoutData("97%"));
+        chatroomPanel.add(sendArea, new AnchorLayoutData("97%"));
+        
+        Button sendBtn = new Button("Send");
+        chatroomPanel.add(sendBtn);
         overallPanel.add(chatroomPanel);
         
-        //ÇöÀç ´ëÈ­Ã¢
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­Ã¢
         Label messagelabel = new Label("current message");
         chatroomPanel.add(messagelabel);
         
-        TextArea textArea = new TextArea("currentMessage", "subject");
-        textArea.setValue(id+name+text);
-        HTML html = new HTML("<hr>");
-//        textArea.setValue("message : ");
+        TextArea textArea = new TextArea();
         textArea.setWidth(300);
-        textArea.setHeight(25);
-        textArea.setHideLabel(true);  
-        chatroomPanel.add(textArea, new AnchorLayoutData("100% -53")); 
+        textArea.setHeight(150);
+        textArea.setReadOnly(true);
         
-        TextArea textArea2 = new TextArea("currentMessage", "subject");
-//        textArea2.setValue(id+name+text);
-        textArea.setValue("message : ");
-        textArea2.setWidth(300);
-        textArea2.setHeight(25);
-        textArea2.setHideLabel(true);  
-        chatroomPanel.add(textArea2, new AnchorLayoutData("100% -53")); 
+        chatroomPanel.add(new ScrollPanel(textArea));
         
-        TextArea textArea3 = new TextArea("currentMessage", "subject");
-//      textArea2.setValue(id+name+text);
-        textArea.setValue("message : ");
-        textArea3.setWidth(300);
-        textArea3.setHeight(25);
-        textArea3.setHideLabel(true);  
-        chatroomPanel.add(textArea3, new AnchorLayoutData("100% -53")); 
-      
-        TextArea textArea4 = new TextArea("currentMessage", "subject");
-//    textArea2.setValue(id+name+text);
-        textArea.setValue("message : ");
-        textArea4.setWidth(300);
-        textArea4.setHeight(25);
-        textArea4.setHideLabel(true);  
-        chatroomPanel.add(textArea4, new AnchorLayoutData("100% -53")); 
+//        TextArea textArea = new TextArea("currentMessage", "subject");
+//        textArea.setValue(id+name+text);
+//        HTML html = new HTML("<hr>");
+////        textArea.setValue("message : ");
+//        textArea.setWidth(300);
+//        textArea.setHeight(25);
+//        textArea.setHideLabel(true);  
+//        chatroomPanel.add(textArea, new AnchorLayoutData("100% -53")); 
+//        
+//        TextArea textArea2 = new TextArea("currentMessage", "subject");
+////        textArea2.setValue(id+name+text);
+//        textArea.setValue("message : ");
+//        textArea2.setWidth(300);
+//        textArea2.setHeight(25);
+//        textArea2.setHideLabel(true);  
+//        chatroomPanel.add(textArea2, new AnchorLayoutData("100% -53")); 
+//        
+//        TextArea textArea3 = new TextArea("currentMessage", "subject");
+////      textArea2.setValue(id+name+text);
+//        textArea.setValue("message : ");
+//        textArea3.setWidth(300);
+//        textArea3.setHeight(25);
+//        textArea3.setHideLabel(true);  
+//        chatroomPanel.add(textArea3, new AnchorLayoutData("100% -53")); 
+//      
+//        TextArea textArea4 = new TextArea("currentMessage", "subject");
+////    textArea2.setValue(id+name+text);
+//        textArea.setValue("message : ");
+//        textArea4.setWidth(300);
+//        textArea4.setHeight(25);
+//        textArea4.setHideLabel(true);  
+//        chatroomPanel.add(textArea4, new AnchorLayoutData("100% -53")); 
         
         //user1
         Panel user1Panel2 = new Panel();
