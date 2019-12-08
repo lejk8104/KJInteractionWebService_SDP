@@ -34,7 +34,9 @@
 <fullyQualifiedTypeName name="kr.ac.sunmoon.client.ChatService"/>
 <fullyQualifiedTypeName name="com.gwtext.client.widgets.event.ButtonListenerAdapter"/>
 <fullyQualifiedTypeName name="com.google.gwt.user.client.ui.Button"/>
-<fullyQualifiedTypeName name="com.gwtext.client.widgets.Button"/>
 <fullyQualifiedTypeName name="kr.ac.sunmoon.client.MainPage"/>
 <fullyQualifiedTypeName name="kr.ac.sunmoon.shared.KJMember"/>
+<fullyQualifiedTypeName name="com.google.gwt.user.client.ui.ScrollPanel"/>
+<fullyQualifiedTypeName name="com.gwtext.client.widgets.form.TextArea"/>
+<fullyQualifiedTypeName name="com.gwtext.client.widgets.Button"/>
 </qualifiedTypeNameHistroy>

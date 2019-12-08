@@ -1,12 +1,18 @@
 package kr.ac.sunmoon.client;
 
+import java.util.Date;
+
+import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.i18n.client.TimeZone;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.ScrollPanel;
+import com.gwtext.client.core.EventObject;
 import com.gwtext.client.core.Position;
 import com.gwtext.client.widgets.Button;
 import com.gwtext.client.widgets.Panel;
 import com.gwtext.client.widgets.Window;
+import com.gwtext.client.widgets.event.ButtonListenerAdapter;
 import com.gwtext.client.widgets.form.FormPanel;
 import com.gwtext.client.widgets.form.Label;
 import com.gwtext.client.widgets.form.TextArea;
@@ -25,6 +31,8 @@ public class ChatRoom extends Window{
 	private static String id = kjmember.getID();
 	private static String name = kjmember.getName();
 	private static String text;
+	final private TextArea textArea;
+	final private Date date = null;
 	
 	public ChatRoom() {
 		super();
@@ -76,7 +84,7 @@ public class ChatRoom extends Window{
         //�޼��� �ڽ�
 //        TextField messagebox = new TextField();
 //        messagebox.setWidth("300");
-        TextArea sendArea = new TextArea();
+        final TextArea sendArea = new TextArea();
         sendArea.setWidth(250);
         sendArea.setHeight(50);
         
@@ -84,7 +92,15 @@ public class ChatRoom extends Window{
         
         chatroomPanel.add(sendArea, new AnchorLayoutData("97%"));
         
-        Button sendBtn = new Button("Send");
+        final Button sendBtn = new Button("Send", new ButtonListenerAdapter() {
+        	public void onClick(Button sendBtn, EventObject e) {
+        		DateTimeFormat dtf = DateTimeFormat.getFormat("yyyyMMddHHmmss");
+        		textArea.setVtypeText("aaa");
+        		textArea.setValue(dtf.format(date, TimeZone.createTimeZone(0)));
+        		textArea.setValue(sendArea.getText());    		
+        	}
+        }); 
+        
         chatroomPanel.add(sendBtn);
         overallPanel.add(chatroomPanel);
         
@@ -92,7 +108,7 @@ public class ChatRoom extends Window{
         Label messagelabel = new Label("current message");
         chatroomPanel.add(messagelabel);
         
-        TextArea textArea = new TextArea();
+        textArea = new TextArea();
         textArea.setWidth(300);
         textArea.setHeight(150);
         textArea.setReadOnly(true);
