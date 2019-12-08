@@ -1,5 +1,6 @@
 package kr.ac.sunmoon.client;
 
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
 import com.gwtext.client.core.Position;
 import com.gwtext.client.widgets.Panel;
@@ -17,8 +18,15 @@ import com.gwtext.client.widgets.layout.VerticalLayout;
 import kr.ac.sunmoon.shared.KJMember;
 
 public class ChatRoom extends Window{
+	
+	private static KJMember kjmember;
+	private static String id = kjmember.getID();
+	private static String name = kjmember.getName();
+	private static String text;
+	
 	public ChatRoom() {
 		super();
+		
 		this.setBorder(false);
 		this.setPaddings(0);
 		this.setClosable(true);
@@ -60,7 +68,7 @@ public class ChatRoom extends Window{
 		// 채팅룸
         Panel chatroomPanel = new Panel();  
         chatroomPanel.setLayout(new VerticalLayout(15));
-        chatroomform.setMargins(30, 0, 0, 0);
+        chatroomform.setMargins(0, 0, 0, 0);
         chatroomPanel.setBorder(false);
         
         //메세지 박스
@@ -77,11 +85,39 @@ public class ChatRoom extends Window{
         chatroomPanel.add(messagelabel);
         
         TextArea textArea = new TextArea("currentMessage", "subject");
-        textArea.setValue("message : ");
+        textArea.setValue(id+name+text);
+        HTML html = new HTML("<hr>");
+//        textArea.setValue("message : ");
         textArea.setWidth(300);
-        textArea.setHeight(200);
+        textArea.setHeight(25);
         textArea.setHideLabel(true);  
         chatroomPanel.add(textArea, new AnchorLayoutData("100% -53")); 
+        
+        
+        
+        TextArea textArea2 = new TextArea("currentMessage", "subject");
+//        textArea2.setValue(id+name+text);
+        textArea.setValue("message : ");
+        textArea2.setWidth(300);
+        textArea2.setHeight(25);
+        textArea2.setHideLabel(true);  
+        chatroomPanel.add(textArea2, new AnchorLayoutData("100% -53")); 
+        
+        TextArea textArea3 = new TextArea("currentMessage", "subject");
+//      textArea2.setValue(id+name+text);
+        textArea.setValue("message : ");
+        textArea3.setWidth(300);
+        textArea3.setHeight(25);
+        textArea3.setHideLabel(true);  
+        chatroomPanel.add(textArea3, new AnchorLayoutData("100% -53")); 
+      
+        TextArea textArea4 = new TextArea("currentMessage", "subject");
+//    textArea2.setValue(id+name+text);
+        textArea.setValue("message : ");
+        textArea4.setWidth(300);
+        textArea4.setHeight(25);
+        textArea4.setHideLabel(true);  
+        chatroomPanel.add(textArea4, new AnchorLayoutData("100% -53")); 
         
         //user1
         Panel user1Panel2 = new Panel();
@@ -99,40 +135,9 @@ public class ChatRoom extends Window{
         //interests panel
         GridBox_Interest user1interest = new GridBox_Interest();
         
-//        Panel interest_user1 = new Panel();  
-//        interest_user1.setLayout(new FormLayout()); 
-//        interest_user1.setBorder(false);
-//        
         Panel interest_user2 = new Panel();  
         interest_user2.setLayout(new FormLayout());  
         interest_user2.setBorder(false);
-//        
-//        //interest_user1
-//        final TextField interest1 = new TextField("Interest1", "data", 75);  
-//        interest1.setAllowBlank(false);  
-//        interest1.setValue("kjinteraction"); 
-//        interest_user1.add(interest1);
-//
-//        final TextField interest2 = new TextField("Interest2", "data", 75);  
-//        interest2.setAllowBlank(false);  
-//        interest2.setValue("chatting"); 
-//        interest_user1.add(interest2);
-//        
-//        final TextField interest3 = new TextField("Interest3", "data", 75);  
-//        interest3.setAllowBlank(false);  
-//        interest3.setValue("fencing"); 
-//        interest_user1.add(interest3);
-//
-//        final TextField interest4 = new TextField("Interest4", "data", 75);  
-//        interest4.setAllowBlank(false);  
-//        interest4.setValue("trip"); 
-//        interest_user1.add(interest4);
-//        
-//        final TextField interest5 = new TextField("Interest5", "data", 75);  
-//        interest5.setAllowBlank(false);  
-//        interest5.setValue("movie"); 
-//        interest_user1.add(interest5);
-//        
         user1Panel.add(user1interest);
         
         //interest_user2
@@ -162,19 +167,6 @@ public class ChatRoom extends Window{
         interest_user2.add(interest_5);
         
         user1Panel2.add(interest_user2);
-        
-        //채팅 창
-//        Panel chattingForm = new Panel();
-//        chattingForm.setLayout(new FormLayout());  
-//        chattingForm.setBorder(false);
-//        chattingForm.setBodyStyle("background-color:#EEEEEE");
-//        chattingForm.setMargins(0, 10, 0, 0);
-//        
-        
-//        chatroomform.add(interest_user1, new ColumnLayoutData(0.33));
-//        chatroomform.add(chattingForm, new ColumnLayoutData(0.33));
-//        chatroomform.add(interest_user2, new ColumnLayoutData(0.33));
-        
         
         this.add(chatroomform);
 	}
